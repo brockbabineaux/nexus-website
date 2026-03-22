@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Clinical | The Neural Operating System for Healthcare Professionals</title>
+  <meta name="description" content="Nexus Clinical is an AI-powered clinical education and shift management platform built for nurses, nursing students, and healthcare professionals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-2: #111118;
+      --surface: #16161f;
+      --card: #1a1a25;
+      --border: #2a2a3a;
+      --t1: #e8e8f0;
+      --t2: #9898b0;
+      --t3: #6a6a82;
+      --accent: #a855f7;
+      --accent-hover: #b57afc;
+      --accent-dim: rgba(168, 85, 247, 0.12);
+      --accent-glow: rgba(168, 85, 247, 0.35);
+      --gradient-1: linear-gradient(135deg, #a855f7 0%, #6d28d9 50%, #4c1d95 100%);
+      --gradient-2: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--t1);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Utility ─── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .gradient-text {
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px; font-weight: 600;
+      font-size: 15px; transition: all 0.25s ease; border: none; cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gradient-1); color: white;
+      box-shadow: 0 4px 24px var(--accent-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); }
+    .btn-secondary {
+      background: transparent; color: var(--t1);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .section-label {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* ─── Ambient background effects ─── */
+    .ambient-orb {
+      position: absolute; border-radius: 50%; filter: blur(120px);
+      pointer-events: none; z-index: 0;
+    }
+    .orb-1 { width: 600px; height: 600px; background: rgba(168,85,247,0.08); top: -200px; right: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(236,72,153,0.06); bottom: -150px; left: -200px; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(168,85,247,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    /* ─── Nav ─── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-1);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900; color: white;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--t2);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--t1); }
+    .nav-cta { display: flex; gap: 12px; align-items: center; }
+    .nav-cta .btn { padding: 10px 24px; font-size: 14px; }
+    .mobile-toggle { display: none; background: none; border: none; color: var(--t1); cursor: pointer; }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative; padding: 160px 0 120px; text-align: center;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px 6px 8px; border-radius: 999px;
+      background: var(--accent-dim); border: 1px solid rgba(168,85,247,0.25);
+      font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 32px;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px); font-weight: 900; letter-spacing: -2px;
+      line-height: 1.05; margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 18px; color: var(--t2); max-width: 640px; margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 64px; margin-top: 80px;
+      padding-top: 48px; border-top: 1px solid var(--border);
+    }
+    .hero-stat-value {
+      font-size: 36px; font-weight: 800; letter-spacing: -1px;
+    }
+    .hero-stat-label { font-size: 14px; color: var(--t3); margin-top: 4px; }
+
+    /* ─── Proof bar ─── */
+    .proof-bar {
+      padding: 48px 0; border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .proof-bar p { font-size: 13px; color: var(--t3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 24px; }
+    .proof-logos {
+      display: flex; justify-content: center; gap: 48px; align-items: center;
+      flex-wrap: wrap; opacity: 0.4;
+    }
+    .proof-logos span { font-size: 16px; font-weight: 700; color: var(--t2); letter-spacing: 1px; }
+
+    /* ─── Features ─── */
+    .features { padding: 120px 0; position: relative; }
+    .features-header { text-align: center; margin-bottom: 64px; }
+    .features-header h2 {
+      font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .features-header p { font-size: 16px; color: var(--t2); max-width: 560px; margin: 0 auto; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .feature-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px; transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .feature-card:hover {
+      border-color: rgba(168,85,247,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gradient-1); opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--accent-dim); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 20px; font-size: 22px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--t2); line-height: 1.6; }
+
+    /* ─── Showcase (large feature highlight) ─── */
+    .showcase { padding: 120px 0; position: relative; }
+    .showcase-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .showcase-text h2 {
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 20px; line-height: 1.15;
+    }
+    .showcase-text p { font-size: 16px; color: var(--t2); margin-bottom: 32px; line-height: 1.7; }
+    .showcase-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .showcase-list li {
+      display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--t2);
+    }
+    .showcase-list li .check {
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+      background: var(--accent-dim); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; margin-top: 2px;
+    }
+    .showcase-visual {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; position: relative;
+      min-height: 400px; display: flex; align-items: center; justify-content: center;
+    }
+    .showcase-mockup {
+      width: 100%; border-radius: 12px; overflow: hidden;
+      background: var(--bg); border: 1px solid var(--border);
+    }
+    .showcase-mockup-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 12px 16px; background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    .showcase-mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .showcase-mockup-body { padding: 24px; }
+    .showcase-mockup-body .mock-row {
+      display: flex; gap: 12px; margin-bottom: 12px; align-items: center;
+    }
+    .mock-pill {
+      padding: 6px 14px; border-radius: 8px; font-size: 12px;
+      font-weight: 600; background: var(--accent-dim); color: var(--accent);
+    }
+    .mock-bar {
+      height: 10px; border-radius: 5px; background: var(--surface);
+    }
+    .mock-bar.accent { background: var(--accent-dim); }
+
+    /* ─── Pricing ─── */
+    .pricing { padding: 120px 0; background: var(--bg-2); position: relative; }
+    .pricing-header { text-align: center; margin-bottom: 64px; }
+    .pricing-header h2 {
+      font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .pricing-header p { font-size: 16px; color: var(--t2); max-width: 500px; margin: 0 auto; }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: 960px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 16px 64px var(--accent-glow);
+    }
+    .pricing-card.featured .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gradient-1); color: white; padding: 4px 16px;
+      border-radius: 999px; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .pricing-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .pricing-card .price {
+      font-size: 40px; font-weight: 800; letter-spacing: -2px; margin: 16px 0 4px;
+    }
+    .pricing-card .price span { font-size: 16px; font-weight: 500; color: var(--t3); letter-spacing: 0; }
+    .pricing-card .price-desc { font-size: 13px; color: var(--t3); margin-bottom: 24px; }
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 32px; flex: 1;
+    }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--t2);
+    }
+    .pricing-features li .pf-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent-dim); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; flex-shrink: 0;
+    }
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    /* ─── CTA ─── */
+    .cta { padding: 120px 0; text-align: center; position: relative; }
+    .cta-inner {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 80px 40px; position: relative;
+      overflow: hidden;
+    }
+    .cta-inner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, var(--accent-dim) 0%, transparent 70%);
+    }
+    .cta h2 {
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 16px; position: relative;
+    }
+    .cta p { font-size: 16px; color: var(--t2); margin-bottom: 32px; position: relative; max-width: 480px; margin-left: auto; margin-right: auto; margin-bottom: 32px; }
+    .cta .btn { position: relative; }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 64px 0 32px; border-top: 1px solid var(--border);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 14px; color: var(--t3); margin-top: 12px; line-height: 1.6; }
+    .footer-col h4 {
+      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--t2); margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 14px; color: var(--t3);
+      padding: 4px 0; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 32px; border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--t3);
+    }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-socials a { color: var(--t3); transition: color 0.2s; }
+    .footer-socials a:hover { color: var(--accent); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .showcase-inner { grid-template-columns: 1fr; }
+      .showcase-visual { order: -1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 32px; flex-wrap: wrap; }
+    }
+    @media (max-width: 640px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+      .hero { padding: 120px 0 80px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Animations ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">N</div>
+      <span>Nexus</span>
+    </a>
+    <div class="nav-links">
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-secondary">Log In</a>
+      <a href="#" class="btn btn-primary">Get Started Free</a>
+    </div>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Toggle menu">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="container">
+    <div class="fade-up">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Now in Beta
+      </div>
+    </div>
+    <h1 class="fade-up delay-1">
+      The Neural Operating System<br />
+      for <span class="gradient-text">Healthcare Professionals</span>
+    </h1>
+    <p class="fade-up delay-2">
+      Nexus connects every dimension of clinical practice into one intelligent platform &mdash;
+      study tools, shift management, real-time communication, and AI-powered clinical decision support.
+    </p>
+    <div class="hero-buttons fade-up delay-3">
+      <a href="#" class="btn btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 5-5M12 3v14"/></svg>
+        Start Free Trial
+      </a>
+      <a href="features.html" class="btn btn-secondary">
+        Explore Features
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div>
+        <div class="hero-stat-value gradient-text">2,000+</div>
+        <div class="hero-stat-label">NCLEX Practice Questions</div>
+      </div>
+      <div>
+        <div class="hero-stat-value gradient-text">1,050+</div>
+        <div class="hero-stat-label">Clinical Flashcards</div>
+      </div>
+      <div>
+        <div class="hero-stat-value gradient-text">50+</div>
+        <div class="hero-stat-label">Audio Reviews</div>
+      </div>
+      <div>
+        <div class="hero-stat-value gradient-text">24/7</div>
+        <div class="hero-stat-label">AI Clinical Assistant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Social Proof Bar ─── -->
+<section class="proof-bar">
+  <div class="container">
+    <p>Built for professionals at</p>
+    <div class="proof-logos">
+      <span>HOSPITALS</span>
+      <span>NURSING SCHOOLS</span>
+      <span>CLINICS</span>
+      <span>ICU UNITS</span>
+      <span>ED DEPARTMENTS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Features Grid ─── -->
+<section class="features" id="features">
+  <div class="ambient-orb orb-3"></div>
+  <div class="container">
+    <div class="features-header fade-up">
+      <div class="section-label">Features</div>
+      <h2>Everything you need,<br /><span class="gradient-text">interconnected</span></h2>
+      <p>Every feature feeds into every other &mdash; like neural synapses in a brain. Your shift data, study progress, and clinical tools all talk to each other.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feature-card fade-up delay-1">
+        <div class="feature-icon">&#x1F9E0;</div>
+        <h3>AI Clinical Assistant</h3>
+        <p>Ask clinical questions, get evidence-based answers, drug interactions, lab interpretation, and differential diagnosis support in real time.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-2">
+        <div class="feature-icon">&#x1F4CB;</div>
+        <h3>Shift Management Brain</h3>
+        <p>Unified To-Do, Assignment Board, and Handoff tools that share patient data automatically. Add a patient once, see them everywhere.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-3">
+        <div class="feature-icon">&#x1F4DA;</div>
+        <h3>NCLEX Exam Prep</h3>
+        <p>2,000+ practice questions across multiple quiz banks, adaptive difficulty, detailed rationales, and progress tracking by category.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-1">
+        <div class="feature-icon">&#x1F0CF;</div>
+        <h3>Clinical Flashcards</h3>
+        <p>1,050+ flashcards covering pathophysiology, pharmacology, emergency nursing, oncology, legal/ethics, and more with spaced repetition.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-2">
+        <div class="feature-icon">&#x1F4AC;</div>
+        <h3>Team Communication</h3>
+        <p>Secure messaging with emoji, image sharing, and camera support. SBAR-formatted reports. Built-in walkie-talkie with PTT and transmission locking.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-3">
+        <div class="feature-icon">&#x1F4C8;</div>
+        <h3>ECG Interpretation</h3>
+        <p>Interactive 12-lead ECG analysis with rhythm identification, axis deviation detection, and clinical correlation guidance.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-1">
+        <div class="feature-icon">&#x1F30D;</div>
+        <h3>Clinical Translator</h3>
+        <p>Two-way medical translation with speech support. Translate between nurse and patient languages with quick medical phrases built in.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-2">
+        <div class="feature-icon">&#x1F3A7;</div>
+        <h3>Audio Reviews</h3>
+        <p>Listen to clinical review sessions on pharmacology, pathology, emergency protocols, and more &mdash; perfect for commute study time.</p>
+      </div>
+
+      <div class="feature-card fade-up delay-3">
+        <div class="feature-icon">&#x1F6E1;</div>
+        <h3>Drug Reference & Calculators</h3>
+        <p>Comprehensive medication lookup, IV drip calculators, dosage converters, and interaction checkers at your fingertips.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Showcase: Shift Brain ─── -->
+<section class="showcase">
+  <div class="container">
+    <div class="showcase-inner">
+      <div class="showcase-text fade-up">
+        <div class="section-label">Shift Brain</div>
+        <h2>Your entire shift,<br /><span class="gradient-text">one unified brain</span></h2>
+        <p>
+          Add a patient in the Assignment Board &mdash; they instantly appear in your Shift To-Do with tasks and in Handoff with SBAR fields pre-populated. Every feature reads from one shared data layer.
+        </p>
+        <ul class="showcase-list">
+          <li><span class="check">&#10003;</span> Rooms and patients sync across To-Do, Board, and Handoff</li>
+          <li><span class="check">&#10003;</span> Context bar shows active shift data on every page</li>
+          <li><span class="check">&#10003;</span> Cross-tab sync &mdash; update on one device, see it on another</li>
+          <li><span class="check">&#10003;</span> Shift buddy system for paired nursing workflows</li>
+          <li><span class="check">&#10003;</span> Voice input for hands-free task creation</li>
+        </ul>
+      </div>
+      <div class="showcase-visual fade-up delay-2">
+        <div class="showcase-mockup">
+          <div class="showcase-mockup-bar">
+            <div class="showcase-mockup-dot" style="background:#ff5f57"></div>
+            <div class="showcase-mockup-dot" style="background:#febc2e"></div>
+            <div class="showcase-mockup-dot" style="background:#28c840"></div>
+          </div>
+          <div class="showcase-mockup-body">
+            <div class="mock-row">
+              <div class="mock-pill">Room 201 &middot; JD</div>
+              <div class="mock-pill" style="background:rgba(239,68,68,0.15);color:#f87171">Acuity 2</div>
+            </div>
+            <div class="mock-bar" style="width:85%"></div>
+            <div style="height:8px"></div>
+            <div class="mock-bar accent" style="width:60%"></div>
+            <div style="height:16px"></div>
+            <div class="mock-row">
+              <div class="mock-pill">Room 204 &middot; MS</div>
+              <div class="mock-pill" style="background:rgba(34,197,94,0.15);color:#4ade80">Acuity 4</div>
+            </div>
+            <div class="mock-bar" style="width:70%"></div>
+            <div style="height:8px"></div>
+            <div class="mock-bar accent" style="width:40%"></div>
+            <div style="height:16px"></div>
+            <div class="mock-row">
+              <div class="mock-pill">Room 207 &middot; LK</div>
+              <div class="mock-pill" style="background:rgba(251,191,36,0.15);color:#fbbf24">Acuity 3</div>
+            </div>
+            <div class="mock-bar" style="width:55%"></div>
+            <div style="height:8px"></div>
+            <div class="mock-bar accent" style="width:75%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pricing ─── -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header fade-up">
+      <div class="section-label">Pricing</div>
+      <h2>Simple, transparent <span class="gradient-text">pricing</span></h2>
+      <p>Start free. Upgrade when you're ready. Cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card fade-up delay-1">
+        <h3>Free</h3>
+        <div class="price">$0 <span>/forever</span></div>
+        <div class="price-desc">Get started with core features</div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> 50 quiz questions/day</li>
+          <li><span class="pf-check">&#10003;</span> Basic flashcard access</li>
+          <li><span class="pf-check">&#10003;</span> Shift To-Do list</li>
+          <li><span class="pf-check">&#10003;</span> Drug reference lookup</li>
+          <li><span class="pf-check">&#10003;</span> Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Get Started</a>
+      </div>
+
+      <!-- Student (Featured) -->
+      <div class="pricing-card featured fade-up delay-2">
+        <div class="pricing-badge">Most Popular</div>
+        <h3>Student</h3>
+        <div class="price">$9.99 <span>/month</span></div>
+        <div class="price-desc">Everything you need for clinicals</div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> Unlimited quiz questions</li>
+          <li><span class="pf-check">&#10003;</span> All 1,050+ flashcards</li>
+          <li><span class="pf-check">&#10003;</span> Audio reviews</li>
+          <li><span class="pf-check">&#10003;</span> Full shift management</li>
+          <li><span class="pf-check">&#10003;</span> Team communication</li>
+          <li><span class="pf-check">&#10003;</span> Clinical translator</li>
+          <li><span class="pf-check">&#10003;</span> Email support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+      </div>
+
+      <!-- Professional -->
+      <div class="pricing-card fade-up delay-3">
+        <h3>Professional</h3>
+        <div class="price">$24.99 <span>/month</span></div>
+        <div class="price-desc">For working nurses and advanced practice</div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> Everything in Student</li>
+          <li><span class="pf-check">&#10003;</span> AI Clinical Assistant</li>
+          <li><span class="pf-check">&#10003;</span> ECG interpretation</li>
+          <li><span class="pf-check">&#10003;</span> Advanced calculators</li>
+          <li><span class="pf-check">&#10003;</span> Walkie-talkie PTT</li>
+          <li><span class="pf-check">&#10003;</span> Orientation tracker</li>
+          <li><span class="pf-check">&#10003;</span> Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Start Free Trial</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <h2>Ready to upgrade your<br /><span class="gradient-text">clinical practice?</span></h2>
+      <p>Join thousands of nurses and students who are using Nexus to study smarter, work safer, and communicate better.</p>
+      <a href="#" class="btn btn-primary">
+        Get Started Free
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:4px;">
+          <div class="nav-logo-icon">N</div>
+          <span>Nexus Clinical</span>
+        </div>
+        <p>The neural operating system for healthcare professionals. Study smarter. Work safer. Communicate better.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="#">Changelog</a>
+        <a href="#">Mobile App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">HIPAA Notice</a>
+        <a href="#">Medical Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nexus Clinical. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="#" aria-label="Twitter">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" aria-label="GitHub">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
