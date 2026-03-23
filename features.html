@@ -91,9 +91,7 @@
       font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
     }
     .nav-logo-icon {
-      width: 36px; height: 36px; background: var(--gradient-1);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 900; color: white;
+      width: 36px; height: 36px; border-radius: 10px; overflow: hidden;
     }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a {
@@ -375,7 +373,19 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">N</div>
+      <svg class="nav-logo-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
+        <defs>
+          <linearGradient id="navLogoGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7C3AED" />
+            <stop offset="100%" stop-color="#F59E0B" />
+          </linearGradient>
+        </defs>
+        <rect width="200" height="200" fill="#141418" rx="36" />
+        <circle cx="100" cy="100" r="52" fill="none" stroke="url(#navLogoGrad)" stroke-width="5" stroke-linecap="round" stroke-dasharray="285 42" transform="rotate(-45 100 100)" />
+        <circle cx="100" cy="100" r="40" fill="none" stroke="#3A3A4A" stroke-width="1" />
+        <circle cx="100" cy="100" r="39" fill="#1C1C24" />
+        <text x="100" y="114" text-anchor="middle" fill="#fff" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600">N</text>
+      </svg>
       <span>Nexus</span>
     </a>
     <div class="nav-links">
@@ -385,8 +395,8 @@
       <a href="contact.html">Contact</a>
     </div>
     <div class="nav-cta">
-      <a href="#" class="btn btn-secondary">Log In</a>
-      <a href="#" class="btn btn-primary">Get Started Free</a>
+      <a href="https://app.nxsclinical.com" class="btn btn-secondary">Log In</a>
+      <a href="https://app.nxsclinical.com" class="btn btn-primary">Get Started Free</a>
     </div>
     <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Toggle menu">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -480,10 +490,10 @@
               <div class="showcase-mockup-dot" style="background:#28c840"></div>
             </div>
             <div class="showcase-mockup-body">
-              <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--t1);">Assignment Board</div>
+              <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--t1);">Shift To-Do</div>
               <div class="mock-row">
                 <div class="mock-pill">Room 201 &middot; JD</div>
-                <div class="mock-pill" style="background:rgba(239,68,68,0.15);color:#f87171">Acuity 2</div>
+                <div class="mock-pill" style="background:rgba(239,68,68,0.15);color:#f87171">Priority High</div>
               </div>
               <div class="mock-bar" style="width:85%"></div>
               <div style="height:8px"></div>
@@ -491,7 +501,7 @@
               <div style="height:16px"></div>
               <div class="mock-row">
                 <div class="mock-pill">Room 204 &middot; MS</div>
-                <div class="mock-pill" style="background:rgba(34,197,94,0.15);color:#4ade80">Acuity 4</div>
+                <div class="mock-pill" style="background:rgba(34,197,94,0.15);color:#4ade80">Priority Standard</div>
               </div>
               <div class="mock-bar" style="width:70%"></div>
               <div style="height:8px"></div>
@@ -499,7 +509,7 @@
               <div style="height:16px"></div>
               <div class="mock-row">
                 <div class="mock-pill">Room 207 &middot; LK</div>
-                <div class="mock-pill" style="background:rgba(251,191,36,0.15);color:#fbbf24">Acuity 3</div>
+                <div class="mock-pill" style="background:rgba(251,191,36,0.15);color:#fbbf24">Priority Medium</div>
               </div>
               <div class="mock-bar" style="width:55%"></div>
               <div style="height:8px"></div>
@@ -511,10 +521,9 @@
           <div class="section-label">Shift Management</div>
           <h2>Control your entire <br /><span class="gradient-text">shift in one view</span></h2>
           <p>
-            Assignment Board, Shift To-Do, and Handoff report generator all synchronized in real time. Add a patient once, see them everywhere. Built for the rhythm of nursing shifts.
+            Shift To-Do and Handoff report generator all synchronized in real time. Add a patient once, see them everywhere. Built for the rhythm of nursing shifts.
           </p>
           <ul class="showcase-list">
-            <li><span class="check">&#10003;</span> Assignment Board with patient cards and acuity levels</li>
             <li><span class="check">&#10003;</span> Code status and critical alerts at a glance</li>
             <li><span class="check">&#10003;</span> Shift To-Do with voice input for hands-free task creation</li>
             <li><span class="check">&#10003;</span> Quick task pills for fast-tap common actions</li>
@@ -651,10 +660,7 @@
     <div class="cta-inner fade-up">
       <h2>Ready to experience <br /><span class="gradient-text">the future of nursing?</span></h2>
       <p>Join thousands of nurses and students who are using Nexus to study smarter, work safer, and communicate better every single shift.</p>
-      <a href="#" class="btn btn-primary">
-        Start Free Trial
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <a href="https://app.nxsclinical.com" class="btn btn-primary">Start Free Trial</a>
     </div>
   </div>
 </section>
@@ -665,7 +671,19 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="nav-logo" style="margin-bottom:4px;">
-          <div class="nav-logo-icon">N</div>
+          <svg class="nav-logo-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
+            <defs>
+              <linearGradient id="navLogoGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7C3AED" />
+                <stop offset="100%" stop-color="#F59E0B" />
+              </linearGradient>
+            </defs>
+            <rect width="200" height="200" fill="#141418" rx="36" />
+            <circle cx="100" cy="100" r="52" fill="none" stroke="url(#navLogoGrad)" stroke-width="5" stroke-linecap="round" stroke-dasharray="285 42" transform="rotate(-45 100 100)" />
+            <circle cx="100" cy="100" r="40" fill="none" stroke="#3A3A4A" stroke-width="1" />
+            <circle cx="100" cy="100" r="39" fill="#1C1C24" />
+            <text x="100" y="114" text-anchor="middle" fill="#fff" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600">N</text>
+          </svg>
           <span>Nexus Clinical</span>
         </div>
         <p>The neural operating system for healthcare professionals. Study smarter. Work safer. Communicate better.</p>
@@ -686,10 +704,10 @@
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">HIPAA Notice</a>
-        <a href="#">Medical Disclaimer</a>
+        <a href="https://app.nxsclinical.com/privacy">Privacy Policy</a>
+        <a href="https://app.nxsclinical.com/terms">Terms of Service</a>
+        <a href="https://app.nxsclinical.com/legal">HIPAA Notice</a>
+        <a href="https://app.nxsclinical.com/legal">Medical Disclaimer</a>
       </div>
     </div>
     <div class="footer-bottom">
