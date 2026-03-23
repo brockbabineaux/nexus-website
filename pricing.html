@@ -345,12 +345,31 @@
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
-      .mobile-toggle { display: block; }
       .hero { padding: 120px 0 80px; }
       .pricing-grid { grid-template-columns: 1fr; }
       .comparison-table {
-        display: block;
-        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+        font-size: 11px;
+      }
+      .comparison-table th,
+      .comparison-table td {
+        padding: 8px 4px;
+        word-break: break-word;
+        hyphens: auto;
+      }
+      .comparison-table th:first-child,
+      .comparison-table td:first-child {
+        width: 40%;
+      }
+      .comparison-table th:nth-child(2),
+      .comparison-table th:nth-child(3),
+      .comparison-table th:nth-child(4),
+      .comparison-table td:nth-child(2),
+      .comparison-table td:nth-child(3),
+      .comparison-table td:nth-child(4) {
+        width: 20%;
+        text-align: center;
       }
       .footer-grid { grid-template-columns: 1fr; }
     }
