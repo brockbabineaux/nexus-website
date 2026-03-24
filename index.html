@@ -18,12 +18,14 @@
       --t1: #e8e8f0;
       --t2: #9898b0;
       --t3: #6a6a82;
-      --accent: #a855f7;
-      --accent-hover: #b57afc;
-      --accent-dim: rgba(168, 85, 247, 0.12);
-      --accent-glow: rgba(168, 85, 247, 0.35);
-      --gradient-1: linear-gradient(135deg, #a855f7 0%, #6d28d9 50%, #4c1d95 100%);
-      --gradient-2: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+      --accent: #7C3AED;
+      --accent-hover: #9353ff;
+      --accent-dim: rgba(124, 58, 237, 0.12);
+      --accent-glow: rgba(124, 58, 237, 0.35);
+      --amber: #F59E0B;
+      --amber-dim: rgba(245, 158, 11, 0.12);
+      --gradient-1: linear-gradient(135deg, #7C3AED 0%, #F59E0B 100%);
+      --gradient-2: linear-gradient(135deg, #7C3AED 0%, #F59E0B 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +64,7 @@
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
     .section-label {
-      display: inline-block; font-size: 12px; font-weight: 700;
+      display: inline-block; font-size: 12px; font-weight: 500;
       letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
       margin-bottom: 12px;
     }
@@ -72,9 +74,10 @@
       position: absolute; border-radius: 50%; filter: blur(120px);
       pointer-events: none; z-index: 0;
     }
-    .orb-1 { width: 600px; height: 600px; background: rgba(168,85,247,0.08); top: -200px; right: -200px; }
-    .orb-2 { width: 500px; height: 500px; background: rgba(236,72,153,0.06); bottom: -150px; left: -200px; }
-    .orb-3 { width: 400px; height: 400px; background: rgba(168,85,247,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .orb-1 { width: 600px; height: 600px; background: rgba(124,58,237,0.08); top: -200px; right: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(245,158,11,0.06); bottom: -150px; left: -200px; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(124,58,237,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .orb-amber { width: 500px; height: 500px; background: rgba(245,158,11,0.05); border-radius: 50%; filter: blur(120px); position: absolute; pointer-events: none; z-index: 0; }
 
     /* ─── Nav ─── */
     .nav {
@@ -88,7 +91,7 @@
     }
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
-      font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+      font-size: 16px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase;
     }
     .nav-logo-icon {
       width: 36px; height: 36px; border-radius: 10px; overflow: hidden;
@@ -120,7 +123,7 @@
     }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
     .hero h1 {
-      font-size: clamp(40px, 6vw, 72px); font-weight: 900; letter-spacing: -2px;
+      font-size: clamp(40px, 6vw, 72px); font-weight: 600; letter-spacing: -2px;
       line-height: 1.05; margin-bottom: 24px;
     }
     .hero p {
@@ -133,7 +136,7 @@
       padding-top: 48px; border-top: 1px solid var(--border);
     }
     .hero-stat-value {
-      font-size: 36px; font-weight: 800; letter-spacing: -1px;
+      font-size: 36px; font-weight: 600; letter-spacing: -1px;
     }
     .hero-stat-label { font-size: 14px; color: var(--t3); margin-top: 4px; }
 
@@ -142,18 +145,18 @@
       padding: 48px 0; border-bottom: 1px solid var(--border);
       text-align: center;
     }
-    .proof-bar p { font-size: 13px; color: var(--t3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 24px; }
+    .proof-bar p { font-size: 13px; color: var(--t3); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; margin-bottom: 24px; }
     .proof-logos {
       display: flex; justify-content: center; gap: 48px; align-items: center;
       flex-wrap: wrap; opacity: 0.4;
     }
-    .proof-logos span { font-size: 16px; font-weight: 700; color: var(--t2); letter-spacing: 1px; }
+    .proof-logos span { font-size: 16px; font-weight: 500; color: var(--t2); letter-spacing: 1px; }
 
     /* ─── Features ─── */
     .features { padding: 120px 0; position: relative; }
     .features-header { text-align: center; margin-bottom: 64px; }
     .features-header h2 {
-      font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+      font-size: clamp(32px, 4vw, 48px); font-weight: 600;
       letter-spacing: -1px; margin-bottom: 16px;
     }
     .features-header p { font-size: 16px; color: var(--t2); max-width: 560px; margin: 0 auto; }
@@ -166,9 +169,9 @@
       position: relative; overflow: hidden;
     }
     .feature-card:hover {
-      border-color: rgba(168,85,247,0.3);
+      border-color: rgba(124,58,237,0.3);
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 40px rgba(124,58,237,0.08);
     }
     .feature-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0;
@@ -181,7 +184,7 @@
       background: var(--accent-dim); display: flex; align-items: center;
       justify-content: center; margin-bottom: 20px; font-size: 22px;
     }
-    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
     .feature-card p { font-size: 14px; color: var(--t2); line-height: 1.6; }
 
     /* ─── Showcase (large feature highlight) ─── */
@@ -190,7 +193,7 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
     }
     .showcase-text h2 {
-      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 600;
       letter-spacing: -1px; margin-bottom: 20px; line-height: 1.15;
     }
     .showcase-text p { font-size: 16px; color: var(--t2); margin-bottom: 32px; line-height: 1.7; }
@@ -236,7 +239,7 @@
     .pricing { padding: 120px 0; background: var(--bg-2); position: relative; }
     .pricing-header { text-align: center; margin-bottom: 64px; }
     .pricing-header h2 {
-      font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+      font-size: clamp(32px, 4vw, 48px); font-weight: 600;
       letter-spacing: -1px; margin-bottom: 16px;
     }
     .pricing-header p { font-size: 16px; color: var(--t2); max-width: 500px; margin: 0 auto; }
@@ -251,7 +254,7 @@
     }
     .pricing-card.featured {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 16px 64px var(--accent-glow);
+      box-shadow: 0 0 0 1px var(--accent), 0 16px 64px var(--accent-glow), 0 0 80px rgba(245,158,11,0.08);
     }
     .pricing-card.featured .pricing-badge {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -259,9 +262,9 @@
       border-radius: 999px; font-size: 12px; font-weight: 700;
       letter-spacing: 0.5px;
     }
-    .pricing-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .pricing-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
     .pricing-card .price {
-      font-size: 40px; font-weight: 800; letter-spacing: -2px; margin: 16px 0 4px;
+      font-size: 40px; font-weight: 600; letter-spacing: -2px; margin: 16px 0 4px;
     }
     .pricing-card .price span { font-size: 16px; font-weight: 500; color: var(--t3); letter-spacing: 0; }
     .pricing-card .price-desc { font-size: 13px; color: var(--t3); margin-bottom: 24px; }
@@ -293,7 +296,7 @@
       background: radial-gradient(ellipse at center, var(--accent-dim) 0%, transparent 70%);
     }
     .cta h2 {
-      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 600;
       letter-spacing: -1px; margin-bottom: 16px; position: relative;
     }
     .cta p { font-size: 16px; color: var(--t2); margin-bottom: 32px; position: relative; max-width: 480px; margin-left: auto; margin-right: auto; margin-bottom: 32px; }
@@ -309,7 +312,7 @@
     }
     .footer-brand p { font-size: 14px; color: var(--t3); margin-top: 12px; line-height: 1.6; }
     .footer-col h4 {
-      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      font-size: 13px; font-weight: 500; letter-spacing: 1px;
       text-transform: uppercase; color: var(--t2); margin-bottom: 16px;
     }
     .footer-col a {
@@ -378,7 +381,7 @@
         <circle cx="100" cy="100" r="39" fill="#1C1C24" />
         <text x="100" y="114" text-anchor="middle" fill="#fff" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600">N</text>
       </svg>
-      <span>Nexus</span>
+      <span>NEXUS</span>
     </a>
     <div class="nav-links">
       <a href="features.html">Features</a>
@@ -397,6 +400,7 @@
 <section class="hero">
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
+  <div class="orb-amber" style="top: 20%; right: -15%;"></div>
   <div class="container">
     <div class="fade-up">
       <div class="hero-badge">
@@ -577,8 +581,10 @@
 </section>
 
 <!-- ─── Pricing ─── -->
-<section class="pricing" id="pricing">
-  <div class="container">
+<section class="pricing" id="pricing" style="position:relative;overflow:hidden;">
+  <div class="orb-amber" style="bottom: -20%; left: -10%;"></div>
+  <div class="ambient-orb orb-1" style="top: -30%; right: -20%;"></div>
+  <div class="container" style="position:relative;z-index:1;">
     <div class="pricing-header fade-up">
       <div class="section-label">Pricing</div>
       <h2>Simple, transparent <span class="gradient-text">pricing</span></h2>
