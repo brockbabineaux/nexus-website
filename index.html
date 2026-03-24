@@ -38,9 +38,9 @@
       --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
 
       /* Glass effect */
-      --glass-bg: rgba(17, 23, 42, 0.95);
-      --glass-border: rgba(20, 184, 166, 0.15);
-      --glass-blur: blur(16px);
+      --glass-bg: rgba(17, 23, 42, 0.96);
+      --glass-border: rgba(20, 184, 166, 0.2);
+      --glass-blur: blur(24px);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -49,7 +49,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-page);
       color: var(--text-primary);
-      line-height: 1.55;
+      line-height: 1.65;
       overflow-x: hidden;
       font-size: 0.92rem;
     }
@@ -80,8 +80,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(20, 184, 166, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.4);
     }
 
     .btn-secondary {
@@ -93,7 +93,7 @@
     .btn-secondary:hover {
       border-color: var(--color-primary);
       color: var(--color-primary);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
     .section-label {
@@ -102,11 +102,34 @@
       margin-bottom: 16px;
     }
 
+    /* ─── Fade-in Animation ─── */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ─── Navigation ─── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur) saturate(180%);
       border-bottom: 1px solid var(--glass-border);
     }
 
@@ -153,12 +176,22 @@
     }
 
     .hero-content h1 {
-      font-size: clamp(2.6rem, 5vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1.1;
+      font-size: clamp(2.6rem, 5vw, 4.75rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
       margin-bottom: 24px;
       color: var(--text-primary);
+    }
+
+    .hero-disclaimer {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      padding: 10px 14px;
+      background: rgba(20, 184, 166, 0.08);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 4px;
     }
 
     .hero-content p {
@@ -167,6 +200,7 @@
       margin-bottom: 32px;
       line-height: 1.6;
       max-width: 500px;
+      font-weight: 400;
     }
 
     .hero-cta {
@@ -220,6 +254,7 @@
     .stat-card-label {
       color: var(--text-tertiary);
       margin-top: 4px;
+      font-weight: 400;
     }
 
     .stat-1 { top: 60px; left: 20px; animation-delay: 0s; }
@@ -249,6 +284,7 @@
       gap: 12px;
       font-size: 0.9rem;
       color: var(--text-secondary);
+      font-weight: 500;
     }
 
     .trust-dot {
@@ -279,6 +315,7 @@
       border-radius: 16px;
       padding: 28px 24px;
       text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(20, 184, 166, 0.12);
     }
 
     .stat-box-value {
@@ -293,6 +330,7 @@
       color: var(--text-tertiary);
       letter-spacing: 0.05em;
       text-transform: uppercase;
+      font-weight: 500;
     }
 
     /* ─── Features Section ─── */
@@ -308,9 +346,10 @@
     }
 
     .section-header h2 {
-      font-size: clamp(1.4rem, 2.5vw, 2.25rem);
+      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
       font-weight: 700;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
     /* Primary features grid */
@@ -326,11 +365,11 @@
       background: var(--gradient-card);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
+      border-left: 3px solid var(--color-primary);
       padding: 40px;
       transition: all 160ms ease;
       position: relative;
       overflow: hidden;
-      border-top: 3px solid var(--color-primary);
     }
 
     .feature-card-primary::before {
@@ -372,6 +411,22 @@
       color: var(--text-secondary);
       font-size: 0.95rem;
       line-height: 1.6;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .feature-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 160ms ease;
+    }
+
+    .feature-explore:hover {
+      gap: 10px;
     }
 
     /* Secondary features grid */
@@ -408,17 +463,125 @@
       color: var(--text-tertiary);
       font-size: 0.88rem;
       line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* ─── Role-Based Section ─── */
+    .role-section {
+      background: var(--bg-page);
+      padding: 80px 24px;
+    }
+
+    .role-header {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .role-header h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .role-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .role-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 160ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    }
+
+    .role-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
+    }
+
+    .role-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-top: 12px;
+      color: var(--text-primary);
+    }
+
+    .role-card ul {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .role-card li {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .role-card li::before {
+      content: '✓';
+      color: var(--color-primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .role-card-cta {
+      display: inline-block;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 160ms ease;
+    }
+
+    .role-card-cta:hover {
+      gap: 6px;
     }
 
     /* ─── Pricing Section ─── */
     .pricing {
-      background: var(--bg-page);
+      background: var(--bg-section);
       padding: 80px 24px;
     }
 
     .pricing-container {
       max-width: 600px;
       margin: 0 auto;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: rgba(20, 184, 166, 0.15);
+      color: var(--color-primary);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
     .pricing-card {
@@ -428,6 +591,7 @@
       border-top: 2px solid var(--color-primary);
       padding: 48px;
       text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(20, 184, 166, 0.12);
     }
 
     .pricing-amount {
@@ -441,6 +605,7 @@
       color: var(--text-secondary);
       font-size: 0.95rem;
       margin-bottom: 32px;
+      font-weight: 400;
     }
 
     .pricing-features {
@@ -456,6 +621,7 @@
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       gap: 12px;
+      font-weight: 400;
     }
 
     .pricing-features li::before {
@@ -467,7 +633,7 @@
 
     /* ─── Final CTA Section ─── */
     .final-cta {
-      background: var(--bg-section);
+      background: var(--bg-page);
       padding: 100px 24px;
       position: relative;
       overflow: hidden;
@@ -498,6 +664,7 @@
       font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 800;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
     .final-cta p {
@@ -505,18 +672,56 @@
       color: var(--text-secondary);
       margin-bottom: 32px;
       line-height: 1.6;
+      font-weight: 400;
     }
 
     /* ─── Footer ─── */
     .footer {
       background: var(--bg-page);
       border-top: 1px solid var(--border-subtle);
-      padding: 40px 24px;
+      padding: 60px 24px;
     }
 
     .footer-content {
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    .footer-disclaimer {
+      background: rgba(20, 184, 166, 0.08);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .footer-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+      animation: pulse-status 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-status {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -527,6 +732,15 @@
     .footer-left {
       color: var(--text-tertiary);
       font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .footer-credit {
+      color: var(--text-tertiary);
+      font-size: 0.85rem;
+      text-align: center;
+      flex: 1;
+      font-weight: 400;
     }
 
     .footer-right {
@@ -539,6 +753,7 @@
       color: var(--text-secondary);
       font-size: 0.85rem;
       transition: color 160ms ease;
+      font-weight: 400;
     }
 
     .footer-right a:hover {
@@ -581,13 +796,16 @@
         grid-template-columns: 1fr;
       }
 
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+
       .feature-card-primary {
         padding: 28px;
       }
 
-      .footer-content {
+      .footer-bottom {
         flex-direction: column;
-        text-align: center;
       }
 
       .footer-right {
@@ -622,13 +840,16 @@
       <div class="hero-container">
         <div class="hero-content">
           <h1>
-            The <span class="gradient-text">Neural Operating System</span> for Healthcare Professionals
+            The <span class="gradient-text">Neural Operating System</span> for Licensed Healthcare Professionals
           </h1>
+          <div class="hero-disclaimer">
+            For licensed clinicians only. Not a substitute for clinical judgment.
+          </div>
           <p>
             Instant access to clinical knowledge: 755+ medications, 1,678+ board questions, 27 validated calculators, and an AI assistant built for the bedside. Education, reference, and decision support—all in one platform.
           </p>
           <div class="hero-cta">
-            <button class="btn btn-primary">Get Started Free</button>
+            <button class="btn btn-primary">Launch Nexus →</button>
             <button class="btn btn-secondary">Learn More</button>
           </div>
         </div>
@@ -692,11 +913,11 @@
   </section>
 
   <!-- Trust Bar -->
-  <section class="trust-bar">
+  <section class="trust-bar fade-in">
     <div class="trust-content">
       <div class="trust-item">
         <div class="trust-dot"></div>
-        <span>Built by nurses, for healthcare professionals</span>
+        <span>Built by an RN + senior dev team</span>
       </div>
       <div class="trust-item">
         <div class="trust-dot"></div>
@@ -716,19 +937,19 @@
   <!-- Stats Row -->
   <section class="stats">
     <div class="stats-grid">
-      <div class="stat-box">
+      <div class="stat-box fade-in">
         <div class="stat-box-value">755+</div>
         <div class="stat-box-label">Medications</div>
       </div>
-      <div class="stat-box">
+      <div class="stat-box fade-in">
         <div class="stat-box-value">1,678+</div>
         <div class="stat-box-label">Board Questions</div>
       </div>
-      <div class="stat-box">
+      <div class="stat-box fade-in">
         <div class="stat-box-value">1,165+</div>
         <div class="stat-box-label">Calculators</div>
       </div>
-      <div class="stat-box">
+      <div class="stat-box fade-in">
         <div class="stat-box-value">8,219+</div>
         <div class="stat-box-label">ICD-10 Codes</div>
       </div>
@@ -738,60 +959,112 @@
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="section-label">Powered by your clinical needs</div>
         <h2>Comprehensive Clinical Tools</h2>
       </div>
 
       <!-- Primary Features -->
       <div class="primary-features">
-        <div class="feature-card-primary">
+        <div class="feature-card-primary fade-in">
+          <div class="feature-icon">📊</div>
+          <h3>Shift Hub</h3>
+          <p>Role-based dashboard that adapts to your workflow. Customize your workspace with quick-access references, calculators, and decision support tools.</p>
+          <a href="#" class="feature-explore">Explore →</a>
+        </div>
+        <div class="feature-card-primary fade-in">
+          <div class="feature-icon">📝</div>
+          <h3>Clinical Documentation</h3>
+          <p>SOAP note templates, Code Blue protocols, and structured documentation guides. Evidence-based frameworks to streamline charting and decision-making.</p>
+          <a href="#" class="feature-explore">Explore →</a>
+        </div>
+        <div class="feature-card-primary fade-in">
           <div class="feature-icon">💊</div>
           <h3>Drug Reference</h3>
-          <p>Complete medication database with dosing, interactions, and contraindications. Instant lookup for 755+ medications with evidence-based information.</p>
+          <p>755+ medications with dosing, interactions, and contraindications. Instant lookup with evidence-based information and clinical considerations.</p>
+          <a href="#" class="feature-explore">Explore →</a>
         </div>
-        <div class="feature-card-primary">
-          <div class="feature-icon">📊</div>
-          <h3>Clinical Calculators</h3>
-          <p>27 validated calculators for ICU, nephrology, cardiology, and more. Risk stratification, dosing adjustments, and outcome predictions in seconds.</p>
-        </div>
-        <div class="feature-card-primary">
-          <div class="feature-icon">🔍</div>
-          <h3>DDx Builder</h3>
-          <p>Systematic differential diagnosis generator. Input symptoms, get organized differential lists with conditional probabilities and key diagnostic tests.</p>
-        </div>
-        <div class="feature-card-primary">
-          <div class="feature-icon">📚</div>
-          <h3>Exam Prep</h3>
-          <p>1,678+ board-style questions with detailed explanations. Track performance, identify weak areas, and prepare for NCLEX, USMLE, and specialty exams.</p>
+        <div class="feature-card-primary fade-in">
+          <div class="feature-icon">🧠</div>
+          <h3>AI Clinical Assistant</h3>
+          <p>Neural-powered reasoning partner. Ask questions, discuss cases, and get evidence-based guidance contextual to your current patient or study scenario.</p>
+          <a href="#" class="feature-explore">Explore →</a>
         </div>
       </div>
 
       <!-- Secondary Features -->
       <div class="secondary-features">
-        <div class="feature-card-secondary">
+        <div class="feature-card-secondary fade-in">
           <h4>Lab Reference</h4>
           <p>Normal ranges, interpretation guides, and critical value protocols for all common lab tests.</p>
         </div>
-        <div class="feature-card-secondary">
+        <div class="feature-card-secondary fade-in">
           <h4>Antibiotic Guide</h4>
           <p>Empiric therapy recommendations, spectrum coverage, and resistance patterns by organism.</p>
         </div>
-        <div class="feature-card-secondary">
+        <div class="feature-card-secondary fade-in">
           <h4>ICD-10 Lookup</h4>
           <p>8,219+ diagnosis codes with descriptions, laterality, severity modifiers, and billing guidelines.</p>
         </div>
-        <div class="feature-card-secondary">
-          <h4>AI Assistant</h4>
-          <p>Clinical reasoning partner. Ask questions, discuss cases, and get evidence-based guidance.</p>
+        <div class="feature-card-secondary fade-in">
+          <h4>Clinical Calculators</h4>
+          <p>27 validated calculators for ICU, nephrology, cardiology, and more. Risk stratification and dosing adjustments in seconds.</p>
         </div>
-        <div class="feature-card-secondary">
+        <div class="feature-card-secondary fade-in">
           <h4>Flashcards</h4>
-          <p>Spaced repetition system for consolidating clinical knowledge across all specialties.</p>
+          <p>Spaced repetition system for consolidating clinical knowledge across all specialties and boards.</p>
         </div>
-        <div class="feature-card-secondary">
+        <div class="feature-card-secondary fade-in">
           <h4>Procedures</h4>
           <p>Step-by-step guides, complication management, and evidence summaries for 30+ common procedures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role-Based Section -->
+  <section class="role-section">
+    <div class="container">
+      <div class="role-header fade-in">
+        <div class="section-label">Built for your role</div>
+        <h2>Your workflow, your way</h2>
+      </div>
+
+      <div class="role-grid">
+        <div class="role-card fade-in">
+          <h3>Nursing Students</h3>
+          <ul>
+            <li>Exam prep for NCLEX with 1,678+ questions</li>
+            <li>Comprehensive medication reference</li>
+            <li>Clinical calculator learning tools</li>
+            <li>Evidence-based procedure guides</li>
+            <li>Flashcard system for rapid learning</li>
+          </ul>
+          <a href="#" class="role-card-cta">Get Started →</a>
+        </div>
+
+        <div class="role-card fade-in">
+          <h3>New Graduates</h3>
+          <ul>
+            <li>First-shift confidence builders</li>
+            <li>DDx generator for systematic thinking</li>
+            <li>Rapid drug interaction checking</li>
+            <li>Code Blue and critical decision support</li>
+            <li>Calculation tools for dosing accuracy</li>
+          </ul>
+          <a href="#" class="role-card-cta">Get Started →</a>
+        </div>
+
+        <div class="role-card fade-in">
+          <h3>Experienced Nurses</h3>
+          <ul>
+            <li>Advanced clinical decision support</li>
+            <li>Complex drug-drug interaction analysis</li>
+            <li>Specialty calculators for your domain</li>
+            <li>Latest evidence and guideline updates</li>
+            <li>Leadership and education tools</li>
+          </ul>
+          <a href="#" class="role-card-cta">Get Started →</a>
         </div>
       </div>
     </div>
@@ -800,14 +1073,15 @@
   <!-- Pricing Section -->
   <section class="pricing" id="pricing">
     <div class="pricing-container">
-      <div class="section-header" style="margin-bottom: 48px;">
+      <div class="section-header fade-in">
         <div class="section-label">Simple pricing</div>
         <h2>One Plan. Full Access.</h2>
       </div>
 
-      <div class="pricing-card">
+      <div class="pricing-card fade-in">
+        <div class="pricing-badge">Free during beta</div>
         <div class="pricing-amount">$9.99</div>
-        <div class="pricing-period">per month</div>
+        <div class="pricing-period">per month after beta</div>
         <ul class="pricing-features">
           <li>755+ medications with interactions</li>
           <li>1,678+ board-style questions</li>
@@ -820,32 +1094,68 @@
           <li>Offline access (local storage)</li>
           <li>HIPAA-conscious architecture</li>
         </ul>
-        <button class="btn btn-primary" style="width: 100%;">Start Free Trial</button>
+        <button class="btn btn-primary" style="width: 100%;">Start Your Free Trial</button>
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
-  <section class="final-cta">
+  <section class="final-cta fade-in">
     <div class="final-cta-content">
       <h2>Ready to transform your clinical practice?</h2>
       <p>Join healthcare professionals who trust Nexus Clinical for instant access to evidence-based clinical knowledge.</p>
-      <button class="btn btn-primary">Get Started Free</button>
+      <button class="btn btn-primary">Launch Nexus →</button>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer" id="footer">
     <div class="footer-content">
-      <div class="footer-left">
-        For licensed healthcare professionals only.
+      <div class="footer-disclaimer">
+        <strong>Clinical Disclaimer:</strong> Nexus Clinical is intended for licensed healthcare professionals only. All content is for informational and educational purposes and does not replace professional medical judgment. Data is stored locally on your device—no PHI leaves your device. Use clinical reasoning and consult authoritative sources for critical decisions.
       </div>
-      <div class="footer-right">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Clinical Disclaimers</a>
+
+      <div class="footer-status">
+        <div class="status-dot"></div>
+        <span>System Operational</span>
+      </div>
+
+      <div class="footer-credit">
+        Built by an RN + senior dev team
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-left">
+          For licensed healthcare professionals only.
+        </div>
+        <div class="footer-right">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Clinical Disclaimers</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
+    });
+  </script>
 </body>
 </html>
