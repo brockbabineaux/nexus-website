@@ -20,6 +20,7 @@
       --sienna: #B85C38;
       --sienna-light: rgba(184,92,56,0.08);
       --gold: #C4A35A;
+      --gold-light: rgba(196,163,90,0.1);
       --deep: #3D3929;
       --text: #3D3929;
       --text-secondary: rgba(61,57,41,0.6);
@@ -37,7 +38,6 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    /* Container */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
     /* Nav */
@@ -51,13 +51,18 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo img { width: 36px; height: 36px; }
-    .nav-logo span {
-      font-weight: 500; font-size: 14px; letter-spacing: 0.12em;
-      color: var(--text);
+    .nav-brand {
+      display: flex; flex-direction: column; align-items: flex-start; line-height: 1;
+    }
+    .nav-brand-nexus {
+      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: 0.18em; color: var(--text);
+    }
+    .nav-brand-clinical {
+      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 500; font-size: 8px; letter-spacing: 0.45em; color: var(--text); opacity: 0.7;
     }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a {
@@ -75,7 +80,7 @@
       height: 44px; padding: 0 28px;
       background: var(--olive); color: var(--cream);
     }
-    .btn-primary:hover { background: #4E5D3E; transform: translateY(-1px); }
+    .btn-primary:hover { background: #4E5D3E; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(92,107,74,0.3); }
     .btn-outline {
       height: 44px; padding: 0 28px;
       background: transparent; color: var(--olive);
@@ -86,16 +91,31 @@
       height: 44px; padding: 0 28px;
       background: var(--sienna); color: var(--cream);
     }
-    .btn-sienna:hover { background: #A04E2E; transform: translateY(-1px); }
+    .btn-sienna:hover { background: #A04E2E; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,92,56,0.3); }
+    .btn-ghost {
+      height: 44px; padding: 0 28px;
+      background: transparent; color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--olive); color: var(--olive); }
 
     /* Hero */
     .hero {
       padding: 100px 0 80px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(92,107,74,0.04) 0%, transparent 70%);
+      pointer-events: none;
     }
     .hero-owl {
-      width: 100px; height: 100px;
+      width: 110px; height: 110px;
       margin: 0 auto 32px;
+      filter: drop-shadow(0 4px 24px rgba(61,57,41,0.1));
     }
     .hero h1 {
       font-family: 'DM Serif Display', Georgia, serif;
@@ -109,10 +129,10 @@
       font-style: italic;
       color: var(--sienna);
     }
-    .hero p {
+    .hero p.hero-sub {
       font-size: 18px;
       color: var(--text-secondary);
-      max-width: 580px;
+      max-width: 600px;
       margin: 0 auto 12px;
       line-height: 1.7;
     }
@@ -127,11 +147,25 @@
       flex-wrap: wrap;
     }
 
+    /* Trust bar */
+    .trust-bar {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-items {
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-secondary); font-weight: 500;
+    }
+    .trust-item svg { color: var(--olive); flex-shrink: 0; }
+
     /* Stats bar */
     .stats-bar {
       padding: 48px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
     .stats-grid {
       display: grid;
@@ -139,6 +173,18 @@
       gap: 24px;
       text-align: center;
     }
+    .stat-item {
+      padding: 24px 16px;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid var(--border);
+      transition: all 250ms ease;
+    }
+    .stat-item:hover {
+      border-color: rgba(92,107,74,0.2);
+      box-shadow: 0 4px 20px rgba(61,57,41,0.05);
+    }
+    .stat-icon { margin-bottom: 12px; color: var(--olive); }
     .stat-number {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: 32px;
@@ -174,7 +220,7 @@
       margin: 12px auto 0;
     }
 
-    /* Feature cards */
+    /* Feature cards — 4 primary */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -186,21 +232,34 @@
       border-radius: 16px;
       padding: 32px;
       transition: all 250ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--olive);
+      opacity: 0;
+      transition: opacity 250ms ease;
     }
     .feature-card:hover {
       border-color: rgba(92,107,74,0.25);
       box-shadow: 0 8px 32px rgba(61,57,41,0.06);
       transform: translateY(-2px);
     }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-card:nth-child(2)::after,
+    .feature-card:nth-child(4)::after { background: var(--sienna); }
     .feature-icon {
-      width: 44px; height: 44px;
+      width: 48px; height: 48px;
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 16px;
-      font-size: 20px;
     }
     .feature-icon.olive { background: var(--olive-light); color: var(--olive); }
     .feature-icon.sienna { background: var(--sienna-light); color: var(--sienna); }
+    .feature-icon.gold { background: var(--gold-light); color: var(--gold); }
     .feature-card h3 {
       font-size: 18px; font-weight: 600;
       margin-bottom: 8px; color: var(--deep);
@@ -209,7 +268,7 @@
       font-size: 14px; color: var(--text-secondary); line-height: 1.65;
     }
 
-    /* Mini features row */
+    /* Mini features — 6 secondary tools */
     .mini-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -222,12 +281,67 @@
       border-radius: 12px;
       padding: 24px;
       text-align: center;
+      transition: all 250ms ease;
+    }
+    .mini-card:hover {
+      border-color: rgba(92,107,74,0.2);
+      box-shadow: 0 4px 16px rgba(61,57,41,0.04);
+      transform: translateY(-1px);
+    }
+    .mini-icon {
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--olive-light);
+      color: var(--olive);
+    }
+    .mini-card:nth-child(even) .mini-icon {
+      background: var(--sienna-light);
+      color: var(--sienna);
     }
     .mini-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--deep); }
     .mini-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
 
+    /* How it works */
+    .how-section { background: var(--cream-warm); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 14%; right: 14%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--olive), var(--gold), var(--sienna));
+      opacity: 0.25;
+    }
+    .step-card { text-align: center; position: relative; }
+    .step-number {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 20px;
+      background: white;
+      border: 2px solid var(--olive);
+      color: var(--olive);
+      position: relative;
+      z-index: 1;
+    }
+    .step-card h4 {
+      font-size: 15px; font-weight: 600; color: var(--deep); margin-bottom: 6px;
+    }
+    .step-card p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.55;
+    }
+
     /* Roles section */
-    .roles-section { background: var(--cream-warm); }
+    .roles-section { }
     .roles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -238,23 +352,79 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px;
+      transition: all 250ms ease;
     }
+    .role-card:hover {
+      border-color: rgba(92,107,74,0.2);
+      box-shadow: 0 8px 24px rgba(61,57,41,0.05);
+    }
+    .role-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .role-card:nth-child(1) .role-icon { background: var(--olive-light); color: var(--olive); }
+    .role-card:nth-child(2) .role-icon { background: var(--gold-light); color: var(--gold); }
+    .role-card:nth-child(3) .role-icon { background: var(--sienna-light); color: var(--sienna); }
     .role-card h3 {
       font-size: 18px; font-weight: 600;
       color: var(--deep); margin-bottom: 12px;
     }
-    .role-card ul {
-      list-style: none; padding: 0;
-    }
+    .role-card ul { list-style: none; padding: 0; }
     .role-card li {
       font-size: 14px; color: var(--text-secondary);
       padding: 6px 0; padding-left: 20px;
       position: relative; line-height: 1.5;
     }
-    .role-card li::before {
+    .role-card:nth-child(1) li::before {
       content: ''; position: absolute; left: 0; top: 13px;
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--olive);
+    }
+    .role-card:nth-child(2) li::before {
+      content: ''; position: absolute; left: 0; top: 13px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+    }
+    .role-card:nth-child(3) li::before {
+      content: ''; position: absolute; left: 0; top: 13px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--sienna);
+    }
+
+    /* Evidence & Security */
+    .evidence-section { background: var(--cream-warm); }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .evidence-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      transition: all 250ms ease;
+    }
+    .evidence-card:hover {
+      border-color: rgba(92,107,74,0.2);
+      box-shadow: 0 4px 20px rgba(61,57,41,0.05);
+    }
+    .evidence-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      background: var(--olive-light);
+      color: var(--olive);
+    }
+    .evidence-card h4 {
+      font-size: 16px; font-weight: 600; color: var(--deep); margin-bottom: 8px;
+    }
+    .evidence-card p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
     }
 
     /* CTA */
@@ -267,18 +437,39 @@
       border-radius: 24px;
       padding: 64px 48px;
       color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute; top: -50%; right: -20%;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,107,74,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-card::after {
+      content: '';
+      position: absolute; bottom: -30%; left: -10%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,92,56,0.1) 0%, transparent 70%);
+      pointer-events: none;
     }
     .cta-card h2 {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: clamp(28px, 4vw, 38px);
       font-weight: 400;
       margin-bottom: 16px;
+      position: relative;
     }
     .cta-card p {
       color: rgba(250,248,244,0.7);
       max-width: 480px;
       margin: 0 auto 32px;
+      position: relative;
     }
+    .cta-card .btn { position: relative; }
 
     /* Footer */
     footer {
@@ -302,9 +493,17 @@
       color: var(--text-secondary);
       opacity: 0.7;
       margin-top: 32px;
-      max-width: 700px;
+      max-width: 780px;
       margin-left: auto; margin-right: auto;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+    .footer-disclaimer strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      opacity: 1;
+      font-size: 11px;
+      letter-spacing: 0.05em;
     }
 
     /* Fade in */
@@ -318,10 +517,15 @@
       .features-grid { grid-template-columns: 1fr; }
       .mini-grid { grid-template-columns: 1fr; }
       .roles-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid::before { display: none; }
+      .evidence-grid { grid-template-columns: 1fr; }
       .hero { padding: 60px 0 48px; }
       .section { padding: 56px 0; }
       .footer-content { flex-direction: column; gap: 24px; text-align: center; }
       .footer-links { justify-content: center; }
+      .trust-items { gap: 20px; }
+      .cta-card { padding: 48px 24px; }
     }
   </style>
 </head>
@@ -332,7 +536,10 @@
     <div class="container">
       <a href="/" class="nav-logo">
         <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus">
-        <span>NEXUS CLINICAL</span>
+        <div class="nav-brand">
+          <span class="nav-brand-nexus">NEXUS</span>
+          <span class="nav-brand-clinical">CLINICAL</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/features">Features</a>
@@ -348,12 +555,36 @@
   <section class="hero">
     <div class="container">
       <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-512-transparent.png" alt="Nexus Owl" class="hero-owl">
-      <h1>Your clinical companion,<br><em>always within reach</em></h1>
-      <p>Education, reference, and decision support for licensed healthcare professionals. Everything you need for confident clinical practice, in one place.</p>
-      <p class="disclaimer">For licensed clinicians only. Not a substitute for clinical judgment.</p>
+      <h1>Clinical intelligence,<br><em>notebook simple</em></h1>
+      <p class="hero-sub">Evidence-based tools for the bedside. Drug references, clinical calculators, SOAP documentation, and AI decision support — built by clinicians who understand the pace of patient care.</p>
+      <p class="disclaimer">For licensed healthcare professionals only. Not a substitute for clinical judgment.</p>
       <div class="hero-actions">
         <a href="https://app.nxsclinical.com/signup" class="btn btn-primary">Start Free Trial</a>
         <a href="/features" class="btn btn-outline">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-items fade-in">
+        <div class="trust-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+          Clinician-Reviewed Content
+        </div>
+        <div class="trust-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Data Stored Locally on Device
+        </div>
+        <div class="trust-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Peer-Reviewed Guidelines
+        </div>
+        <div class="trust-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Updated Regularly
+        </div>
       </div>
     </div>
   </section>
@@ -362,19 +593,31 @@
   <section class="stats-bar">
     <div class="container">
       <div class="stats-grid fade-in">
-        <div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+          </div>
           <div class="stat-number">755+</div>
           <div class="stat-label">Medications</div>
         </div>
-        <div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
           <div class="stat-number">1,678+</div>
           <div class="stat-label">Board Questions</div>
         </div>
-        <div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          </div>
           <div class="stat-number">27+</div>
           <div class="stat-label">Clinical Calculators</div>
         </div>
-        <div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
           <div class="stat-number">8,219+</div>
           <div class="stat-label">ICD-10 Codes</div>
         </div>
@@ -391,52 +634,122 @@
         <p>Every tool is designed by clinicians, for clinicians. Fast lookups, reliable data, and thoughtful design for the moments that matter.</p>
       </div>
       <div class="features-grid">
+        <!-- Pharmacy Hub — Pill icon -->
         <div class="feature-card fade-in">
-          <div class="feature-icon olive">&#x1F48A;</div>
+          <div class="feature-icon olive">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+          </div>
           <h3>Pharmacy Hub</h3>
-          <p>755+ medications with dosing, interactions, IV compatibility, and an antibiotic guide. Bedside med checks in seconds.</p>
+          <p>755+ medications with dosing, interactions, IV compatibility, and a comprehensive antibiotic guide. Bedside med checks in seconds.</p>
         </div>
+        <!-- Patient Brain — Brain icon -->
         <div class="feature-card fade-in">
-          <div class="feature-icon sienna">&#x1F9E0;</div>
+          <div class="feature-icon sienna">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
           <h3>Patient Brain</h3>
           <p>Digital brain sheet replacement. Glanceable patient snapshots with diagnosis, code status, drips, lines, and shift tasks all in one view.</p>
         </div>
+        <!-- Shift Hub — ClipboardList icon -->
         <div class="feature-card fade-in">
-          <div class="feature-icon olive">&#x1F4CB;</div>
+          <div class="feature-icon olive">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+          </div>
           <h3>Shift Hub</h3>
           <p>Role-based dashboard that adapts to your workflow. Room assignments, task tracking, handoff reports, and SBAR generation.</p>
         </div>
+        <!-- AI Assistant — Sparkles icon -->
         <div class="feature-card fade-in">
-          <div class="feature-icon sienna">&#x2728;</div>
+          <div class="feature-icon sienna">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          </div>
           <h3>AI Clinical Assistant</h3>
           <p>An evidence-based reasoning partner. Ask questions, discuss cases, and get contextual clinical guidance at the point of care.</p>
         </div>
       </div>
 
+      <!-- Mini features with icons -->
       <div class="mini-grid">
+        <!-- Lab Reference — TestTubes -->
         <div class="mini-card fade-in">
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v17.5A2.5 2.5 0 0 1 6.5 22v0A2.5 2.5 0 0 1 4 19.5V2"/><path d="M20 2v17.5a2.5 2.5 0 0 1-2.5 2.5v0a2.5 2.5 0 0 1-2.5-2.5V2"/><path d="M3 2h7"/><path d="M14 2h7"/><path d="M9 16H4"/><path d="M20 16h-5"/></svg>
+          </div>
           <h4>Lab Reference</h4>
           <p>Normal ranges, critical values, and interpretation guides</p>
         </div>
+        <!-- Clinical Calculators — Calculator -->
         <div class="mini-card fade-in">
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          </div>
           <h4>Clinical Calculators</h4>
           <p>27 validated tools for ICU, cardiology, nephrology, and more</p>
         </div>
+        <!-- Code Blue — AlertCircle/Siren -->
         <div class="mini-card fade-in">
-          <h4>ICD-10 Lookup</h4>
-          <p>8,219+ codes with modifiers, laterality, and billing guidance</p>
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h4>Code Blue</h4>
+          <p>ACLS protocol timer, epi tracking, and role-based checklists</p>
         </div>
+        <!-- Board Prep — BookOpen -->
         <div class="mini-card fade-in">
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
           <h4>Board Prep</h4>
           <p>1,678+ questions with spaced repetition flashcards</p>
         </div>
+        <!-- Procedures — Stethoscope -->
         <div class="mini-card fade-in">
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+          </div>
           <h4>Procedures</h4>
           <p>Step-by-step guides for 30+ common clinical procedures</p>
         </div>
+        <!-- SOAP Notes — FileText -->
         <div class="mini-card fade-in">
-          <h4>Protocols</h4>
-          <p>Evidence-based clinical protocols and documentation frameworks</p>
+          <div class="mini-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h4>SOAP Notes</h4>
+          <p>AI-powered clinical documentation with smart templates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Getting Started</div>
+        <h2>From sign-up to bedside in minutes</h2>
+        <p>No complex setup, no training required. Nexus is designed for the way you already work.</p>
+      </div>
+      <div class="steps-grid fade-in">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Create Account</h4>
+          <p>Sign up with your credentials in under 60 seconds</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Set Your Role</h4>
+          <p>Student, RN, NP, PA, or MD — your dashboard adapts</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Access Tools</h4>
+          <p>Open any clinical tool instantly from your dashboard</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4>Practice Confidently</h4>
+          <p>Evidence-based answers at the bedside, every shift</p>
         </div>
       </div>
     </div>
@@ -446,20 +759,29 @@
   <section class="section roles-section">
     <div class="container">
       <div class="section-header fade-in">
-        <div class="section-label">For Every Stage</div>
+        <div class="section-label">For Every Clinician</div>
         <h2>Your workflow, your way</h2>
+        <p>Whether you're studying for boards or managing a unit, Nexus adapts to meet you where you are.</p>
       </div>
       <div class="roles-grid">
         <div class="role-card fade-in">
+          <div class="role-icon">
+            <!-- GraduationCap -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
           <h3>Nursing Students</h3>
           <ul>
-            <li>NCLEX prep with 1,678+ questions</li>
+            <li>NCLEX prep with 1,678+ practice questions</li>
             <li>Comprehensive medication reference</li>
             <li>Clinical calculator learning tools</li>
-            <li>Flashcard system for rapid learning</li>
+            <li>Spaced repetition flashcard system</li>
           </ul>
         </div>
         <div class="role-card fade-in">
+          <div class="role-icon">
+            <!-- HeartPulse -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
+          </div>
           <h3>New Graduates</h3>
           <ul>
             <li>First-shift confidence builders</li>
@@ -469,13 +791,51 @@
           </ul>
         </div>
         <div class="role-card fade-in">
+          <div class="role-icon">
+            <!-- Award -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
           <h3>Experienced Clinicians</h3>
           <ul>
             <li>Advanced clinical decision support</li>
             <li>Complex interaction analysis</li>
-            <li>Specialty calculators</li>
+            <li>Specialty calculators and protocols</li>
             <li>Latest evidence and guidelines</li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evidence & Security -->
+  <section class="section evidence-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Trust & Transparency</div>
+        <h2>Built on evidence, designed for safety</h2>
+        <p>Every recommendation is grounded in peer-reviewed guidelines and presented for your independent clinical evaluation.</p>
+      </div>
+      <div class="evidence-grid fade-in">
+        <div class="evidence-card">
+          <div class="evidence-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+          </div>
+          <h4>Clinician-Reviewed</h4>
+          <p>All clinical content is reviewed and validated by licensed healthcare professionals against current evidence-based guidelines.</p>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h4>Privacy-First</h4>
+          <p>Patient data is stored locally on your device. No protected health information is transmitted to external servers.</p>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+          </div>
+          <h4>Source Transparency</h4>
+          <p>Underlying sources, algorithms, and clinical reasoning are accessible within the app for independent verification.</p>
         </div>
       </div>
     </div>
@@ -498,7 +858,7 @@
       <div class="footer-content">
         <div class="footer-left">
           <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-64-transparent.png" alt="Nexus">
-          <span>&copy; 2025 Nexus Clinical. All rights reserved.</span>
+          <span>&copy; 2026 Nexus Clinical. All rights reserved.</span>
         </div>
         <div class="footer-links">
           <a href="https://app.nxsclinical.com/privacy">Privacy</a>
@@ -507,9 +867,10 @@
           <a href="/contact">Contact</a>
         </div>
       </div>
-      <p class="footer-disclaimer">
-        Nexus Clinical is intended for licensed healthcare professionals only. All content is for informational and educational purposes and does not replace professional medical judgment. Data is stored locally on your device. Use clinical reasoning and consult authoritative sources for critical decisions.
-      </p>
+      <div class="footer-disclaimer">
+        <strong>Clinical Decision Support Notice</strong>
+        Nexus Clinical is intended for licensed healthcare professionals only and is designed for informational and educational purposes. It is not a substitute for professional medical judgment, diagnosis, or treatment. All content supports — but does not replace — your independent clinical evaluation. Recommendations are based on peer-reviewed clinical guidelines; always verify with current evidence and apply your professional expertise before making patient-care decisions. Content is reviewed regularly but may not reflect every regional variation or the most recent updates. Data entered into patient-facing tools is stored locally on your device. Consult authoritative sources and institutional protocols for critical decisions.
+      </div>
     </div>
   </footer>
 
