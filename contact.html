@@ -1,457 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Nexus | Get in Touch</title>
-  <meta name="description" content="Contact Nexus. We're here to support your questions, feedback, and partnership inquiries." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --bg-2: #111118;
-      --surface: #16161f;
-      --card: #1a1a25;
-      --border: #2a2a3a;
-      --t1: #F1F5F9;
-      --t2: #9898b0;
-      --t3: #6a6a82;
-      --accent: #14B8A6;
-      --accent-hover: #0D9488;
-      --accent-dim: rgba(20, 184, 166, 0.12);
-      --accent-glow: rgba(20, 184, 166, 0.35);
-      --gradient-1: linear-gradient(135deg, #14B8A6 0%, #0EA5E9 100%);
-      --gradient-2: linear-gradient(135deg, #14B8A6 0%, #0EA5E9 100%);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Nexus Clinical</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF8F4;
+            --olive: #5C6B4A;
+            --sienna: #B85C38;
+            --gold: #C4A35A;
+            --deep: #3D3929;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--t1);
-      line-height: 1.7;
-      overflow-x: hidden;
-      font-size: 1.125rem;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .gradient-text {
-      background: var(--gradient-2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px; border-radius: 9999px; font-weight: 600;
-      font-size: 1.125rem; transition: all 0.25s ease; border: none; cursor: pointer;
-    }
-    .btn-primary {
-      height: 52px; padding: 0 2.5rem;
-      background: var(--gradient-1); color: white;
-      box-shadow: 0 4px 24px var(--accent-glow);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); }
-    .btn-secondary {
-      background: transparent; color: var(--t1);
-      border: 2px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--deep);
+            line-height: 1.6;
+        }
 
-    /* ─── Nav ─── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px; max-width: 1200px; margin: 0 auto;
-    }
-    .nav-logo {
-      font-size: 16px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--accent);
-    }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a {
-      font-size: 14px; font-weight: 500; color: var(--t2);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-    .nav-cta { display: flex; gap: 12px; align-items: center; }
-    .nav-cta .btn { padding: 10px 24px; font-size: 14px; }
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background-color: var(--cream);
+            border-bottom: 1px solid rgba(93, 107, 74, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
 
-    /* ─── Hero ─── */
-    .hero {
-      position: relative; padding: 160px 0 80px; text-align: center;
-      overflow: hidden; margin-top: 60px;
-    }
-    .hero h1 {
-      font-size: 3.75rem; font-weight: 700; letter-spacing: -2px;
-      line-height: 1.1; margin-bottom: 24px;
-    }
-    .hero p {
-      font-size: 1.5rem; color: var(--t2); max-width: 640px; margin: 0 auto;
-      line-height: 1.7;
-    }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--deep);
+            text-decoration: none;
+        }
 
-    /* ─── Contact Section ─── */
-    .contact-section { padding: 5rem 0; position: relative; }
-    .contact-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
-    }
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+        }
 
-    /* ─── Form Styles ─── */
-    .form-group { margin-bottom: 20px; }
-    .form-label {
-      display: block; font-size: 12px; font-weight: 600;
-      letter-spacing: 1px; text-transform: uppercase; color: var(--t2);
-      margin-bottom: 8px;
-    }
-    .form-input, .form-select, .form-textarea {
-      width: 100%; padding: 12px 16px; border-radius: 10px;
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--t1); font-family: inherit; font-size: 14px;
-      transition: border-color 0.2s;
-    }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      outline: none; border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-dim);
-    }
-    .form-input::placeholder, .form-textarea::placeholder { color: var(--t3); }
-    .form-textarea {
-      resize: none; line-height: 1.5;
-    }
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            list-style: none;
+        }
 
-    .contact-form {
-      position: relative; z-index: 2;
-    }
-    .contact-form .btn {
-      width: 100%; margin-top: 8px; justify-content: center;
-    }
-    .form-success {
-      display: none; padding: 16px; border-radius: 10px;
-      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #86efac; font-size: 14px; margin-bottom: 20px;
-      text-align: center; font-weight: 500;
-    }
-    .form-success.show { display: block; }
+        .nav-links a {
+            color: var(--deep);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    /* ─── Contact Info Cards ─── */
-    .contact-info { position: relative; z-index: 2; }
-    .info-card {
-      background: rgba(22, 22, 31, 0.92);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(20, 184, 166, 0.15);
-      box-shadow: 0 8px 32px -4px rgb(20 184 166 / 0.1);
-      border-radius: 16px; padding: 32px; margin-bottom: 24px;
-      transition: all 0.3s ease;
-    }
-    .info-card:hover {
-      border-color: rgba(20, 184, 166, 0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(20, 184, 166, 0.12);
-    }
-    .info-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: var(--accent-dim); display: flex; align-items: center;
-      justify-content: center; margin-bottom: 16px; font-size: 22px;
-    }
-    .info-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .info-card p { font-size: 14px; color: var(--t2); line-height: 1.6; margin-bottom: 16px; }
-    .info-card a {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--accent); font-weight: 500; transition: color 0.2s;
-    }
-    .info-card a:hover { color: var(--accent-hover); }
+        .nav-links a:hover {
+            color: var(--sienna);
+        }
 
-    .social-links {
-      display: flex; gap: 16px; margin-top: 12px;
-    }
-    .social-links a {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--accent-dim); display: flex; align-items: center;
-      justify-content: center; color: var(--accent); transition: all 0.2s;
-    }
-    .social-links a:hover {
-      background: var(--accent); color: white;
-    }
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            background: linear-gradient(135deg, rgba(196, 163, 90, 0.05) 0%, rgba(184, 92, 56, 0.05) 100%);
+            animation: fadeIn 1s ease-out;
+        }
 
-    /* ─── Footer ─── */
-    .footer {
-      padding: 64px 0 32px; border-top: 1px solid var(--border);
-    }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
-      margin-bottom: 48px;
-    }
-    .footer-brand p { font-size: 14px; color: var(--t3); margin-top: 12px; line-height: 1.6; }
-    .footer-col h4 {
-      font-size: 13px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--t2); margin-bottom: 16px;
-    }
-    .footer-col a {
-      display: block; font-size: 14px; color: var(--t3);
-      padding: 4px 0; transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--accent); }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 32px; border-top: 1px solid var(--border);
-      font-size: 13px; color: var(--t3);
-    }
-    .footer-socials { display: flex; gap: 16px; }
-    .footer-socials a { color: var(--t3); transition: color 0.2s; }
-    .footer-socials a:hover { color: var(--accent); }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem;
+            color: var(--deep);
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
 
-    /* ─── Animations ─── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up {
-      opacity: 0; animation: fadeInUp 0.6s ease forwards;
-    }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--olive);
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    /* ─── Responsive ─── */
-    @media (max-width: 900px) {
-      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .hero h1 { font-size: 2.5rem; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .hero { padding: 120px 0 80px; margin-top: 80px; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.125rem; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; }
-    }
-  </style>
+        /* Main Content */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: var(--spacing-2xl) auto;
+            padding: 0 var(--spacing-xl);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+        }
+
+        /* Form Styles */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--deep);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: var(--spacing-md);
+            background-color: var(--cream);
+            border: 1px solid rgba(93, 107, 74, 0.2);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--deep);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--olive);
+            box-shadow: 0 0 0 3px rgba(92, 107, 74, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--olive);
+            color: var(--cream);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a5439;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 107, 74, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .info-item {
+            padding: var(--spacing-lg);
+            background-color: rgba(92, 107, 74, 0.05);
+            border-left: 4px solid var(--olive);
+            border-radius: 4px;
+        }
+
+        .info-item h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            color: var(--deep);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 400;
+        }
+
+        .info-item p {
+            color: var(--olive);
+            line-height: 1.8;
+        }
+
+        .info-item a {
+            color: var(--sienna);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .info-item a:hover {
+            color: var(--olive);
+        }
+
+        .note-box {
+            padding: var(--spacing-lg);
+            background-color: rgba(196, 163, 90, 0.1);
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+        }
+
+        .note-box p {
+            color: var(--deep);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--deep);
+            color: var(--cream);
+            text-align: center;
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        footer p {
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+        }
+
+        .disclaimer {
+            margin-top: var(--spacing-lg);
+            font-size: 0.8rem;
+            color: rgba(250, 248, 244, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                padding: var(--spacing-md);
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .content-wrapper {
+                padding: 0 var(--spacing-md);
+            }
+
+            footer {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ─── Navigation ─── -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nxGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#14B8A6"/><stop offset="100%" stop-color="#0EA5E9"/></linearGradient></defs><rect width="100" height="100" fill="#141418" rx="20"/><circle cx="50" cy="50" r="40" fill="none" stroke="url(#nxGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="216 36" transform="rotate(-50 50 50)" opacity="0.3"/><circle cx="50" cy="50" r="32" fill="none" stroke="url(#nxGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="175 26" transform="rotate(-45 50 50)"/><circle cx="50" cy="50" r="24" fill="#1C1C24"/><text x="50" y="58" text-anchor="middle" fill="#fff" font-family="Helvetica Neue,Arial,sans-serif" font-size="26" font-weight="700">N</text></svg> NEXUS Clinical</a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <a href="https://app.nxsclinical.com/login" class="btn btn-secondary">Log In</a>
-      <a href="https://app.nxsclinical.com/subscribe" class="btn btn-primary">Sign Up</a>
-    </div>
-  </div>
-</nav>
-
-<!-- ─── Hero ─── -->
-<section class="hero">
-  <div class="container">
-    <div class="fade-up">
-      <h1>Get in Touch</h1>
-      <p>Have questions about Nexus? We'd love to hear from you. Reach out and we'll get back to you within 24 hours.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Contact Section ─── -->
-<section class="contact-section">
-  <div class="container">
-    <div class="contact-inner">
-
-      <!-- Left Column: Contact Form -->
-      <div class="contact-form fade-up">
-        <form id="contactForm" onsubmit="handleFormSubmit(event)">
-          <div class="form-success" id="successMessage">
-            ✓ Thank you! Your message has been sent. We'll be in touch within 24 hours.
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input type="text" class="form-input" id="name" name="name" placeholder="Your name" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" id="email" name="email" placeholder="you@example.com" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Subject</label>
-            <select class="form-select" id="subject" name="subject" required>
-              <option value="">Select a subject...</option>
-              <option value="general">General Inquiry</option>
-              <option value="bug">Bug Report</option>
-              <option value="feature">Feature Request</option>
-              <option value="billing">Billing Support</option>
-              <option value="partnership">Partnership</option>
-              <option value="beta">Beta Access</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" id="message" name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
-      </div>
-
-      <!-- Right Column: Contact Info Cards -->
-      <div class="contact-info">
-
-        <div class="info-card fade-up delay-1">
-          <div class="info-icon">✉️</div>
-          <h3>Email</h3>
-          <p>For general inquiries, support, and feedback.</p>
-          <a href="mailto:support@nxsclinical.com">support@nxsclinical.com</a>
-        </div>
-
-        <div class="info-card fade-up delay-2">
-          <div class="info-icon">⏱️</div>
-          <h3>Response Time</h3>
-          <p>We aim to respond to all inquiries within 24 hours during business days.</p>
-          <p style="font-size: 13px; color: var(--t3); margin: 0;">Mon-Fri, 9 AM - 5 PM EST</p>
-        </div>
-
-        <div class="info-card fade-up delay-3">
-          <div class="info-icon">🚀</div>
-          <h3>Get Started</h3>
-          <p>Ready to transform your clinical practice? Start your free 7-day trial today.</p>
-          <a href="https://app.nxsclinical.com/subscribe">Start Free Trial →</a>
-        </div>
-
-        <div class="info-card fade-up delay-4">
-          <div class="info-icon">🔗</div>
-          <h3>Social Media</h3>
-          <p>Follow us for updates and announcements.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Twitter" title="Twitter">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="#" aria-label="GitHub" title="GitHub">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            </a>
-            <a href="#" aria-label="LinkedIn" title="LinkedIn">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─── Footer ─── -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo" style="margin-bottom:4px;display:flex;align-items:center;gap:10px;"><svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nxGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#14B8A6"/><stop offset="100%" stop-color="#0EA5E9"/></linearGradient></defs><rect width="100" height="100" fill="#141418" rx="20"/><circle cx="50" cy="50" r="40" fill="none" stroke="url(#nxGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="216 36" transform="rotate(-50 50 50)" opacity="0.3"/><circle cx="50" cy="50" r="32" fill="none" stroke="url(#nxGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="175 26" transform="rotate(-45 50 50)"/><circle cx="50" cy="50" r="24" fill="#1C1C24"/><text x="50" y="58" text-anchor="middle" fill="#fff" font-family="Helvetica Neue,Arial,sans-serif" font-size="26" font-weight="700">N</text></svg> NEXUS Clinical</div>
-        <p>The neural operating system for healthcare professionals. Study smarter. Work safer. Communicate better.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="features.html">Features</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="#">Changelog</a>
-        <a href="#">Mobile App</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="#">Careers</a>
-        <a href="#">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="https://app.nxsclinical.com/privacy">Privacy Policy</a>
-        <a href="https://app.nxsclinical.com/terms">Terms of Service</a>
-        <a href="https://app.nxsclinical.com/legal">HIPAA Notice</a>
-        <a href="https://app.nxsclinical.com/legal">Medical Disclaimer</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Nexus. All rights reserved.</span>
-      <div class="footer-socials">
-        <a href="#" aria-label="Twitter">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus Clinical Logo">
+            <span>Nexus Clinical</span>
         </a>
-        <a href="#" aria-label="GitHub">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        </a>
-        <a href="#" aria-label="LinkedIn">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-      </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Get in touch</h1>
+        <p>We'd love to hear from you. Whether you have questions, feedback, or just want to say hello, we're here to help.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="contact-grid">
+            <!-- Left: Contact Form -->
+            <div>
+                <form class="contact-form" action="mailto:support@nxsclinical.com" method="POST" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Right: Contact Info -->
+            <div class="contact-info">
+                <div class="info-item">
+                    <h3>Email</h3>
+                    <p><a href="mailto:support@nxsclinical.com">support@nxsclinical.com</a></p>
+                </div>
+
+                <div class="info-item">
+                    <h3>Response Time</h3>
+                    <p>Typically within 24-48 hours</p>
+                </div>
+
+                <div class="note-box">
+                    <p>We're a small team that cares deeply about your experience. Every message is read by a real person.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</footer>
 
-<script>
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  // Get form values
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value;
-  const message = document.getElementById('message').value;
-
-  // Show success message
-  const successMsg = document.getElementById('successMessage');
-  successMsg.classList.add('show');
-
-  // Reset form
-  document.getElementById('contactForm').reset();
-
-  // Hide success message after 5 seconds
-  setTimeout(() => {
-    successMsg.classList.remove('show');
-  }, 5000);
-}
-
-// Intersection observer for fade-up animations
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = 'running';
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.fade-up').forEach(el => {
-  el.style.animationPlayState = 'paused';
-  observer.observe(el);
-});
-
-// Set active nav link
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-links a').forEach(link => {
-  if (link.getAttribute('href').includes(currentPage)) {
-    link.classList.add('active');
-  }
-});
-</script>
-
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Nexus Clinical. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+        </div>
+        <div class="disclaimer">
+            <p>Nexus Clinical is a tool for healthcare professionals. Always consult with qualified medical professionals for clinical decisions. This tool does not provide medical advice and is not a substitute for professional medical judgment.</p>
+        </div>
+    </footer>
 </body>
 </html>

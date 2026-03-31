@@ -1,1178 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEXUS Clinical | The Neural Operating System for Healthcare Professionals</title>
-  <meta name="description" content="Nexus is the neural operating system for healthcare professionals. Instant access to 755+ medications, 1,678+ board questions, and 27 validated clinical calculators." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;650;700;800;900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Clinical — The Clinical Companion for Healthcare Professionals</title>
+  <meta name="description" content="Nexus Clinical is the warm, reliable clinical companion for licensed healthcare professionals. 755+ medications, 1,678+ board questions, 27 validated calculators, and AI decision support.">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://app.nxsclinical.com/brand/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="https://app.nxsclinical.com/brand/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Dark background scale */
-      --bg-page: #0b1020;
-      --bg-section: #11172a;
-      --bg-card: #172033;
-      --bg-hover: #202b42;
-
-      /* Colors */
-      --color-primary: #14B8A6;
-      --color-secondary: #0EA5E9;
-      --color-purple: #7C3AED;
-      --color-success: #10B981;
-      --color-warning: #F59E0B;
-      --color-danger: #EF4444;
-
-      /* Text scale */
-      --text-primary: rgba(255, 255, 255, 0.96);
-      --text-secondary: rgba(255, 255, 255, 0.72);
-      --text-tertiary: rgba(255, 255, 255, 0.54);
-
-      /* Borders */
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.14);
-
-      /* Gradients */
-      --gradient-primary: linear-gradient(135deg, #14B8A6 0%, #0EA5E9 100%);
-      --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-
-      /* Glass effect */
-      --glass-bg: rgba(17, 23, 42, 0.96);
-      --glass-border: rgba(20, 184, 166, 0.2);
-      --glass-blur: blur(24px);
+      --cream: #FAF8F4;
+      --cream-warm: #F5F0E8;
+      --olive: #5C6B4A;
+      --olive-light: rgba(92,107,74,0.08);
+      --olive-medium: rgba(92,107,74,0.15);
+      --sienna: #B85C38;
+      --sienna-light: rgba(184,92,56,0.08);
+      --gold: #C4A35A;
+      --deep: #3D3929;
+      --text: #3D3929;
+      --text-secondary: rgba(61,57,41,0.6);
+      --border: rgba(61,57,41,0.1);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-page);
-      color: var(--text-primary);
-      line-height: 1.65;
-      overflow-x: hidden;
-      font-size: 0.92rem;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
 
-    /* ─── Container ─── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    /* Container */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* ─── Utility ─── */
-    .gradient-text {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,244,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      border-radius: 9999px; font-weight: 600;
-      font-size: 0.92rem; transition: all 160ms ease; border: none; cursor: pointer;
-    }
-
-    .btn-primary {
-      height: 56px; padding: 0 28px;
-      background: var(--gradient-primary); color: white;
-      box-shadow: 0 4px 24px rgba(20, 184, 166, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.4);
-    }
-
-    .btn-secondary {
-      height: 56px; padding: 0 28px;
-      background: transparent; color: var(--text-primary);
-      border: 2px solid var(--border-strong);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-      transform: translateY(-3px);
-    }
-
-    .section-label {
-      display: inline-block; font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary);
-      margin-bottom: 16px;
-    }
-
-    /* ─── Fade-in Animation ─── */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 600ms ease, transform 600ms ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── Navigation ─── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur) saturate(180%);
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .nav-inner {
+    nav .container {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px; max-width: 1200px; margin: 0 auto; width: 100%;
+      height: 64px;
     }
-
     .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--color-primary);
+      display: flex; align-items: center; gap: 12px;
     }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 32px;
-      font-size: 0.85rem; color: var(--text-secondary);
+    .nav-logo img { width: 36px; height: 36px; }
+    .nav-logo span {
+      font-weight: 500; font-size: 14px; letter-spacing: 0.12em;
+      color: var(--text);
     }
-
+    .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a {
-      transition: color 160ms ease;
+      font-size: 14px; font-weight: 500; color: var(--text-secondary);
+      transition: color 200ms;
     }
-
-    .nav-links a:hover {
-      color: var(--color-primary);
+    .nav-links a:hover { color: var(--olive); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 999px; font-weight: 600; font-size: 14px;
+      transition: all 200ms ease; border: none; cursor: pointer;
+      text-decoration: none;
     }
+    .btn-primary {
+      height: 44px; padding: 0 28px;
+      background: var(--olive); color: var(--cream);
+    }
+    .btn-primary:hover { background: #4E5D3E; transform: translateY(-1px); }
+    .btn-outline {
+      height: 44px; padding: 0 28px;
+      background: transparent; color: var(--olive);
+      border: 1.5px solid var(--olive);
+    }
+    .btn-outline:hover { background: var(--olive-light); }
+    .btn-sienna {
+      height: 44px; padding: 0 28px;
+      background: var(--sienna); color: var(--cream);
+    }
+    .btn-sienna:hover { background: #A04E2E; transform: translateY(-1px); }
 
-    /* ─── Hero Section ─── */
+    /* Hero */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 80px;
-      background: var(--bg-page);
-      position: relative;
-      overflow: hidden;
+      padding: 100px 0 80px;
+      text-align: center;
     }
-
-    .hero-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+    .hero-owl {
+      width: 100px; height: 100px;
+      margin: 0 auto 32px;
     }
-
-    .hero-content h1 {
-      font-size: clamp(2.6rem, 5vw, 4.75rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      margin-bottom: 24px;
-      color: var(--text-primary);
-    }
-
-    .hero-disclaimer {
-      font-size: 0.8rem;
-      color: var(--color-primary);
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--deep);
       margin-bottom: 20px;
-      padding: 10px 14px;
-      background: rgba(20, 184, 166, 0.08);
-      border-left: 3px solid var(--color-primary);
-      border-radius: 4px;
     }
-
-    .hero-content p {
-      font-size: 1.05rem;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sienna);
+    }
+    .hero p {
+      font-size: 18px;
       color: var(--text-secondary);
-      margin-bottom: 32px;
-      line-height: 1.6;
-      max-width: 500px;
-      font-weight: 400;
+      max-width: 580px;
+      margin: 0 auto 12px;
+      line-height: 1.7;
     }
-
-    .hero-cta {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      margin-bottom: 48px;
+    .hero .disclaimer {
+      font-size: 12px;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      margin-bottom: 36px;
     }
-
-    .hero-visual {
-      position: relative;
-      height: 500px;
-    }
-
-    .neural-network {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { r: 6px; fill-opacity: 1; }
-      50% { r: 10px; fill-opacity: 0.6; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .neural-node {
-      animation: pulse-glow 2s ease-in-out infinite;
-      fill: url(#gradient-nodes);
-    }
-
-    .stat-card {
-      position: absolute;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      animation: float 4s ease-in-out infinite;
-      font-size: 0.85rem;
-    }
-
-    .stat-card-value {
-      font-weight: 700;
-      color: var(--color-primary);
-      font-size: 1.4rem;
-    }
-
-    .stat-card-label {
-      color: var(--text-tertiary);
-      margin-top: 4px;
-      font-weight: 400;
-    }
-
-    .stat-1 { top: 60px; left: 20px; animation-delay: 0s; }
-    .stat-2 { top: 240px; right: 40px; animation-delay: 1s; }
-    .stat-3 { bottom: 80px; left: 50px; animation-delay: 2s; }
-
-    /* ─── Trust Bar ─── */
-    .trust-bar {
-      background: var(--bg-section);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 40px 24px;
-    }
-
-    .trust-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-around;
-      gap: 32px;
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
       flex-wrap: wrap;
     }
 
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+    /* Stats bar */
+    .stats-bar {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-
-    .trust-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--color-primary);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* ─── Stats Row ─── */
-    .stats {
-      background: var(--bg-page);
-      padding: 64px 24px;
-    }
-
     .stats-grid {
-      max-width: 1200px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
-    }
-
-    .stat-box {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 28px 24px;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(20, 184, 166, 0.12);
+    }
+    .stat-number {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 32px;
+      color: var(--olive);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
     }
 
-    .stat-box-value {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--color-primary);
+    /* Section */
+    .section { padding: 80px 0; }
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sienna);
       margin-bottom: 12px;
     }
-
-    .stat-box-label {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    /* ─── Features Section ─── */
-    .features {
-      background: var(--bg-section);
-      padding: 80px 24px;
-    }
-
-    .section-header {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      text-align: center;
-    }
-
     .section-header h2 {
-      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      color: var(--deep);
+    }
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 12px auto 0;
     }
 
-    /* Primary features grid */
-    .primary-features {
-      max-width: 1200px;
-      margin: 0 auto 60px;
+    /* Feature cards */
+    .features-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
+      gap: 20px;
     }
-
-    .feature-card-primary {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-subtle);
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
       border-radius: 16px;
-      border-left: 3px solid var(--color-primary);
-      padding: 40px;
-      transition: all 160ms ease;
-      position: relative;
-      overflow: hidden;
+      padding: 32px;
+      transition: all 250ms ease;
     }
-
-    .feature-card-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gradient-primary);
-      width: 0;
-      animation: line-expand 0.4s ease forwards;
+    .feature-card:hover {
+      border-color: rgba(92,107,74,0.25);
+      box-shadow: 0 8px 32px rgba(61,57,41,0.06);
+      transform: translateY(-2px);
     }
-
-    @keyframes line-expand {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    .feature-card-primary:hover {
-      transform: translateY(-4px);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-      box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
-    }
-
     .feature-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(14, 165, 233, 0.1));
-      border: 1px solid rgba(20, 184, 166, 0.2);
-    }
-    .feature-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--color-primary);
-      stroke-width: 1.75;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .feature-card-primary h3 {
-      font-size: 1.2rem;
-      font-weight: 650;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-    }
-
-    .feature-card-primary p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 16px;
-      font-weight: 400;
+      font-size: 20px;
+    }
+    .feature-icon.olive { background: var(--olive-light); color: var(--olive); }
+    .feature-icon.sienna { background: var(--sienna-light); color: var(--sienna); }
+    .feature-card h3 {
+      font-size: 18px; font-weight: 600;
+      margin-bottom: 8px; color: var(--deep);
+    }
+    .feature-card p {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.65;
     }
 
-    .feature-explore {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--color-primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 160ms ease;
+    /* Mini features row */
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
     }
-
-    .feature-explore:hover {
-      gap: 10px;
+    .mini-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
     }
+    .mini-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--deep); }
+    .mini-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
 
-    /* Secondary features grid */
-    .secondary-features {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* Roles section */
+    .roles-section { background: var(--cream-warm); }
+    .roles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-
-    .feature-card-secondary {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 160ms ease;
-    }
-
-    .feature-card-secondary:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-      box-shadow: 0 8px 24px rgba(20, 184, 166, 0.1);
-    }
-
-    .feature-card-secondary h4 {
-      font-size: 1.1rem;
-      font-weight: 650;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-
-    .feature-card-secondary p {
-      color: var(--text-tertiary);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      font-weight: 400;
-    }
-
-    /* ─── Role-Based Section ─── */
-    .role-section {
-      background: var(--bg-page);
-      padding: 80px 24px;
-    }
-
-    .role-header {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      text-align: center;
-    }
-
-    .role-header h2 {
-      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .role-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
     .role-card {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-subtle);
+      background: white;
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px;
-      transition: all 160ms ease;
-      position: relative;
-      overflow: hidden;
     }
-
-    .role-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    }
-
-    .role-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
-    }
-
     .role-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      padding-top: 12px;
-      color: var(--text-primary);
+      font-size: 18px; font-weight: 600;
+      color: var(--deep); margin-bottom: 12px;
     }
-
     .role-card ul {
-      list-style: none;
-      margin-bottom: 24px;
+      list-style: none; padding: 0;
     }
-
     .role-card li {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 12px;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      font-weight: 400;
-      line-height: 1.5;
+      font-size: 14px; color: var(--text-secondary);
+      padding: 6px 0; padding-left: 20px;
+      position: relative; line-height: 1.5;
     }
-
     .role-card li::before {
-      content: '✓';
-      color: var(--color-primary);
-      font-weight: 700;
-      flex-shrink: 0;
+      content: ''; position: absolute; left: 0; top: 13px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--olive);
     }
 
-    .role-card-cta {
-      display: inline-block;
-      color: var(--color-primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 160ms ease;
-    }
-
-    .role-card-cta:hover {
-      gap: 6px;
-    }
-
-    /* ─── Pricing Section ─── */
-    .pricing {
-      background: var(--bg-section);
-      padding: 80px 24px;
-    }
-
-    .pricing-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .pricing-badge {
-      display: inline-block;
-      background: rgba(20, 184, 166, 0.15);
-      color: var(--color-primary);
-      padding: 8px 16px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .pricing-card {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      border-top: 2px solid var(--color-primary);
-      padding: 48px;
-      text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(20, 184, 166, 0.12);
-    }
-
-    .pricing-amount {
-      font-size: 3.2rem;
-      font-weight: 800;
-      color: var(--color-primary);
-      margin-bottom: 8px;
-    }
-
-    .pricing-period {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 32px;
-      font-weight: 400;
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 32px;
-      text-align: left;
-    }
-
-    .pricing-features li {
-      padding: 12px 0;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      gap: 12px;
-      font-weight: 400;
-    }
-
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--color-success);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* ─── Final CTA Section ─── */
-    .final-cta {
-      background: var(--bg-page);
-      padding: 100px 24px;
-      position: relative;
-      overflow: hidden;
+    /* CTA */
+    .cta-section {
+      padding: 80px 0;
       text-align: center;
     }
-
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
+    .cta-card {
+      background: var(--deep);
+      border-radius: 24px;
+      padding: 64px 48px;
+      color: var(--cream);
     }
-
-    .final-cta-content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .final-cta h2 {
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .final-cta p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      line-height: 1.6;
+    .cta-card h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 38px);
       font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .cta-card p {
+      color: rgba(250,248,244,0.7);
+      max-width: 480px;
+      margin: 0 auto 32px;
     }
 
-    /* ─── Footer ─── */
-    .footer {
-      background: var(--bg-page);
-      border-top: 1px solid var(--border-subtle);
-      padding: 60px 24px;
+    /* Footer */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
     }
-
     .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    .footer-disclaimer {
-      background: rgba(20, 184, 166, 0.08);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 40px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    .footer-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 24px;
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--color-success);
-      border-radius: 50%;
-      animation: pulse-status 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse-status {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 32px;
-    }
-
     .footer-left {
-      color: var(--text-tertiary);
-      font-size: 0.85rem;
-      font-weight: 400;
+      display: flex; align-items: center; gap: 12px;
     }
-
-    .footer-credit {
-      color: var(--text-tertiary);
-      font-size: 0.85rem;
+    .footer-left img { width: 28px; height: 28px; }
+    .footer-left span { font-size: 12px; color: var(--text-secondary); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--text-secondary); transition: color 200ms; }
+    .footer-links a:hover { color: var(--olive); }
+    .footer-disclaimer {
       text-align: center;
-      flex: 1;
-      font-weight: 400;
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .footer-right a {
+      font-size: 11px;
       color: var(--text-secondary);
-      font-size: 0.85rem;
-      transition: color 160ms ease;
-      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 32px;
+      max-width: 700px;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.6;
     }
 
-    .footer-right a:hover {
-      color: var(--color-primary);
-    }
+    /* Fade in */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── Responsive Design ─── */
+    /* Mobile */
     @media (max-width: 768px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .hero-visual {
-        display: none;
-      }
-
-      .hero-content h1 {
-        font-size: 2.2rem;
-      }
-
-      .trust-content {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .trust-item {
-        justify-content: center;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .primary-features {
-        grid-template-columns: 1fr;
-      }
-
-      .secondary-features {
-        grid-template-columns: 1fr;
-      }
-
-      .role-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-card-primary {
-        padding: 28px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-
-      .footer-right {
-        justify-content: center;
-      }
-
-      .nav-links {
-        display: none;
-      }
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .roles-grid { grid-template-columns: 1fr; }
+      .hero { padding: 60px 0 48px; }
+      .section { padding: 56px 0; }
+      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="nav-logo" style="display:flex;align-items:center;gap:10px;">
-        <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nxGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#14B8A6"/><stop offset="100%" stop-color="#0EA5E9"/></linearGradient></defs><rect width="100" height="100" fill="#141418" rx="20"/><circle cx="50" cy="50" r="40" fill="none" stroke="url(#nxGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="216 36" transform="rotate(-50 50 50)" opacity="0.3"/><circle cx="50" cy="50" r="32" fill="none" stroke="url(#nxGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="175 26" transform="rotate(-45 50 50)"/><circle cx="50" cy="50" r="24" fill="#1C1C24"/><text x="50" y="58" text-anchor="middle" fill="#fff" font-family="Helvetica Neue,Arial,sans-serif" font-size="26" font-weight="700">N</text></svg>
-        NEXUS
-      </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus">
+        <span>NEXUS CLINICAL</span>
+      </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#footer">Contact</a>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="https://app.nxsclinical.com/login" class="btn btn-primary">Sign In</a>
       </div>
-      <a href="https://app.nxsclinical.com/subscribe" class="btn btn-primary">Start Free Trial</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1>
-            The <span class="gradient-text">Neural Operating System</span> for Licensed Healthcare Professionals
-          </h1>
-          <div class="hero-disclaimer">
-            For licensed clinicians only. Not a substitute for clinical judgment.
-          </div>
-          <p>
-            Instant access to clinical knowledge: 755+ medications, 1,678+ board questions, 27 validated calculators, and an AI assistant built for the bedside. Education, reference, and decision support—all in one platform.
-          </p>
-          <div class="hero-cta">
-            <a href="https://app.nxsclinical.com" class="btn btn-primary">Launch Nexus →</a>
-            <a href="#features" class="btn btn-secondary">Learn More</a>
-          </div>
+      <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-512-transparent.png" alt="Nexus Owl" class="hero-owl">
+      <h1>Your clinical companion,<br><em>always within reach</em></h1>
+      <p>Education, reference, and decision support for licensed healthcare professionals. Everything you need for confident clinical practice, in one place.</p>
+      <p class="disclaimer">For licensed clinicians only. Not a substitute for clinical judgment.</p>
+      <div class="hero-actions">
+        <a href="https://app.nxsclinical.com/signup" class="btn btn-primary">Start Free Trial</a>
+        <a href="/features" class="btn btn-outline">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid fade-in">
+        <div>
+          <div class="stat-number">755+</div>
+          <div class="stat-label">Medications</div>
         </div>
-
-        <div class="hero-visual">
-          <svg class="neural-network" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gradient-nodes" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#0EA5E9;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:0.8" />
-              </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <!-- Connection lines -->
-            <g stroke="rgba(20,184,166,0.25)" stroke-width="1.5" fill="none">
-              <line x1="200" y1="50" x2="100" y2="150" />
-              <line x1="200" y1="50" x2="300" y2="150" />
-              <line x1="100" y1="150" x2="200" y2="250" />
-              <line x1="300" y1="150" x2="200" y2="250" />
-              <line x1="100" y1="150" x2="80" y2="280" />
-              <line x1="300" y1="150" x2="320" y2="280" />
-              <line x1="200" y1="250" x2="150" y2="380" />
-              <line x1="200" y1="250" x2="250" y2="380" />
-              <line x1="80" y1="280" x2="150" y2="380" />
-              <line x1="320" y1="280" x2="250" y2="380" />
-            </g>
-            <!-- Neural nodes with animation -->
-            <circle class="neural-node" cx="200" cy="50" r="6" filter="url(#glow)" />
-            <circle class="neural-node" cx="100" cy="150" r="5" filter="url(#glow)" />
-            <circle class="neural-node" cx="300" cy="150" r="5" filter="url(#glow)" />
-            <circle class="neural-node" cx="200" cy="250" r="7" filter="url(#glow)" />
-            <circle class="neural-node" cx="80" cy="280" r="4" filter="url(#glow)" />
-            <circle class="neural-node" cx="320" cy="280" r="4" filter="url(#glow)" />
-            <circle class="neural-node" cx="150" cy="380" r="5" filter="url(#glow)" />
-            <circle class="neural-node" cx="250" cy="380" r="5" filter="url(#glow)" />
-          </svg>
-
-          <!-- Floating stat cards -->
-          <div class="stat-card stat-1">
-            <div class="stat-card-value">755+</div>
-            <div class="stat-card-label">Medications</div>
-          </div>
-          <div class="stat-card stat-2">
-            <div class="stat-card-value">1,678+</div>
-            <div class="stat-card-label">Questions</div>
-          </div>
-          <div class="stat-card stat-3">
-            <div class="stat-card-value">30+</div>
-            <div class="stat-card-label">Tools</div>
-          </div>
+        <div>
+          <div class="stat-number">1,678+</div>
+          <div class="stat-label">Board Questions</div>
+        </div>
+        <div>
+          <div class="stat-number">27+</div>
+          <div class="stat-label">Clinical Calculators</div>
+        </div>
+        <div>
+          <div class="stat-number">8,219+</div>
+          <div class="stat-label">ICD-10 Codes</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust Bar -->
-  <section class="trust-bar fade-in">
-    <div class="trust-content">
-      <div class="trust-item">
-        <div class="trust-dot"></div>
-        <span>Built by an RN + senior dev team</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-dot"></div>
-        <span>HIPAA-conscious local storage</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-dot"></div>
-        <span>27 validated calculators</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-dot"></div>
-        <span>Educational tool</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Row -->
-  <section class="stats">
-    <div class="stats-grid">
-      <div class="stat-box fade-in">
-        <div class="stat-box-value">755+</div>
-        <div class="stat-box-label">Medications</div>
-      </div>
-      <div class="stat-box fade-in">
-        <div class="stat-box-value">1,678+</div>
-        <div class="stat-box-label">Board Questions</div>
-      </div>
-      <div class="stat-box fade-in">
-        <div class="stat-box-value">27+</div>
-        <div class="stat-box-label">Calculators</div>
-      </div>
-      <div class="stat-box fade-in">
-        <div class="stat-box-value">8,219+</div>
-        <div class="stat-box-label">ICD-10 Codes</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features" id="features">
+  <!-- Core Features -->
+  <section class="section">
     <div class="container">
       <div class="section-header fade-in">
-        <div class="section-label">Powered by your clinical needs</div>
-        <h2>Comprehensive Clinical Tools</h2>
+        <div class="section-label">Clinical Tools</div>
+        <h2>Built around your workflow</h2>
+        <p>Every tool is designed by clinicians, for clinicians. Fast lookups, reliable data, and thoughtful design for the moments that matter.</p>
       </div>
-
-      <!-- Primary Features -->
-      <div class="primary-features">
-        <div class="feature-card-primary fade-in">
-          <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon olive">&#x1F48A;</div>
+          <h3>Pharmacy Hub</h3>
+          <p>755+ medications with dosing, interactions, IV compatibility, and an antibiotic guide. Bedside med checks in seconds.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon sienna">&#x1F9E0;</div>
+          <h3>Patient Brain</h3>
+          <p>Digital brain sheet replacement. Glanceable patient snapshots with diagnosis, code status, drips, lines, and shift tasks all in one view.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon olive">&#x1F4CB;</div>
           <h3>Shift Hub</h3>
-          <p>Role-based dashboard that adapts to your workflow. Customize your workspace with quick-access references, calculators, and decision support tools.</p>
-          <a href="https://app.nxsclinical.com/dashboard" class="feature-explore">Explore →</a>
+          <p>Role-based dashboard that adapts to your workflow. Room assignments, task tracking, handoff reports, and SBAR generation.</p>
         </div>
-        <div class="feature-card-primary fade-in">
-          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <h3>Clinical Documentation</h3>
-          <p>SOAP note templates, Code Blue protocols, and structured documentation guides. Evidence-based frameworks to streamline charting and decision-making.</p>
-          <a href="https://app.nxsclinical.com/dashboard/soap-notes" class="feature-explore">Explore →</a>
-        </div>
-        <div class="feature-card-primary fade-in">
-          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></div>
-          <h3>Drug Reference</h3>
-          <p>755+ medications with dosing, interactions, and contraindications. Instant lookup with evidence-based information and clinical considerations.</p>
-          <a href="https://app.nxsclinical.com/dashboard/drugs" class="feature-explore">Explore →</a>
-        </div>
-        <div class="feature-card-primary fade-in">
-          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon sienna">&#x2728;</div>
           <h3>AI Clinical Assistant</h3>
-          <p>Neural-powered reasoning partner. Ask questions, discuss cases, and get evidence-based guidance contextual to your current patient or study scenario.</p>
-          <a href="https://app.nxsclinical.com/dashboard" class="feature-explore">Explore →</a>
+          <p>An evidence-based reasoning partner. Ask questions, discuss cases, and get contextual clinical guidance at the point of care.</p>
         </div>
       </div>
 
-      <!-- Secondary Features -->
-      <div class="secondary-features">
-        <div class="feature-card-secondary fade-in">
+      <div class="mini-grid">
+        <div class="mini-card fade-in">
           <h4>Lab Reference</h4>
-          <p>Normal ranges, interpretation guides, and critical value protocols for all common lab tests.</p>
+          <p>Normal ranges, critical values, and interpretation guides</p>
         </div>
-        <div class="feature-card-secondary fade-in">
-          <h4>Antibiotic Guide</h4>
-          <p>Empiric therapy recommendations, spectrum coverage, and resistance patterns by organism.</p>
-        </div>
-        <div class="feature-card-secondary fade-in">
-          <h4>ICD-10 Lookup</h4>
-          <p>8,219+ diagnosis codes with descriptions, laterality, severity modifiers, and billing guidelines.</p>
-        </div>
-        <div class="feature-card-secondary fade-in">
+        <div class="mini-card fade-in">
           <h4>Clinical Calculators</h4>
-          <p>27 validated calculators for ICU, nephrology, cardiology, and more. Risk stratification and dosing adjustments in seconds.</p>
+          <p>27 validated tools for ICU, cardiology, nephrology, and more</p>
         </div>
-        <div class="feature-card-secondary fade-in">
-          <h4>Flashcards</h4>
-          <p>Spaced repetition system for consolidating clinical knowledge across all specialties and boards.</p>
+        <div class="mini-card fade-in">
+          <h4>ICD-10 Lookup</h4>
+          <p>8,219+ codes with modifiers, laterality, and billing guidance</p>
         </div>
-        <div class="feature-card-secondary fade-in">
+        <div class="mini-card fade-in">
+          <h4>Board Prep</h4>
+          <p>1,678+ questions with spaced repetition flashcards</p>
+        </div>
+        <div class="mini-card fade-in">
           <h4>Procedures</h4>
-          <p>Step-by-step guides, complication management, and evidence summaries for 30+ common procedures.</p>
+          <p>Step-by-step guides for 30+ common clinical procedures</p>
+        </div>
+        <div class="mini-card fade-in">
+          <h4>Protocols</h4>
+          <p>Evidence-based clinical protocols and documentation frameworks</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Role-Based Section -->
-  <section class="role-section">
+  <!-- Roles -->
+  <section class="section roles-section">
     <div class="container">
-      <div class="role-header fade-in">
-        <div class="section-label">Built for your role</div>
+      <div class="section-header fade-in">
+        <div class="section-label">For Every Stage</div>
         <h2>Your workflow, your way</h2>
       </div>
-
-      <div class="role-grid">
+      <div class="roles-grid">
         <div class="role-card fade-in">
           <h3>Nursing Students</h3>
           <ul>
-            <li>Exam prep for NCLEX with 1,678+ questions</li>
+            <li>NCLEX prep with 1,678+ questions</li>
             <li>Comprehensive medication reference</li>
             <li>Clinical calculator learning tools</li>
-            <li>Evidence-based procedure guides</li>
             <li>Flashcard system for rapid learning</li>
           </ul>
-          <a href="https://app.nxsclinical.com/subscribe" class="role-card-cta">Get Started →</a>
         </div>
-
         <div class="role-card fade-in">
           <h3>New Graduates</h3>
           <ul>
             <li>First-shift confidence builders</li>
-            <li>DDx generator for systematic thinking</li>
             <li>Rapid drug interaction checking</li>
-            <li>Code Blue and critical decision support</li>
-            <li>Calculation tools for dosing accuracy</li>
+            <li>Code Blue decision support</li>
+            <li>Dosing calculation tools</li>
           </ul>
-          <a href="https://app.nxsclinical.com/subscribe" class="role-card-cta">Get Started →</a>
         </div>
-
         <div class="role-card fade-in">
-          <h3>Experienced Nurses</h3>
+          <h3>Experienced Clinicians</h3>
           <ul>
             <li>Advanced clinical decision support</li>
-            <li>Complex drug-drug interaction analysis</li>
-            <li>Specialty calculators for your domain</li>
-            <li>Latest evidence and guideline updates</li>
-            <li>Leadership and education tools</li>
+            <li>Complex interaction analysis</li>
+            <li>Specialty calculators</li>
+            <li>Latest evidence and guidelines</li>
           </ul>
-          <a href="https://app.nxsclinical.com/subscribe" class="role-card-cta">Get Started →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pricing Section -->
-  <section class="pricing" id="pricing">
-    <div class="pricing-container">
-      <div class="section-header fade-in">
-        <div class="section-label">Simple pricing</div>
-        <h2>One Plan. Full Access.</h2>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card fade-in">
+        <h2>Ready to elevate your practice?</h2>
+        <p>Join healthcare professionals who trust Nexus for instant access to evidence-based clinical knowledge.</p>
+        <a href="https://app.nxsclinical.com/signup" class="btn btn-sienna">Start Your Free Trial</a>
       </div>
-
-      <div class="pricing-card fade-in">
-        <div class="pricing-badge">Free during beta</div>
-        <div class="pricing-amount">$9.99</div>
-        <div class="pricing-period">per month after beta</div>
-        <ul class="pricing-features">
-          <li>755+ medications with interactions</li>
-          <li>1,678+ board-style questions</li>
-          <li>27 validated clinical calculators</li>
-          <li>ICD-10 code lookup</li>
-          <li>Lab reference and antibiotic guide</li>
-          <li>AI clinical assistant</li>
-          <li>Flashcard system with spaced repetition</li>
-          <li>Procedure protocols and guides</li>
-          <li>Offline access (local storage)</li>
-          <li>HIPAA-conscious architecture</li>
-        </ul>
-        <a href="https://app.nxsclinical.com/subscribe" class="btn btn-primary" style="width: 100%; justify-content: center;">Start Your Free Trial</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="final-cta fade-in">
-    <div class="final-cta-content">
-      <h2>Ready to transform your clinical practice?</h2>
-      <p>Join healthcare professionals who trust Nexus for instant access to evidence-based clinical knowledge.</p>
-      <a href="https://app.nxsclinical.com" class="btn btn-primary">Launch Nexus →</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer" id="footer">
-    <div class="footer-content">
-      <div class="footer-disclaimer">
-        <strong>Clinical Disclaimer:</strong> Nexus is intended for licensed healthcare professionals only. All content is for informational and educational purposes and does not replace professional medical judgment. Data is stored locally on your device—no PHI leaves your device. Use clinical reasoning and consult authoritative sources for critical decisions.
-      </div>
-
-      <div class="footer-status">
-        <div class="status-dot"></div>
-        <span>System Operational</span>
-      </div>
-
-      <div class="footer-credit">
-        Built by an RN + senior dev team
-      </div>
-
-      <div class="footer-bottom">
+  <footer>
+    <div class="container">
+      <div class="footer-content">
         <div class="footer-left">
-          For licensed healthcare professionals only.
+          <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-64-transparent.png" alt="Nexus">
+          <span>&copy; 2025 Nexus Clinical. All rights reserved.</span>
         </div>
-        <div class="footer-right">
-          <a href="https://app.nxsclinical.com/privacy">Privacy Policy</a>
-          <a href="https://app.nxsclinical.com/terms">Terms of Service</a>
-          <a href="#footer">Clinical Disclaimers</a>
+        <div class="footer-links">
+          <a href="https://app.nxsclinical.com/privacy">Privacy</a>
+          <a href="https://app.nxsclinical.com/terms">Terms</a>
+          <a href="https://app.nxsclinical.com/disclaimer">Disclaimers</a>
+          <a href="/contact">Contact</a>
         </div>
       </div>
+      <p class="footer-disclaimer">
+        Nexus Clinical is intended for licensed healthcare professionals only. All content is for informational and educational purposes and does not replace professional medical judgment. Data is stored locally on your device. Use clinical reasoning and consult authoritative sources for critical decisions.
+      </p>
     </div>
   </footer>
 
   <script>
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(element => {
-      observer.observe(element);
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
   </script>
+
 </body>
 </html>
