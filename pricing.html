@@ -1,462 +1,843 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing — Nexus Clinical</title>
-    <style>
-        :root {
-            --cream: #FAF8F4;
-            --olive: #5C6B4A;
-            --sienna: #B85C38;
-            --gold: #C4A35A;
-            --deep: #3D3929;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - Nexus Clinical</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --cream-warm: #F5F0E8;
+      --olive: #5C6B4A;
+      --olive-light: rgba(92,107,74,0.08);
+      --olive-medium: rgba(92,107,74,0.15);
+      --sienna: #B85C38;
+      --sienna-light: rgba(184,92,56,0.08);
+      --gold: #C4A35A;
+      --gold-light: rgba(196,163,90,0.1);
+      --deep: #3D3929;
+      --text: #3D3929;
+      --text-secondary: rgba(61,57,41,0.6);
+      --border: rgba(61,57,41,0.1);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html, body {
-            height: 100%;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--cream);
-            color: var(--deep);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-        }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        /* Navigation */
-        nav {
-            background-color: var(--cream);
-            border-bottom: 1px solid rgba(92, 107, 74, 0.1);
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,248,244,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        nav .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--deep);
-            font-weight: 600;
-            font-size: 1.25rem;
-        }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
 
-        nav .logo img {
-            width: 32px;
-            height: 32px;
-        }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+    }
 
-        nav a {
-            color: var(--deep);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
 
-        nav a:hover {
-            color: var(--sienna);
-        }
+    .nav-brand-nexus {
+      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: var(--text);
+    }
 
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-        }
+    .nav-brand-clinical {
+      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 500;
+      font-size: 8px;
+      letter-spacing: 0.45em;
+      color: var(--text);
+      opacity: 0.7;
+    }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 4rem 2rem;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 200ms;
+      text-decoration: none;
+    }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeIn 0.8s ease-out;
-        }
+    .nav-links a:hover {
+      color: var(--olive);
+    }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3rem;
-            color: var(--deep);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 200ms ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--olive);
-            margin-bottom: 2rem;
-        }
+    .btn-primary {
+      height: 44px;
+      padding: 0 28px;
+      background: var(--olive);
+      color: var(--cream);
+    }
 
-        /* Pricing Card */
-        .pricing-section {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease-out 0.2s both;
-        }
+    .btn-primary:hover {
+      background: #4E5D3E;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(92,107,74,0.3);
+    }
 
-        .pricing-card {
-            background: white;
-            border: 2px solid var(--olive);
-            border-radius: 12px;
-            padding: 3rem;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .btn-sienna {
+      height: 44px;
+      padding: 0 28px;
+      background: var(--sienna);
+      color: var(--cream);
+    }
 
-        .pricing-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(92, 107, 74, 0.15);
-        }
+    .btn-sienna:hover {
+      background: #A04E2E;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(184,92,56,0.3);
+    }
 
-        .plan-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.75rem;
-            color: var(--deep);
-            margin-bottom: 1.5rem;
-        }
+    .btn-full-width {
+      width: 100%;
+    }
 
-        .plan-price {
-            font-size: 1.5rem;
-            color: var(--sienna);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
 
-        .plan-subtitle {
-            font-size: 1rem;
-            color: var(--olive);
-            margin-bottom: 2rem;
-        }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .features-list {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
+    /* Hero Section */
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(196,163,90,0.15) 0%, transparent 70%);
+      position: relative;
+    }
 
-        .features-list li {
-            padding: 0.75rem 0;
-            padding-left: 1.75rem;
-            position: relative;
-            color: var(--deep);
-            font-size: 0.95rem;
-        }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
 
-        .features-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--olive);
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sienna);
+    }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--sienna);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-        }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .cta-button:hover {
-            background-color: var(--gold);
-            color: var(--deep);
-            transform: translateY(-2px);
-        }
+    /* Pricing Card */
+    .pricing-section {
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        /* FAQ Section */
-        .faq-section {
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 2px solid rgba(92, 107, 74, 0.15);
-            animation: fadeIn 1.2s ease-out 0.4s both;
-        }
+    .pricing-card {
+      background: white;
+      border: 2px solid var(--olive);
+      border-radius: 20px;
+      padding: 48px;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .faq-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2rem;
-            color: var(--deep);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gold);
+    }
 
-        .faq-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
+    .pricing-plan-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text);
+      margin-top: 20px;
+      margin-bottom: 16px;
+    }
 
-        .faq-item {
-            margin-bottom: 1rem;
-            border: 1px solid var(--olive);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
 
-        .faq-item details {
-            cursor: pointer;
-        }
+    .pricing-price-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--sienna);
+    }
 
-        .faq-item summary {
-            background-color: rgba(196, 163, 90, 0.1);
-            padding: 1.25rem;
-            font-weight: 600;
-            color: var(--deep);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            transition: background-color 0.3s ease;
-        }
+    .pricing-price-period {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
 
-        .faq-item summary:hover {
-            background-color: rgba(196, 163, 90, 0.2);
-        }
+    .pricing-trial {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      text-align: center;
+    }
 
-        .faq-item summary::marker {
-            color: var(--olive);
-        }
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
 
-        .faq-item[open] summary {
-            background-color: rgba(184, 92, 56, 0.1);
-            color: var(--sienna);
-        }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
 
-        .faq-answer {
-            padding: 1.5rem;
-            background-color: rgba(250, 248, 244, 0.5);
-            color: var(--deep);
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--deep);
-            color: var(--cream);
-            padding: 3rem 2rem;
-            margin-top: auto;
-            border-top: 2px solid var(--olive);
-        }
+    .pricing-features li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
 
-        footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
+    .pricing-features svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--olive);
+    }
 
-        footer p {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            line-height: 1.6;
-        }
+    .pricing-cta {
+      margin-bottom: 20px;
+    }
 
-        footer a {
-            color: var(--gold);
-            text-decoration: none;
-        }
+    .pricing-trust {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    /* What's Included Section */
+    .benefits-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+    .benefit-card {
+      text-align: center;
+    }
 
-            .hero p {
-                font-size: 1rem;
-            }
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--olive);
+    }
 
-            .pricing-card {
-                padding: 2rem;
-            }
+    .benefit-card.accent .benefit-icon {
+      color: var(--sienna);
+    }
 
-            .plan-name {
-                font-size: 1.5rem;
-            }
+    .benefit-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
 
-            nav ul {
-                display: none;
-            }
+    .benefit-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-            main {
-                padding: 2rem 1rem;
-            }
+    /* FAQ Section */
+    .faq-section {
+      padding: 60px 20px;
+    }
 
-            footer {
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
+    .faq-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--sienna);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .faq-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    .faq-container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      transition: border-color 200ms ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--olive);
+      border-top-color: var(--olive);
+    }
+
+    .faq-summary {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 20px 24px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+      transition: color 200ms;
+    }
+
+    .faq-summary:hover {
+      color: var(--olive);
+    }
+
+    .faq-summary::marker {
+      content: '';
+    }
+
+    .faq-summary svg {
+      width: 20px;
+      height: 20px;
+      color: var(--olive);
+      flex-shrink: 0;
+      transition: transform 200ms ease;
+    }
+
+    .faq-item[open] .faq-summary svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Bottom CTA Section */
+    .bottom-cta {
+      padding: 60px 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      text-align: center;
+      max-width: 720px;
+      margin: 60px auto;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .bottom-cta p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-left img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .footer-left span {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: color 200ms;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--olive);
+    }
+
+    .footer-disclaimer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .footer-disclaimer strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      opacity: 1;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .pricing-card {
+        padding: 32px 24px;
+      }
+
+      .pricing-plan-name {
+        font-size: 24px;
+      }
+
+      .pricing-price-amount {
+        font-size: 40px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .faq-section h2 {
+        font-size: 36px;
+      }
+
+      .bottom-cta h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="/" class="logo">
-                <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus Clinical">
-                Nexus Clinical
-            </a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/pricing">Pricing</a></li>
-                <li><a href="https://app.nxsclinical.com">Sign In</a></li>
-            </ul>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus">
+        <div class="nav-brand"><span class="nav-brand-nexus">NEXUS</span><span class="nav-brand-clinical">CLINICAL</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="https://app.nxsclinical.com/login" class="btn btn-primary">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <div class="container">
+      <h1>One plan. <em>Every tool.</em></h1>
+      <p>No tiers, no surprises, no contracts. The complete Nexus experience for the price of one coffee a week.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-section">
+    <div class="pricing-card fade-in">
+      <div class="pricing-plan-name">Complete Access</div>
+      <div class="pricing-price">
+        <span class="pricing-price-amount">$9.99</span>
+        <span class="pricing-price-period">/month</span>
+      </div>
+      <div class="pricing-trial">Start with a 7-day free trial</div>
+
+      <div class="pricing-divider"></div>
+
+      <ul class="pricing-features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          755+ medication references
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          1,678+ board prep questions
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          27 clinical calculators
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          8,219+ ICD-10 codes
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          AI clinical assistant
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Lab reference & antibiotic guide
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Spaced repetition flashcards
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Clinical procedures & protocols
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          SOAP note documentation
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Code Blue decision support
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Patient brain sheets
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          Shift management tools
+        </li>
+      </ul>
+
+      <div class="pricing-cta">
+        <button class="btn btn-sienna btn-full-width">Start Your Free Trial</button>
+      </div>
+      <div class="pricing-trust">Cancel anytime · No commitment</div>
+    </div>
+  </section>
+
+  <!-- What's Included Section -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3>Save Time</h3>
+          <p>Instant lookups at the bedside instead of hunting through apps and PDFs</p>
         </div>
-    </nav>
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h1>Simple, honest pricing</h1>
-                <p>One plan, all the tools you need to deliver better patient care</p>
-            </section>
-
-            <!-- Pricing Card -->
-            <section class="pricing-section">
-                <div class="pricing-card">
-                    <h2 class="plan-name">Complete Access</h2>
-                    <div class="plan-price">Free during beta</div>
-                    <div class="plan-subtitle">$9.99/month after beta</div>
-
-                    <ul class="features-list">
-                        <li>755+ medications</li>
-                        <li>1,678+ board questions</li>
-                        <li>27 clinical calculators</li>
-                        <li>ICD-10 lookup</li>
-                        <li>AI clinical assistant</li>
-                        <li>Lab reference & antibiotic guide</li>
-                        <li>Flashcards with spaced repetition</li>
-                        <li>Procedure protocols</li>
-                        <li>Offline access</li>
-                        <li>HIPAA-conscious architecture</li>
-                    </ul>
-
-                    <a href="https://app.nxsclinical.com/signup" class="cta-button">Start Your Free Trial</a>
-                </div>
-            </section>
-
-            <!-- FAQ Section -->
-            <section class="faq-section">
-                <h2 class="faq-title">Questions?</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <details>
-                            <summary>Is Nexus really free?</summary>
-                            <div class="faq-answer">
-                                Yes, Nexus is completely free during our beta period. After we launch out of beta, the Complete Access plan will be $9.99/month. No hidden fees, no surprises.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Who is Nexus for?</summary>
-                            <div class="faq-answer">
-                                Nexus is designed for licensed healthcare professionals and nursing students who need fast, reliable access to clinical information. Whether you're a physician, nurse practitioner, PA, or nursing student, Nexus gives you the tools to make better clinical decisions.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Is my data safe?</summary>
-                            <div class="faq-answer">
-                                Your privacy is our top priority. Nexus uses local storage, which means your data stays on your device. We're built with a HIPAA-conscious architecture, and no protected health information (PHI) ever leaves your device. You're always in control.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>Can I use Nexus offline?</summary>
-                            <div class="faq-answer">
-                                Absolutely. Core features like medication lookup, calculators, and flashcards work entirely offline. This means you can access critical clinical information anywhere, anytime—even without an internet connection.
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="faq-item">
-                        <details>
-                            <summary>How do I cancel?</summary>
-                            <div class="faq-answer">
-                                You can cancel anytime with no penalties, no contracts, and no questions asked. We're confident you'll love Nexus, but if you ever want to cancel, it's just a few clicks.
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </section>
+        <div class="benefit-card">
+          <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/>
+          </svg>
+          <h3>Evidence-Based</h3>
+          <p>All content grounded in peer-reviewed clinical guidelines</p>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>
-                <strong>Disclaimer:</strong> Nexus Clinical is an educational and research tool designed to support clinical decision-making. It is not a substitute for professional medical advice. Always consult with qualified healthcare professionals for diagnosis and treatment. Nexus Clinical and its developers assume no liability for misuse or harm resulting from reliance on this information.
-            </p>
+        <div class="benefit-card accent">
+          <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>
+          </svg>
+          <h3>Built for You</h3>
+          <p>Designed by clinicians who understand the pace of patient care</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-label">Questions</div>
+      <h2>Frequently asked</h2>
+
+      <div class="faq-container">
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Is there really just one plan?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">Yes. Every clinician gets access to every tool — Pharmacy Hub, Patient Brain, AI Assistant, Board Prep, and all clinical references. No feature gates, no upsells.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            How does the free trial work?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">You get full access to everything for 7 days. No credit card required to start. If you love it, subscribe for $9.99/month. If not, no charge.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Can I cancel anytime?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">Absolutely. Cancel with one click from your account settings. No contracts, no cancellation fees, no questions asked.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Who is Nexus built for?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">Licensed healthcare professionals and students — nurses, nurse practitioners, physician assistants, physicians, and nursing students preparing for boards.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            How often is content updated?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-answer">Clinical content is reviewed and updated regularly against current peer-reviewed guidelines and evidence-based sources.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section>
+    <div class="container">
+      <div class="bottom-cta fade-in">
+        <h2>Start practicing with confidence</h2>
+        <p>7 days free. Full access. No credit card required.</p>
+        <button class="btn btn-sienna">Start Your Free Trial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-64-transparent.png" alt="Nexus">
+          <span>&copy; 2026 Nexus Clinical. All rights reserved.</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://app.nxsclinical.com/privacy">Privacy</a>
+          <a href="https://app.nxsclinical.com/terms">Terms</a>
+          <a href="https://app.nxsclinical.com/disclaimer">Disclaimers</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        <strong>Clinical Decision Support Notice</strong>
+        Nexus Clinical is intended for licensed healthcare professionals only and is designed for informational and educational purposes. It is not a substitute for professional medical judgment, diagnosis, or treatment. All content supports — but does not replace — your independent clinical evaluation. Recommendations are based on peer-reviewed clinical guidelines; always verify with current evidence and apply your professional expertise before making patient-care decisions. Content is reviewed regularly but may not reflect every regional variation or the most recent updates. Consult authoritative sources and institutional protocols for critical decisions.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-in animation observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>

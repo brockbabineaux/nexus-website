@@ -1,520 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Nexus Clinical</title>
-    <style>
-        :root {
-            --cream: #FAF8F4;
-            --olive: #5C6B4A;
-            --sienna: #B85C38;
-            --gold: #C4A35A;
-            --deep: #3D3929;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Nexus Clinical</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --cream-warm: #F5F0E8;
+      --olive: #5C6B4A;
+      --olive-light: rgba(92,107,74,0.08);
+      --olive-medium: rgba(92,107,74,0.15);
+      --sienna: #B85C38;
+      --sienna-light: rgba(184,92,56,0.08);
+      --gold: #C4A35A;
+      --gold-light: rgba(196,163,90,0.1);
+      --deep: #3D3929;
+      --text: #3D3929;
+      --text-secondary: rgba(61,57,41,0.6);
+      --border: rgba(61,57,41,0.1);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--cream);
-            color: var(--deep);
-            line-height: 1.6;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* Navigation */
-        nav {
-            background-color: var(--cream);
-            border-bottom: 1px solid rgba(92, 107, 74, 0.1);
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+    }
 
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        nav .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--deep);
-            font-weight: 600;
-        }
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(250, 248, 244, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        nav .logo img {
-            width: 32px;
-            height: 32px;
-        }
+    nav .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
 
-        nav a {
-            color: var(--deep);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+    }
 
-        nav a:hover {
-            color: var(--sienna);
-        }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 1.2;
+    }
 
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-        }
+    .nav-brand-nexus {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    .nav-brand-clinical {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      color: var(--text-secondary);
+    }
 
-        /* Hero Section */
-        .hero {
-            padding: 6rem 2rem;
-            text-align: center;
-            animation: fadeIn 0.8s ease;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3.5rem;
-            color: var(--deep);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--olive);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    .nav-links a:hover {
+      color: var(--sienna);
+    }
 
-        @media (max-width: 768px) {
-            .hero {
-                padding: 4rem 1.5rem;
-            }
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+    .btn-primary {
+      background: var(--olive);
+      color: white;
+    }
 
-            .hero p {
-                font-size: 1rem;
-            }
-        }
+    .btn-primary:hover {
+      background: #4f5940;
+      transform: translateY(-2px);
+    }
 
-        /* Story Section */
-        .story {
-            padding: 5rem 2rem;
-            background-color: white;
-            margin: 3rem 0;
-            border-radius: 8px;
-            animation: fadeIn 1s ease;
-        }
+    .btn-sienna {
+      background: var(--sienna);
+      color: white;
+    }
 
-        .story h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep);
-            margin-bottom: 2rem;
-        }
+    .btn-sienna:hover {
+      background: #a74f30;
+      transform: translateY(-2px);
+    }
 
-        .story p {
-            font-size: 1.1rem;
-            color: var(--olive);
-            line-height: 1.8;
-            max-width: 800px;
-        }
+    /* Hero */
+    .hero {
+      background: radial-gradient(ellipse at center, rgba(196,163,90,0.12) 0%, var(--cream) 100%);
+      padding: 120px 24px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-out;
+    }
 
-        @media (max-width: 768px) {
-            .story {
-                padding: 3rem 1.5rem;
-            }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: var(--deep);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-            .story h2 {
-                font-size: 2rem;
-            }
+    .hero h1 em {
+      color: var(--sienna);
+      font-style: italic;
+      font-weight: normal;
+    }
 
-            .story p {
-                font-size: 1rem;
-            }
-        }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
 
-        /* Values Section */
-        .values {
-            padding: 5rem 2rem;
-            animation: fadeIn 1.2s ease;
-        }
+    /* Our Story */
+    .our-story {
+      background: var(--cream-warm);
+      padding: 96px 24px;
+    }
 
-        .values h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--sienna);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 16px;
+    }
 
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+    .section-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        .value-card {
-            background: linear-gradient(135deg, rgba(200, 163, 90, 0.05) 0%, rgba(184, 92, 56, 0.05) 100%);
-            border: 1px solid rgba(92, 107, 74, 0.15);
-            border-radius: 8px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
+    .our-story h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      margin-bottom: 32px;
+      text-align: center;
+      color: var(--deep);
+    }
 
-        .value-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 8px 24px rgba(184, 92, 56, 0.1);
-            transform: translateY(-4px);
-        }
+    .our-story p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      text-align: justify;
+    }
 
-        .value-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            color: var(--sienna);
-            margin-bottom: 1rem;
-        }
+    /* Values */
+    .values {
+      padding: 96px 24px;
+      background: var(--cream);
+    }
 
-        .value-card p {
-            color: var(--olive);
-            line-height: 1.7;
-        }
+    .values h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      margin-bottom: 48px;
+      text-align: center;
+      color: var(--deep);
+    }
 
-        @media (max-width: 768px) {
-            .values {
-                padding: 3rem 1.5rem;
-            }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-            .values h2 {
-                font-size: 2rem;
-            }
+    .value-card {
+      background: white;
+      padding: 40px 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+      animation: fadeIn 0.8s ease-out;
+    }
 
-            .values-grid {
-                gap: 1.5rem;
-            }
+    .value-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--sienna-light);
+    }
 
-            .value-card {
-                padding: 1.75rem;
-            }
-        }
+    .value-icon-container {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
 
-        /* Stats Section */
-        .stats {
-            padding: 5rem 2rem;
-            background-color: white;
-            border-radius: 8px;
-            animation: fadeIn 1.4s ease;
-        }
+    .value-icon-container svg {
+      width: 32px;
+      height: 32px;
+    }
 
-        .stats h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+    .value-card.sienna .value-icon-container {
+      background: var(--sienna-light);
+      color: var(--sienna);
+    }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-        }
+    .value-card.olive .value-icon-container {
+      background: var(--olive-light);
+      color: var(--olive);
+    }
 
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem;
-        }
+    .value-card.gold .value-icon-container {
+      background: var(--gold-light);
+      color: var(--gold);
+    }
 
-        .stat-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--sienna);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+    .value-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--deep);
+    }
 
-        .stat-label {
-            color: var(--olive);
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+    .value-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-        @media (max-width: 768px) {
-            .stats {
-                padding: 3rem 1.5rem;
-            }
+    /* By the Numbers */
+    .by-numbers {
+      background: var(--cream-warm);
+      padding: 96px 24px;
+    }
 
-            .stats h2 {
-                font-size: 2rem;
-            }
+    .by-numbers h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      margin-bottom: 48px;
+      text-align: center;
+      color: var(--deep);
+    }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-            .stat-number {
-                font-size: 2rem;
-            }
-        }
+    .stat-card {
+      background: white;
+      padding: 32px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+      animation: fadeIn 0.8s ease-out;
+    }
 
-        /* CTA Section */
-        .cta {
-            padding: 4rem 2rem;
-            text-align: center;
-            animation: fadeIn 1.6s ease;
-        }
+    .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--sienna-light);
+    }
 
-        .cta h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2rem;
-            color: var(--deep);
-            margin-bottom: 1.5rem;
-        }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sienna);
+    }
 
-        .cta p {
-            font-size: 1.1rem;
-            color: var(--olive);
-            margin-bottom: 2rem;
-        }
+    .stat-icon svg {
+      width: 28px;
+      height: 28px;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background-color: var(--sienna);
-            color: var(--cream);
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--sienna);
-            cursor: pointer;
-        }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--olive);
+      margin-bottom: 8px;
+    }
 
-        .btn:hover {
-            background-color: transparent;
-            color: var(--sienna);
-        }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--sienna);
-            border: 2px solid var(--sienna);
-        }
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #4a5a3a 0%, #3D3929 100%);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-out;
+    }
 
-        .btn-secondary:hover {
-            background-color: var(--sienna);
-            color: var(--cream);
-        }
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        @media (max-width: 768px) {
-            .cta {
-                padding: 3rem 1.5rem;
-            }
+    .cta-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
 
-            .cta h2 {
-                font-size: 1.75rem;
-            }
+    .cta-section p {
+      font-size: 18px;
+      margin-bottom: 32px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
 
-            .cta p {
-                font-size: 1rem;
-            }
-        }
+    /* Footer */
+    footer {
+      background: var(--cream-warm);
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--deep);
-            color: var(--cream);
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-            text-align: center;
-        }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-        footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
 
-        footer p {
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
+    .footer-left img {
+      width: 32px;
+      height: 32px;
+    }
 
-        footer a {
-            color: var(--gold);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
 
-        footer a:hover {
-            color: var(--cream);
-        }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
 
-        .footer-disclaimer {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: rgba(250, 248, 244, 0.7);
-            line-height: 1.6;
-        }
+    .footer-links a:hover {
+      color: var(--sienna);
+    }
 
-        @media (max-width: 768px) {
-            footer {
-                padding: 2rem 1.5rem;
-            }
-        }
+    .footer-disclaimer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .footer-disclaimer strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 8px;
+    }
 
-        /* Utility Classes */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-    </style>
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav .container {
+        padding: 0 16px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 64px 24px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .our-story {
+        padding: 64px 24px;
+      }
+
+      .our-story h2,
+      .values h2,
+      .by-numbers h2,
+      .cta-section h2 {
+        font-size: 32px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .stat-card {
+        padding: 24px 16px;
+      }
+
+      .stat-number {
+        font-size: 28px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .cta-section {
+        padding: 60px 24px;
+      }
+
+      .cta-section h2 {
+        font-size: 32px;
+      }
+
+      .cta-section p {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="/" class="logo">
-                <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus Clinical Logo">
-                <span>Nexus Clinical</span>
-            </a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+  <nav><div class="container"><a href="/" class="nav-logo"><img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus"><div class="nav-brand"><span class="nav-brand-nexus">NEXUS</span><span class="nav-brand-clinical">CLINICAL</span></div></a><div class="nav-links"><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/about">About</a><a href="/contact">Contact</a><a href="https://app.nxsclinical.com/login" class="btn btn-primary">Sign In</a></div></div></nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Built by clinicians, for clinicians</h1>
-            <p>Nexus Clinical exists to empower healthcare professionals with evidence-based tools designed around real bedside workflows. Because care coordination shouldn't slow you down.</p>
-        </div>
-    </section>
+  <section class="hero">
+    <h1>Built by a clinician <em>who gets it</em></h1>
+    <p>Nexus was born during real shifts, from real frustrations, with the belief that healthcare professionals deserve tools as thoughtful as the care they give.</p>
+  </section>
 
-    <!-- Story Section -->
-    <section class="story">
-        <div class="container">
-            <h2>Our Story</h2>
-            <p>Nexus was born from a simple realization — clinicians deserve better tools. Built by an RN and development team who understand the demands of bedside care, Nexus combines clinical expertise with thoughtful design. Every feature is built around real workflows, real needs, and the understanding that at the bedside, every second matters.</p>
-        </div>
-    </section>
+  <section class="our-story">
+    <div class="section-content">
+      <div class="section-label">Our Story</div>
+      <h2>From bedside to codebase</h2>
+      <p>Nexus Clinical started with a simple question — why are the tools clinicians rely on every day so far behind the care they deliver? Built by an RN and a small development team, Nexus combines clinical expertise with thoughtful design. Every feature is shaped by real workflows, real needs, and the understanding that at the bedside, every second matters.</p>
+      <p>We're not a big corporation. We're a small team that still works shifts and still codes from the bedside. That proximity to patient care isn't just our origin story — it's how we build every single day.</p>
+    </div>
+  </section>
 
-    <!-- Values Section -->
-    <section class="values">
-        <div class="container">
-            <h2>Our Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <h3>🏥 Clinical First</h3>
-                    <p>Every decision we make starts with the question: does this help at the bedside? We're guided by clinical outcomes, not feature checklists.</p>
-                </div>
-                <div class="value-card">
-                    <h3>🔒 Privacy by Design</h3>
-                    <p>Your data stays on your device. HIPAA-conscious architecture with local storage ensures patient information never leaves where it's needed most.</p>
-                </div>
-                <div class="value-card">
-                    <h3>📚 Evidence-Based</h3>
-                    <p>All clinical content is sourced from peer-reviewed literature and established guidelines. We audit and update continuously to reflect the latest evidence.</p>
-                </div>
-            </div>
+  <section class="values">
+    <div class="container">
+      <div class="section-label">Our Values</div>
+      <h2>What guides us</h2>
+      <div class="values-grid">
+        <div class="value-card sienna">
+          <div class="value-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path>
+            </svg>
+          </div>
+          <h3>Clinical First</h3>
+          <p>Every decision starts with one question: does this help at the bedside? We build for clinical outcomes, not feature checklists.</p>
         </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <h2>By the Numbers</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">755+</div>
-                    <div class="stat-label">Medications</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">1,678+</div>
-                    <div class="stat-label">Clinical Questions</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">27+</div>
-                    <div class="stat-label">Calculators</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">8,219+</div>
-                    <div class="stat-label">ICD-10 Codes</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Procedures</div>
-                </div>
-            </div>
+        <div class="value-card olive">
+          <div class="value-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3>Privacy by Design</h3>
+          <p>Your trust matters. We build with privacy as a foundational principle, not an afterthought.</p>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to experience better tools?</h2>
-            <p>Join clinicians who are reimagining bedside care with Nexus Clinical.</p>
-            <a href="#" class="btn">Get Started</a>
+        <div class="value-card gold">
+          <div class="value-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <h3>Evidence-Based</h3>
+          <p>All clinical content is sourced from peer-reviewed literature and established guidelines. We review and update continuously.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Nexus Clinical. All rights reserved.</p>
-            <p><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></p>
-            <div class="footer-disclaimer">
-                <p><strong>Disclaimer:</strong> Nexus Clinical is a reference and decision support tool. It does not replace clinical judgment or professional medical advice. Always consult with appropriate healthcare providers and follow institutional protocols. Medication information and clinical content are current as of the last update but should be verified against authoritative sources before clinical use.</p>
-            </div>
+  <section class="by-numbers">
+    <div class="container">
+      <div class="section-label">By The Numbers</div>
+      <h2>What's inside Nexus</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
+              <path d="m8.5 8.5 7 7"></path>
+            </svg>
+          </div>
+          <div class="stat-number">755+</div>
+          <div class="stat-label">Medications</div>
         </div>
-    </footer>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <div class="stat-number">1,678+</div>
+          <div class="stat-label">Board Questions</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="16" y1="14" x2="16" y2="18"></line>
+              <path d="M16 10h.01"></path>
+              <path d="M12 10h.01"></path>
+              <path d="M8 10h.01"></path>
+              <path d="M12 14h.01"></path>
+              <path d="M8 14h.01"></path>
+              <path d="M12 18h.01"></path>
+              <path d="M8 18h.01"></path>
+            </svg>
+          </div>
+          <div class="stat-number">27+</div>
+          <div class="stat-label">Calculators</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <div class="stat-number">8,219+</div>
+          <div class="stat-label">ICD-10 Codes</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path>
+              <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path>
+              <circle cx="20" cy="10" r="2"></circle>
+            </svg>
+          </div>
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Procedures</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to try the journal built for your workflow?</h2>
+      <p>7 days free. Full access to every tool.</p>
+      <a href="https://app.nxsclinical.com/signup" class="btn btn-sienna">Start Your Free Trial</a>
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-content"><div class="footer-left"><img src="https://app.nxsclinical.com/brand/nexus-owl-icon-64-transparent.png" alt="Nexus"><span>&copy; 2026 Nexus Clinical. All rights reserved.</span></div><div class="footer-links"><a href="https://app.nxsclinical.com/privacy">Privacy</a><a href="https://app.nxsclinical.com/terms">Terms</a><a href="https://app.nxsclinical.com/disclaimer">Disclaimers</a><a href="/contact">Contact</a></div></div><div class="footer-disclaimer"><strong>Clinical Decision Support Notice</strong>Nexus Clinical is intended for licensed healthcare professionals only and is designed for informational and educational purposes. It is not a substitute for professional medical judgment, diagnosis, or treatment. All content supports — but does not replace — your independent clinical evaluation. Recommendations are based on peer-reviewed clinical guidelines; always verify with current evidence and apply your professional expertise before making patient-care decisions. Content is reviewed regularly but may not reflect every regional variation or the most recent updates. Consult authoritative sources and institutional protocols for critical decisions.</div></div></footer>
 </body>
 </html>

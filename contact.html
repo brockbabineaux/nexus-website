@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact — Nexus Clinical</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #FAF8F4;
+            --cream-warm: #F5F0E8;
             --olive: #5C6B4A;
+            --olive-light: rgba(92,107,74,0.08);
+            --olive-medium: rgba(92,107,74,0.15);
             --sienna: #B85C38;
+            --sienna-light: rgba(184,92,56,0.08);
             --gold: #C4A35A;
+            --gold-light: rgba(196,163,90,0.1);
             --deep: #3D3929;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-            --spacing-2xl: 4rem;
+            --text: #3D3929;
+            --text-secondary: rgba(61,57,41,0.6);
+            --border: rgba(61,57,41,0.1);
         }
 
         * {
@@ -28,124 +28,207 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
+            color: var(--text);
             background-color: var(--cream);
-            color: var(--deep);
             line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
         }
 
         /* Navigation */
         nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 248, 244, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            height: 64px;
+        }
+
+        nav .container {
+            height: 100%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            background-color: var(--cream);
-            border-bottom: 1px solid rgba(93, 107, 74, 0.1);
-            animation: fadeIn 0.8s ease-out;
+            justify-content: space-between;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--deep);
+            gap: 12px;
             text-decoration: none;
+            color: inherit;
         }
 
         .nav-logo img {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .nav-brand-nexus {
+            font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--text);
+        }
+
+        .nav-brand-clinical {
+            font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 0.45em;
+            color: var(--text);
+            opacity: 0.7;
         }
 
         .nav-links {
             display: flex;
-            gap: var(--spacing-xl);
-            list-style: none;
+            align-items: center;
+            gap: 32px;
         }
 
         .nav-links a {
-            color: var(--deep);
             text-decoration: none;
+            color: var(--text);
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: color 200ms;
         }
 
         .nav-links a:hover {
-            color: var(--sienna);
+            color: var(--olive);
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 200ms;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--olive);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a5739;
+            transform: translateY(-2px);
+        }
+
+        .btn-sienna {
+            background-color: var(--sienna);
+            color: white;
+        }
+
+        .btn-sienna:hover {
+            background-color: #a04d2e;
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-xl);
-            background: linear-gradient(135deg, rgba(196, 163, 90, 0.05) 0%, rgba(184, 92, 56, 0.05) 100%);
-            animation: fadeIn 1s ease-out;
+            padding: 80px 32px;
+            background: radial-gradient(circle at 50% 30%, rgba(184, 92, 56, 0.05) 0%, transparent 70%);
         }
 
         .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: 3rem;
-            color: var(--deep);
-            margin-bottom: var(--spacing-md);
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--sienna);
             font-weight: 400;
         }
 
         .hero p {
-            font-size: 1.125rem;
-            color: var(--olive);
+            font-size: 16px;
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
         /* Main Content */
-        .content-wrapper {
-            max-width: 1200px;
-            margin: var(--spacing-2xl) auto;
-            padding: 0 var(--spacing-xl);
-            animation: fadeIn 1.2s ease-out;
+        .main-content {
+            padding: 60px 32px;
         }
 
-        .contact-grid {
+        .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-2xl);
+            grid-template-columns: 60% 1fr;
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Form Styles */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
+        /* Form Card */
+        .form-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            animation: fadeIn 0.6s ease-out;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-xs);
+            margin-bottom: 24px;
         }
 
         .form-group label {
-            font-weight: 600;
-            color: var(--deep);
-            font-size: 0.95rem;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
-            padding: var(--spacing-md);
+            width: 100%;
+            padding: 12px 16px;
             background-color: var(--cream);
-            border: 1px solid rgba(93, 107, 74, 0.2);
-            border-radius: 6px;
+            border: 1px solid rgba(61, 57, 41, 0.15);
+            border-radius: 10px;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: var(--deep);
-            transition: all 0.3s ease;
+            font-size: 14px;
+            color: var(--text);
+            transition: border-color 200ms, box-shadow 200ms;
         }
 
         .form-group input:focus,
@@ -157,131 +240,181 @@
         }
 
         .form-group textarea {
+            min-height: 140px;
             resize: vertical;
-            min-height: 150px;
         }
 
-        /* Button Styles */
-        .btn-primary {
-            padding: var(--spacing-md) var(--spacing-lg);
-            background-color: var(--olive);
-            color: var(--cream);
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
+        .form-submit {
+            width: 100%;
+            margin-top: 8px;
         }
 
-        .btn-primary:hover {
-            background-color: #4a5439;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(92, 107, 74, 0.2);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        /* Contact Info */
-        .contact-info {
+        /* Sidebar */
+        .sidebar {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-lg);
+            gap: 24px;
+            animation: fadeIn 0.6s ease-out 0.1s both;
         }
 
-        .info-item {
-            padding: var(--spacing-lg);
-            background-color: rgba(92, 107, 74, 0.05);
-            border-left: 4px solid var(--olive);
-            border-radius: 4px;
+        .info-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
         }
 
-        .info-item h3 {
+        .info-icon-container {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background-color: var(--olive-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--olive);
+        }
+
+        .info-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .info-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: var(--sienna);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 200ms;
+        }
+
+        .info-content a:hover {
+            color: #a04d2e;
+        }
+
+        /* Callout Box */
+        .callout-box {
+            background-color: var(--cream-warm);
+            border-left: 4px solid var(--gold);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep) 0%, #4a5739 100%);
+            border-radius: 16px;
+            padding: 48px 40px;
+            text-align: center;
+            margin-top: 48px;
+            color: white;
+            animation: fadeIn 0.6s ease-out 0.2s both;
+        }
+
+        .cta-section h2 {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.25rem;
-            color: var(--deep);
-            margin-bottom: var(--spacing-sm);
+            font-size: 36px;
+            margin-bottom: 16px;
             font-weight: 400;
         }
 
-        .info-item p {
-            color: var(--olive);
-            line-height: 1.8;
-        }
-
-        .info-item a {
-            color: var(--sienna);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .info-item a:hover {
-            color: var(--olive);
-        }
-
-        .note-box {
-            padding: var(--spacing-lg);
-            background-color: rgba(196, 163, 90, 0.1);
-            border-radius: 6px;
-            border: 1px solid var(--gold);
-        }
-
-        .note-box p {
-            color: var(--deep);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            font-style: italic;
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* Footer */
         footer {
             background-color: var(--deep);
-            color: var(--cream);
-            text-align: center;
-            padding: var(--spacing-xl);
-            margin-top: var(--spacing-2xl);
-            animation: fadeIn 1.4s ease-out;
+            color: white;
+            padding: 48px 32px 32px;
+            margin-top: 80px;
         }
 
-        footer p {
-            margin-bottom: var(--spacing-sm);
-            font-size: 0.9rem;
+        footer .container {
+            max-width: 1200px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 32px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-left img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .footer-left span {
+            font-size: 13px;
+            opacity: 0.8;
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-md);
-            font-size: 0.85rem;
+            gap: 32px;
         }
 
         .footer-links a {
-            color: var(--gold);
+            color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 13px;
+            transition: opacity 200ms;
         }
 
         .footer-links a:hover {
-            color: var(--cream);
+            opacity: 0.7;
         }
 
-        .disclaimer {
-            margin-top: var(--spacing-lg);
-            font-size: 0.8rem;
-            color: rgba(250, 248, 244, 0.7);
+        .footer-disclaimer {
+            font-size: 12px;
             line-height: 1.6;
+            opacity: 0.7;
+        }
+
+        .footer-disclaimer strong {
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0.9;
         }
 
         /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -289,35 +422,51 @@
             }
         }
 
-        /* Responsive */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: var(--spacing-md);
-                padding: var(--spacing-md);
+            .nav-links {
+                display: none;
             }
 
-            .nav-links {
-                flex-direction: column;
-                gap: var(--spacing-md);
-                text-align: center;
+            .hero {
+                padding: 60px 24px;
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 36px;
             }
 
-            .contact-grid {
+            .main-content {
+                padding: 40px 24px;
+            }
+
+            .content-grid {
                 grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
+                gap: 32px;
             }
 
-            .content-wrapper {
-                padding: 0 var(--spacing-md);
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
             }
 
-            footer {
-                padding: var(--spacing-lg) var(--spacing-md);
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-section {
+                padding: 32px 24px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
             }
         }
     </style>
@@ -325,29 +474,36 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="/" class="nav-logo">
-            <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus Clinical Logo">
-            <span>Nexus Clinical</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/contact.html">Contact</a></li>
-        </ul>
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-128-transparent.png" alt="Nexus">
+                <div class="nav-brand">
+                    <span class="nav-brand-nexus">NEXUS</span>
+                    <span class="nav-brand-clinical">CLINICAL</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/features">Features</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="https://app.nxsclinical.com/login" class="btn btn-primary">Sign In</a>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Get in touch</h1>
-        <p>We'd love to hear from you. Whether you have questions, feedback, or just want to say hello, we're here to help.</p>
+        <h1>We read <em>every message</em></h1>
+        <p>Questions, feedback, feature ideas — our small team of clinicians and builders is here. Real humans, real replies, usually within 24–48 hours.</p>
     </section>
 
     <!-- Main Content -->
-    <div class="content-wrapper">
-        <div class="contact-grid">
+    <section class="main-content">
+        <div class="content-grid">
             <!-- Left: Contact Form -->
-            <div>
-                <form class="contact-form" action="mailto:support@nxsclinical.com" method="POST" enctype="text/plain">
+            <div class="form-card">
+                <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
@@ -362,11 +518,11 @@
                         <label for="subject">Subject</label>
                         <select id="subject" name="subject" required>
                             <option value="">Select a subject</option>
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Bug Report">Bug Report</option>
-                            <option value="Feature Request">Feature Request</option>
-                            <option value="Partnership">Partnership</option>
-                            <option value="Other">Other</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 
@@ -375,40 +531,131 @@
                         <textarea id="message" name="message" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary form-submit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                        Send Message
+                    </button>
                 </form>
             </div>
 
-            <!-- Right: Contact Info -->
-            <div class="contact-info">
-                <div class="info-item">
-                    <h3>Email</h3>
-                    <p><a href="mailto:support@nxsclinical.com">support@nxsclinical.com</a></p>
+            <!-- Right: Sidebar -->
+            <aside class="sidebar">
+                <!-- Email Card -->
+                <div class="info-card">
+                    <div class="info-icon-container">
+                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <a href="mailto:support@nxsclinical.com">support@nxsclinical.com</a>
+                    </div>
                 </div>
 
-                <div class="info-item">
-                    <h3>Response Time</h3>
-                    <p>Typically within 24-48 hours</p>
+                <!-- Response Time Card -->
+                <div class="info-card">
+                    <div class="info-icon-container">
+                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Response Time</h4>
+                        <p>We typically respond within 24–48 hours</p>
+                    </div>
                 </div>
 
-                <div class="note-box">
-                    <p>We're a small team that cares deeply about your experience. Every message is read by a real person.</p>
+                <!-- Real People Card -->
+                <div class="info-card">
+                    <div class="info-icon-container">
+                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Real People</h4>
+                        <p>Every message is read by a member of our team — not a bot.</p>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Callout Box -->
+                <div class="callout-box">
+                    Nexus Clinical is built and maintained by a small, dedicated team. Your feedback directly shapes what we build next.
+                </div>
+            </aside>
         </div>
-    </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Want to try Nexus first?</h2>
+            <p>7 days free. Full access to every tool.</p>
+            <a href="https://app.nxsclinical.com/signup" class="btn btn-sienna">Start Free Trial</a>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Nexus Clinical. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="/">Home</a>
-            <a href="/about.html">About</a>
-            <a href="/contact.html">Contact</a>
-        </div>
-        <div class="disclaimer">
-            <p>Nexus Clinical is a tool for healthcare professionals. Always consult with qualified medical professionals for clinical decisions. This tool does not provide medical advice and is not a substitute for professional medical judgment.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <img src="https://app.nxsclinical.com/brand/nexus-owl-icon-64-transparent.png" alt="Nexus">
+                    <span>&copy; 2026 Nexus Clinical. All rights reserved.</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://app.nxsclinical.com/privacy">Privacy</a>
+                    <a href="https://app.nxsclinical.com/terms">Terms</a>
+                    <a href="https://app.nxsclinical.com/disclaimer">Disclaimers</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <strong>Clinical Decision Support Notice</strong>
+                Nexus Clinical is intended for licensed healthcare professionals only and is designed for informational and educational purposes. It is not a substitute for professional medical judgment, diagnosis, or treatment. All content supports — but does not replace — your independent clinical evaluation. Recommendations are based on peer-reviewed clinical guidelines; always verify with current evidence and apply your professional expertise before making patient-care decisions. Content is reviewed regularly but may not reflect every regional variation or the most recent updates. Consult authoritative sources and institutional protocols for critical decisions.
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply fade-in animation to form card and sidebar
+        document.querySelectorAll('.form-card, .sidebar').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            console.log('Form submitted:', formData);
+            alert('Thank you for reaching out! We\'ll be in touch within 24–48 hours.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
