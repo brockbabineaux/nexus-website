@@ -1,890 +1,1214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus Clinical — The Clinical Companion for Healthcare Professionals</title>
-  <meta name="description" content="Nexus Clinical is the warm, reliable clinical companion for licensed healthcare professionals. 755+ medications, 1,678+ board questions, 27 validated calculators, and AI decision support.">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://app.nxsclinical.com/brand/favicon-32x32.png">
-  <link rel="apple-touch-icon" href="https://app.nxsclinical.com/brand/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cream: #FAF7F2;
-      --cream-warm: #F5F0E8;
-      --olive: #3D4A2A;
-      --olive-light: rgba(61,74,42,0.08);
-      --olive-medium: rgba(61,74,42,0.15);
-      --sienna: #C0583A;
-      --sienna-light: rgba(192,88,58,0.08);
-      --gold: #B8A88A;
-      --gold-light: rgba(184,168,138,0.1);
-      --deep: #3D3929;
-      --text: #3D3929;
-      --text-secondary: rgba(61,57,41,0.6);
-      --border: rgba(61,57,41,0.1);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXS Clinical — The Clinical Companion</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        :root {
+            --cream: #FAF8F4;
+            --olive: #5C6B4A;
+            --copper: #B85C38;
+            --gold: #C4A35A;
+            --text: #3D3929;
+            --border: rgba(61, 57, 41, 0.08);
+            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
 
-    /* Nav */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(250,248,244,0.85);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    nav .container {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
-    }
-    .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo img { width: 36px; height: 36px; }
-    .nav-brand {
-      display: flex; flex-direction: column; align-items: flex-start; line-height: 1;
-    }
-    .nav-brand-nexus {
-      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 700; font-size: 14px; letter-spacing: 0.18em; color: var(--text);
-    }
-    .nav-brand-clinical {
-      font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 500; font-size: 8px; letter-spacing: 0.45em; color: var(--text); opacity: 0.7;
-    }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a {
-      font-size: 14px; font-weight: 500; color: var(--text-secondary);
-      transition: color 200ms;
-    }
-    .nav-links a:hover { color: var(--olive); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      border-radius: 999px; font-weight: 600; font-size: 14px;
-      transition: all 200ms ease; border: none; cursor: pointer;
-      text-decoration: none;
-    }
-    .btn-primary {
-      height: 44px; padding: 0 28px;
-      background: var(--olive); color: var(--cream);
-    }
-    .btn-primary:hover { background: #4E5D3E; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(61,74,42,0.3); }
-    .btn-outline {
-      height: 44px; padding: 0 28px;
-      background: transparent; color: var(--olive);
-      border: 1.5px solid var(--olive);
-    }
-    .btn-outline:hover { background: var(--olive-light); }
-    .btn-sienna {
-      height: 44px; padding: 0 28px;
-      background: var(--sienna); color: var(--cream);
-    }
-    .btn-sienna:hover { background: #A04E2E; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(192,88,58,0.3); }
-    .btn-ghost {
-      height: 44px; padding: 0 28px;
-      background: transparent; color: var(--text-secondary);
-      border: 1.5px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--olive); color: var(--olive); }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* Hero */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(61,74,42,0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-logo {
-      width: 110px; height: 110px;
-      margin: 0 auto 32px;
-      filter: drop-shadow(0 4px 24px rgba(61,57,41,0.1));
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--deep);
-      margin-bottom: 20px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--sienna);
-    }
-    .hero p.hero-sub {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 12px;
-      line-height: 1.7;
-    }
-    .hero .disclaimer {
-      font-size: 12px;
-      color: var(--text-secondary);
-      opacity: 0.7;
-      margin-bottom: 36px;
-    }
-    .hero-actions {
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-      flex-wrap: wrap;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    /* Trust bar */
-    .trust-bar {
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .trust-items {
-      display: flex; align-items: center; justify-content: center; gap: 40px;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 13px; color: var(--text-secondary); font-weight: 500;
-    }
-    .trust-item svg { color: var(--olive); flex-shrink: 0; }
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise'/%3E%3CfeColorMatrix in='noise' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    /* Stats bar */
-    .stats-bar {
-      padding: 48px 0;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      text-align: center;
-    }
-    .stat-item {
-      padding: 24px 16px;
-      border-radius: 16px;
-      background: white;
-      border: 1px solid var(--border);
-      transition: all 250ms ease;
-    }
-    .stat-item:hover {
-      border-color: rgba(61,74,42,0.2);
-      box-shadow: 0 4px 20px rgba(61,57,41,0.05);
-    }
-    .stat-icon { margin-bottom: 12px; color: var(--olive); }
-    .stat-number {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 32px;
-      color: var(--olive);
-    }
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 248, 244, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
 
-    /* Section */
-    .section { padding: 80px 0; }
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-label {
-      display: inline-block;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--sienna);
-      margin-bottom: 12px;
-    }
-    .section-header h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 400;
-      color: var(--deep);
-    }
-    .section-header p {
-      color: var(--text-secondary);
-      max-width: 560px;
-      margin: 12px auto 0;
-    }
+        nav > div {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
 
-    /* Feature cards — 4 primary */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .feature-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      transition: all 250ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .feature-card::after {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--olive);
-      opacity: 0;
-      transition: opacity 250ms ease;
-    }
-    .feature-card:hover {
-      border-color: rgba(61,74,42,0.25);
-      box-shadow: 0 8px 32px rgba(61,57,41,0.06);
-      transform: translateY(-2px);
-    }
-    .feature-card:hover::after { opacity: 1; }
-    .feature-card:nth-child(2)::after,
-    .feature-card:nth-child(4)::after { background: var(--sienna); }
-    .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px;
-    }
-    .feature-icon.olive { background: var(--olive-light); color: var(--olive); }
-    .feature-icon.sienna { background: var(--sienna-light); color: var(--sienna); }
-    .feature-icon.gold { background: var(--gold-light); color: var(--gold); }
-    .feature-card h3 {
-      font-size: 18px; font-weight: 600;
-      margin-bottom: 8px; color: var(--deep);
-    }
-    .feature-card p {
-      font-size: 14px; color: var(--text-secondary); line-height: 1.65;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.18em;
+            font-family: 'Avenir Next', 'Montserrat', 'Helvetica Neue', sans-serif;
+        }
 
-    /* Mini features — 6 secondary tools */
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .mini-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      transition: all 250ms ease;
-    }
-    .mini-card:hover {
-      border-color: rgba(61,74,42,0.2);
-      box-shadow: 0 4px 16px rgba(61,57,41,0.04);
-      transform: translateY(-1px);
-    }
-    .mini-icon {
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 12px;
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--olive-light);
-      color: var(--olive);
-    }
-    .mini-card:nth-child(even) .mini-icon {
-      background: var(--sienna-light);
-      color: var(--sienna);
-    }
-    .mini-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--deep); }
-    .mini-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+        .logo-mark {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 6px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
 
-    /* How it works */
-    .how-section { background: var(--cream-warm); }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      position: relative;
-    }
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 28px; left: 14%; right: 14%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--olive), var(--gold), var(--sienna));
-      opacity: 0.25;
-    }
-    .step-card { text-align: center; position: relative; }
-    .step-number {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 20px;
-      background: white;
-      border: 2px solid var(--olive);
-      color: var(--olive);
-      position: relative;
-      z-index: 1;
-    }
-    .step-card h4 {
-      font-size: 15px; font-weight: 600; color: var(--deep); margin-bottom: 6px;
-    }
-    .step-card p {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.55;
-    }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
 
-    /* Roles section */
-    .roles-section { }
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .role-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      transition: all 250ms ease;
-    }
-    .role-card:hover {
-      border-color: rgba(61,74,42,0.2);
-      box-shadow: 0 8px 24px rgba(61,57,41,0.05);
-    }
-    .role-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px;
-    }
-    .role-card:nth-child(1) .role-icon { background: var(--olive-light); color: var(--olive); }
-    .role-card:nth-child(2) .role-icon { background: var(--gold-light); color: var(--gold); }
-    .role-card:nth-child(3) .role-icon { background: var(--sienna-light); color: var(--sienna); }
-    .role-card h3 {
-      font-size: 18px; font-weight: 600;
-      color: var(--deep); margin-bottom: 12px;
-    }
-    .role-card ul { list-style: none; padding: 0; }
-    .role-card li {
-      font-size: 14px; color: var(--text-secondary);
-      padding: 6px 0; padding-left: 20px;
-      position: relative; line-height: 1.5;
-    }
-    .role-card:nth-child(1) li::before {
-      content: ''; position: absolute; left: 0; top: 13px;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--olive);
-    }
-    .role-card:nth-child(2) li::before {
-      content: ''; position: absolute; left: 0; top: 13px;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold);
-    }
-    .role-card:nth-child(3) li::before {
-      content: ''; position: absolute; left: 0; top: 13px;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--sienna);
-    }
+        .logo-main {
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            font-size: 0.75rem;
+        }
 
-    /* Evidence & Security */
-    .evidence-section { background: var(--cream-warm); }
-    .evidence-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .evidence-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      text-align: center;
-      transition: all 250ms ease;
-    }
-    .evidence-card:hover {
-      border-color: rgba(61,74,42,0.2);
-      box-shadow: 0 4px 20px rgba(61,57,41,0.05);
-    }
-    .evidence-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-      background: var(--olive-light);
-      color: var(--olive);
-    }
-    .evidence-card h4 {
-      font-size: 16px; font-weight: 600; color: var(--deep); margin-bottom: 8px;
-    }
-    .evidence-card p {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
-    }
+        .logo-sub {
+            font-weight: 400;
+            letter-spacing: 0.45em;
+            opacity: 0.7;
+            font-size: 0.65rem;
+        }
 
-    /* CTA */
-    .cta-section {
-      padding: 80px 0;
-      text-align: center;
-    }
-    .cta-card {
-      background: var(--deep);
-      border-radius: 24px;
-      padding: 64px 48px;
-      color: var(--cream);
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-card::before {
-      content: '';
-      position: absolute; top: -50%; right: -20%;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(61,74,42,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-card::after {
-      content: '';
-      position: absolute; bottom: -30%; left: -10%;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(192,88,58,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-card h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(28px, 4vw, 38px);
-      font-weight: 400;
-      margin-bottom: 16px;
-      position: relative;
-    }
-    .cta-card p {
-      color: rgba(250,248,244,0.7);
-      max-width: 480px;
-      margin: 0 auto 32px;
-      position: relative;
-    }
-    .cta-card .btn { position: relative; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            flex: 1;
+        }
 
-    /* Footer */
-    footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-    }
-    .footer-content {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-left {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .footer-left img { width: 28px; height: 28px; }
-    .footer-left span { font-size: 12px; color: var(--text-secondary); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: 13px; color: var(--text-secondary); transition: color 200ms; }
-    .footer-links a:hover { color: var(--olive); }
-    .footer-disclaimer {
-      text-align: center;
-      font-size: 11px;
-      color: var(--text-secondary);
-      opacity: 0.7;
-      margin-top: 32px;
-      max-width: 780px;
-      margin-left: auto; margin-right: auto;
-      line-height: 1.7;
-    }
-    .footer-disclaimer strong {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 4px;
-      opacity: 1;
-      font-size: 11px;
-      letter-spacing: 0.05em;
-    }
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            opacity: 0.75;
+        }
 
-    /* Fade in */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease, transform 600ms ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+        nav a:hover {
+            opacity: 1;
+            color: var(--olive);
+        }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .features-grid { grid-template-columns: 1fr; }
-      .mini-grid { grid-template-columns: 1fr; }
-      .roles-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid::before { display: none; }
-      .evidence-grid { grid-template-columns: 1fr; }
-      .hero { padding: 60px 0 48px; }
-      .section { padding: 56px 0; }
-      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
-      .footer-links { justify-content: center; }
-      .trust-items { gap: 20px; }
-      .cta-card { padding: 48px 24px; }
-    }
-  </style>
+        .nav-cta {
+            background: var(--olive);
+            color: white;
+            padding: 0.6rem 1.3rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        /* Main content wrapper */
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            scroll-margin-top: 80px;
+        }
+
+        h1, h2, h3 {
+            font-family: Georgia, Palatino, serif;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-headline {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-subheadline {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--olive);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 107, 74, 0.15);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--text);
+        }
+
+        .btn-outline:hover {
+            background: var(--text);
+            color: var(--cream);
+        }
+
+        .hero-mockup {
+            margin: 3rem 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .iphone-frame {
+            width: 300px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .iphone-screen {
+            width: 100%;
+            background: var(--cream);
+            border-radius: 28px;
+            overflow: hidden;
+            padding: 24px 18px 0 18px;
+            box-sizing: border-box;
+        }
+
+        .mock-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.75rem;
+            flex: 1;
+            opacity: 0.6;
+        }
+
+        /* Mode Switcher */
+        #modes {
+            padding: 4rem 2rem;
+        }
+
+        .mode-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .mode-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mode-tab {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .mode-tab:hover {
+            border-color: var(--olive);
+        }
+
+        .mode-tab.active {
+            background: var(--olive);
+            color: white;
+            border-color: var(--olive);
+        }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--olive);
+        }
+
+        .tool-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0 auto 0.75rem;
+            color: var(--olive);
+        }
+
+        .tool-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Voice Section */
+        #voice {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(196, 163, 90, 0.03) 0%, transparent 100%);
+        }
+
+        .voice-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .voice-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .voice-icon-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .voice-pulse {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(196, 163, 90, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(196, 163, 90, 0); }
+        }
+
+        .voice-icon {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .voice-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .voice-tab {
+            padding: 0.6rem 1.4rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .voice-tab.active {
+            background: var(--olive);
+            color: white;
+            border-color: var(--olive);
+        }
+
+        .voice-demo {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .voice-input, .voice-output {
+            display: none;
+        }
+
+        .voice-input.active, .voice-output.active {
+            display: block;
+        }
+
+        .voice-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .voice-quote {
+            font-style: italic;
+            font-family: Georgia, Palatino, serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--copper);
+        }
+
+        .voice-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .field-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .field-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            min-width: 80px;
+        }
+
+        .field-value {
+            padding: 0.5rem 1rem;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .voice-workflows {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .workflow-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .workflows-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .workflow-badge {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* AI Intelligence Section */
+        #ai {
+            padding: 6rem 2rem;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .ai-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--olive);
+        }
+
+        .ai-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--copper);
+            margin-bottom: 1rem;
+        }
+
+        .ai-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ai-card p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* Tool Map */
+        #toolmap {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(92, 107, 74, 0.02) 0%, transparent 100%);
+        }
+
+        .tool-section {
+            margin-bottom: 3rem;
+        }
+
+        .tool-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .tool-item:hover {
+            border-color: var(--olive);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .tool-item-icon {
+            width: 2rem;
+            height: 2rem;
+            margin: 0 auto 0.5rem;
+            color: var(--olive);
+        }
+
+        .tool-item-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Pricing */
+        #pricing {
+            padding: 6rem 2rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.highlighted {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 1px var(--gold);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-period {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .price-desc {
+            margin: 1.5rem 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 1.5rem;
+            background: var(--gold);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: var(--cream);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(196, 163, 90, 0.2);
+        }
+
+        footer .logo {
+            color: var(--cream);
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        footer .logo-mark {
+            background: var(--gold);
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-copyright {
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            nav > div {
+                padding: 0;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .voice-demo {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .iphone-frame {
+                width: 250px;
+                height: 450px;
+            }
+        }
+
+        /* Scroll animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div>
+            <a href="#hero" class="logo">
+                <img class="logo-mark" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAG+UlEQVR4nO1ab0iUSRifeefd3VzL9eosw8srryIT84w8vNQKog8tBUXRhxKiLy27mRtmkikYLS1J0e6G1RpC+CGCaL+EEJVE/rs6y+oszg7LC0tPg/JqrdSdP/ch5y5qd319988Itz8YFt59dvaZ38zzzG+eeSFjjIH/MSTRDohGjADRDohGjADRDohGjADRDohGjADRDohGjADRDoiGrPaHjY2N9xsaGrxarRZQSv3aIIQAxhhs3rz5m/z8/GWUUipJ0oSkc7vr1693XLt2bViWZUAI+cpOkiRACAFr1qyJ27hx40+qBsJUore3t89gMLwFALCJWlpaWq/X6x3GGGNKKZ2ob5/P52OMsdLS0ltK+rdYLE1qx6E6BBITExPq6up+BwAAnU43ihAi/ppWqx3r6emZV1VVdQ8hhIi/qQyAuLg4hhAigfrXarVjCCGi1+tVn2hVE+BwOO7NmDFDs2PHjrbR0VEdAAAQQtCXzefzaRBCxOVy5Xd0dHTJsiwrJYFS6rfPL1ugEFQC1QQQQoDFYpl99OjR+QaD4R0AAEAIv5oJxhgct0cWi4XywTM2NeoQqgmYNWsW7OnpmefxeJ6ePHmykxCCEEJ+Z5YQgmRZxu3t7Rk1NTWtCCFEQ5m2MEI1AT6fD0AI2aFDh3Jzc3Pnrl69+jeMsRyMBEmSaGVl5Ypnz571SpIkTQUSVBPAGAOMMTg6OqqzWq1vT58+HS/LMgYgcChACNnw8HD83r17X0EI4VQIg5CFkFarHWtsbFz+8OHDwcOHD7fymfZny8Pk6tWrKy5evPjLZHeFSCBkAsY1C7VaremFhYWLlixZ0sOf+bNnjEFJkmhJScnCoaGhvyGEUGQohEwAX9qvX7+eWVVV9Wdtba2XP/NnTymVIIRsYGBgdllZ2SPRuSAsZwGe5evr6/MJIcxkMrVMtCsghEhdXV3BrVu3Hk5GG4QbYTsM8Zk1mUyJBw8eXJCUlPSaL3d/9lwfWCyWhJGRkZHxZ1FPimElACFEuru759fX1z89derUH8FyAaVUkmUZd3V1pR05cuSOqIQY1uMwX9o2m60gIyMjyWg03p1IGyCEyIkTJ/IeP378VJZlOdr5IKwEfC579+zZ89HpdCbpdLpRAILLZJ/PpzGbzR8+P6WF069gCHtBhCfElpaWZU1NTS/sdvsdJdqgtbV12blz51qjHQoRqQjxAZeUlGQbjcZ52dnZTybKB5Ik0fLy8sy+vr4BjUajiYRf/hARAnj293q9069cufLi/PnzUjBtwL8bGhpKtFqtzxFCKFphENGaIISQvXnzBmRlZS0uLCxsU6INPB5PrsfjuQMhhNGIhIgSwBiD45PJjh8/vkiJNoAQsuLi4gUYYwwh9Js8w4mIV4XHBwGTk5NnV1dXdynJBf39/XPsdntrXl5ePGMM8t0iEohaWXxsbGxs165d+evWrbsfTBtwQWWz2fJTU1MTjUbj3WChEyqiRgBPamfOnJml1+s/ABBcG2CM5aKiog8OhyNp2rRpI4HsQ0XUCEAIIYwxXrhw4fcVFRXtSkpozc3NWW1tbS9tNtuvkVoFUb0Z4iLnwIEDeZmZmd1KZLLVav1x06ZN87Ozs59gjOVA+UMtokoAhBACAIBGo9G43e4RvqSDhYLX651eXl7+V21tLQ1kGwqifjfIQ2HlypWZFoulZSKZLMsyvnz5cu7g4OD7/fv3N4U7FIRcjvKyuN1uz05JSRlQsjWazebviouLF6WmpvYH0xKThRACeEU4ISFhhsvleq6khPby5cu5Tqez++zZs33BCJsshF2P84S4ZcuW3K1bt95RIpMdDsfqmTNnxm3btu12sAQ6GQh9P4CvBKfTOT8hISFoMZUnRZPJpK2urp5nMBjeUUpD9l8oAbwinJKSknzs2LEHXAX6s+UltM7OzsWXLl165nK5OjHGqt9v+NeHUDsI2QFJkgghxGw2ryooKOhUog0qKytX5uTkzF27du0DAD69iKH6/1X/MkyA4wAAALfbHa+0hLZv3763NTU1BgCA37dHlEI4AQB8WgUYY7x06dIfysrKbiuRyTdu3Fj+6NGjwdLS0qa+vj6t6v9W7/Z/gBCyQE1pH3xXqKio+Dk9Pb2Hh4K/PnmuKCoqWrR9+/Y569evV70EQrodBuBTcuJn9s+bz+fTMMag0io3DwOdTqdzu91eSZIoIQT565tSKhFC0KtXr7612Wxvd+7cma92HKqzaFxcHIyPj38vyzJBCBGuzsY/GUKIfPz4cZper1fcJ18Fq1atytq9e3fzhQsXlut0urFA9hBCdvPmzfSGhoa7GzZsyFEzjilxRy8SUyIJikSMANEOiEaMANEOiEaMANEOiEaMANEOiEaMANEOiMb/noB/ALjE5Qeu2S3pAAAAAElFTkSuQmCC" alt="NXS Clinical" />
+                <div class="logo-text">
+                    <div class="logo-main">NXS</div>
+                    <div class="logo-sub">CLINICAL</div>
+                </div>
+            </a>
+            <ul>
+                <li><a href="#modes">Features</a></li>
+                <li><a href="#voice">Voice AI</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+            <a href="https://app.nxsclinical.com/signup" class="btn btn-primary nav-cta">Start Free Trial</a>
+        </div>
+    </nav>
 
-  <!-- Nav -->
-  <nav>
-    <div class="container">
-      <a href="/" class="nav-logo">
-        <img src="https://app.nxsclinical.com/brand/nexus-n-mark-512-transparent.png" alt="Nexus">
-        <div class="nav-brand">
-          <span class="nav-brand-nexus">NEXUS</span>
-          <span class="nav-brand-clinical">CLINICAL</span>
-        </div>
-      </a>
-      <div class="nav-links">
-        <a href="/features">Features</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="https://app.nxsclinical.com/login" class="btn btn-primary">Sign In</a>
-      </div>
-    </div>
-  </nav>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-headline">
+                <h1>The clinical companion that listens.</h1>
+            </div>
+            <p class="hero-subheadline">27 tools. 14 voice workflows. 8 AI features. One app built for healthcare professionals, students, and clinicians.</p>
+            <div class="hero-ctas">
+                <a href="https://app.nxsclinical.com/signup" class="btn btn-primary">Start 7-Day Free Trial</a>
+                <a href="#modes" class="btn btn-outline">Explore Features</a>
+            </div>
+            <div class="hero-mockup">
+                <div class="iphone-frame">
+                    <div class="iphone-screen" style="position: relative; overflow: hidden;">
+                        <img src="data:image/jpeg;base64,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" style="width: 100%; height: auto; display: block; border-radius: 4px;" alt="NXS Clinical Dashboard" />
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <img src="https://app.nxsclinical.com/brand/nexus-n-mark-512-transparent.png" alt="Nexus N Mark" class="hero-logo">
-      <h1>Clinical intelligence,<br><em>notebook simple</em></h1>
-      <p class="hero-sub">Evidence-based tools for the bedside. Drug references, clinical calculators, SOAP documentation, and AI decision support — built by clinicians who understand the pace of patient care.</p>
-      <p class="disclaimer">For licensed healthcare professionals only. Not a substitute for clinical judgment.</p>
-      <div class="hero-actions">
-        <a href="https://app.nxsclinical.com/signup" class="btn btn-primary">Start Free Trial</a>
-        <a href="/features" class="btn btn-outline">Explore Features</a>
-      </div>
-    </div>
-  </section>
+        <!-- Mode Switcher -->
+        <section id="modes">
+            <div class="mode-header">
+                <h2>One app. Five professional identities.</h2>
+            </div>
+            <div class="mode-tabs">
+                <div class="mode-tab active" data-mode="student">Student</div>
+                <div class="mode-tab" data-mode="clinical">Clinical</div>
+                <div class="mode-tab" data-mode="orientation">Orientation</div>
+                <div class="mode-tab" data-mode="aprn">APRN</div>
+                <div class="mode-tab" data-mode="clinical-student">Clinical-Student</div>
+            </div>
+            <div class="mode-grid" id="modeGrid"></div>
+        </section>
 
-  <!-- Trust Bar -->
-  <section class="trust-bar">
-    <div class="container">
-      <div class="trust-items fade-in">
-        <div class="trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
-          Clinician-Reviewed Content
-        </div>
-        <div class="trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Data Stored Locally on Device
-        </div>
-        <div class="trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Peer-Reviewed Guidelines
-        </div>
-        <div class="trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Updated Regularly
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Voice Section -->
+        <section id="voice">
+            <div class="voice-header">
+                <h2>Stop typing. Start treating.</h2>
+            </div>
+            <div class="voice-container">
+                <div class="voice-icon-container">
+                    <div class="voice-pulse">
+                        <svg class="voice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </div>
+                </div>
 
-  <!-- Stats -->
-  <section class="stats-bar">
-    <div class="container">
-      <div class="stats-grid fade-in">
-        <div class="stat-item">
-          <div class="stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-          </div>
-          <div class="stat-number">755+</div>
-          <div class="stat-label">Medications</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-          </div>
-          <div class="stat-number">1,678+</div>
-          <div class="stat-label">Board Questions</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-          </div>
-          <div class="stat-number">27+</div>
-          <div class="stat-label">Clinical Calculators</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <div class="stat-number">8,219+</div>
-          <div class="stat-label">ICD-10 Codes</div>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div class="voice-tabs">
+                    <div class="voice-tab active" data-voice="vitals">Vitals</div>
+                    <div class="voice-tab" data-voice="soap">SOAP Notes</div>
+                    <div class="voice-tab" data-voice="translator">Translator</div>
+                </div>
 
-  <!-- Core Features -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-label">Clinical Tools</div>
-        <h2>Built around your workflow</h2>
-        <p>Every tool is designed by clinicians, for clinicians. Fast lookups, reliable data, and thoughtful design for the moments that matter.</p>
-      </div>
-      <div class="features-grid">
-        <!-- Pharmacy Hub — Pill icon -->
-        <div class="feature-card fade-in">
-          <div class="feature-icon olive">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-          </div>
-          <h3>Pharmacy Hub</h3>
-          <p>755+ medications with dosing, interactions, IV compatibility, and a comprehensive antibiotic guide. Bedside med checks in seconds.</p>
-        </div>
-        <!-- Patient Brain — Brain icon -->
-        <div class="feature-card fade-in">
-          <div class="feature-icon sienna">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
-          </div>
-          <h3>Patient Brain</h3>
-          <p>Digital brain sheet replacement. Glanceable patient snapshots with diagnosis, code status, drips, lines, and shift tasks all in one view.</p>
-        </div>
-        <!-- Shift Hub — ClipboardList icon -->
-        <div class="feature-card fade-in">
-          <div class="feature-icon olive">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
-          </div>
-          <h3>Shift Hub</h3>
-          <p>Role-based dashboard that adapts to your workflow. Room assignments, task tracking, handoff reports, and SBAR generation.</p>
-        </div>
-        <!-- AI Assistant — Sparkles icon -->
-        <div class="feature-card fade-in">
-          <div class="feature-icon sienna">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-          </div>
-          <h3>AI Clinical Assistant</h3>
-          <p>An evidence-based reasoning partner. Ask questions, discuss cases, and get contextual clinical guidance at the point of care.</p>
-        </div>
-      </div>
+                <div class="voice-demo">
+                    <div>
+                        <div class="voice-label">What you say</div>
+                        <div class="voice-input active" data-voice="vitals">
+                            <p class="voice-quote">"BP 120 over 80, heart rate 72, temperature 98.6"</p>
+                        </div>
+                        <div class="voice-input" data-voice="soap">
+                            <p class="voice-quote">"Patient presents with chest pain, shortness of breath. Exam shows tachycardia. Plan is EKG and troponin."</p>
+                        </div>
+                        <div class="voice-input" data-voice="translator">
+                            <p class="voice-quote">"El paciente tiene diabetes tipo 2 con presión arterial elevada."</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="voice-label">What the app does</div>
+                        <div class="voice-output active" data-voice="vitals">
+                            <div class="voice-fields">
+                                <div class="field-group">
+                                    <div class="field-label">BP (systolic)</div>
+                                    <div class="field-value">120 mmHg</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">BP (diastolic)</div>
+                                    <div class="field-value">80 mmHg</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Heart Rate</div>
+                                    <div class="field-value">72 bpm</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Temperature</div>
+                                    <div class="field-value">98.6°F</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="voice-output" data-voice="soap">
+                            <div class="voice-fields">
+                                <div class="field-group">
+                                    <div class="field-label">Subjective</div>
+                                    <div class="field-value">Chest pain, SOB</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Objective</div>
+                                    <div class="field-value">Tachycardia noted</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Assessment</div>
+                                    <div class="field-value">Cardiac etiology?</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Plan</div>
+                                    <div class="field-value">EKG, troponin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="voice-output" data-voice="translator">
+                            <div class="voice-fields">
+                                <div class="field-group">
+                                    <div class="field-label">Language</div>
+                                    <div class="field-value">Spanish</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">English</div>
+                                    <div class="field-value">Patient has type 2 diabetes with elevated blood pressure</div>
+                                </div>
+                                <div class="field-group">
+                                    <div class="field-label">Text-to-Speech</div>
+                                    <div class="field-value">✓ Ready</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Mini features with icons -->
-      <div class="mini-grid">
-        <!-- Lab Reference — TestTubes -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v17.5A2.5 2.5 0 0 1 6.5 22v0A2.5 2.5 0 0 1 4 19.5V2"/><path d="M20 2v17.5a2.5 2.5 0 0 1-2.5 2.5v0a2.5 2.5 0 0 1-2.5-2.5V2"/><path d="M3 2h7"/><path d="M14 2h7"/><path d="M9 16H4"/><path d="M20 16h-5"/></svg>
-          </div>
-          <h4>Lab Reference</h4>
-          <p>Normal ranges, critical values, and interpretation guides</p>
-        </div>
-        <!-- Clinical Calculators — Calculator -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-          </div>
-          <h4>Clinical Calculators</h4>
-          <p>27 validated tools for ICU, cardiology, nephrology, and more</p>
-        </div>
-        <!-- Code Blue — AlertCircle/Siren -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <h4>Code Blue</h4>
-          <p>ACLS protocol timer, epi tracking, and role-based checklists</p>
-        </div>
-        <!-- Board Prep — BookOpen -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <h4>Board Prep</h4>
-          <p>1,678+ questions with spaced repetition flashcards</p>
-        </div>
-        <!-- Procedures — Stethoscope -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
-          </div>
-          <h4>Procedures</h4>
-          <p>Step-by-step guides for 30+ common clinical procedures</p>
-        </div>
-        <!-- SOAP Notes — FileText -->
-        <div class="mini-card fade-in">
-          <div class="mini-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h4>SOAP Notes</h4>
-          <p>AI-powered clinical documentation with smart templates</p>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div class="voice-workflows">
+                    <div class="workflow-label">Voice-enabled across 14 clinical workflows</div>
+                    <div class="workflows-list">
+                        <div class="workflow-badge">Vitals</div>
+                        <div class="workflow-badge">SOAP Notes</div>
+                        <div class="workflow-badge">Translator</div>
+                        <div class="workflow-badge">Patient Brain</div>
+                        <div class="workflow-badge">Care Plan</div>
+                        <div class="workflow-badge">SBAR</div>
+                        <div class="workflow-badge">Code Blue</div>
+                        <div class="workflow-badge">Clinical Log</div>
+                        <div class="workflow-badge">DDx</div>
+                        <div class="workflow-badge">Journals</div>
+                        <div class="workflow-badge">Labs</div>
+                        <div class="workflow-badge">Handoff</div>
+                        <div class="workflow-badge">Communication</div>
+                        <div class="workflow-badge">Shift To-Do</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- How It Works -->
-  <section class="section how-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-label">Getting Started</div>
-        <h2>From sign-up to bedside in minutes</h2>
-        <p>No complex setup, no training required. Nexus is designed for the way you already work.</p>
-      </div>
-      <div class="steps-grid fade-in">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h4>Create Account</h4>
-          <p>Sign up with your credentials in under 60 seconds</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h4>Set Your Role</h4>
-          <p>Student, RN, NP, PA, or MD — your dashboard adapts</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h4>Access Tools</h4>
-          <p>Open any clinical tool instantly from your dashboard</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <h4>Practice Confidently</h4>
-          <p>Evidence-based answers at the bedside, every shift</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- AI Intelligence Section -->
+        <section id="ai">
+            <h2>Intelligence, not automation.</h2>
+            <div class="ai-grid">
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="activity"></i>
+                    <h3>ECG AI</h3>
+                    <p>Snap a photo. Get a structured interpretation.</p>
+                </div>
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="languages"></i>
+                    <h3>AI Interpreter</h3>
+                    <p>Bidirectional across 21 languages with text-to-speech.</p>
+                </div>
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="file-text"></i>
+                    <h3>SOAP Auto-Routing</h3>
+                    <p>150+ keyword patterns route your dictation to S, O, A, or P.</p>
+                </div>
+                <!-- Document Scanner removed per user request -->
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="book-open"></i>
+                    <h3>AI Study Plan</h3>
+                    <p>Personalized study plans from your exam goals.</p>
+                </div>
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="brain-circuit"></i>
+                    <h3>AI Differential Diagnosis</h3>
+                    <p>Maps 400+ chief complaints against guidelines.</p>
+                </div>
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="share-2"></i>
+                    <h3>Cross-Tool Intelligence</h3>
+                    <p>Conditions link to drugs, labs, and procedures automatically.</p>
+                </div>
+                <div class="ai-card fade-in">
+                    <i class="ai-icon" data-lucide="message-circle"></i>
+                    <h3>Clinical Chat Assistant</h3>
+                    <p>Guideline-cited answers at the point of care.</p>
+                </div>
+            </div>
+        </section>
 
-  <!-- Roles -->
-  <section class="section roles-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-label">For Every Clinician</div>
-        <h2>Your workflow, your way</h2>
-        <p>Whether you're studying for boards or managing a unit, Nexus adapts to meet you where you are.</p>
-      </div>
-      <div class="roles-grid">
-        <div class="role-card fade-in">
-          <div class="role-icon">
-            <!-- GraduationCap -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          </div>
-          <h3>Nursing Students</h3>
-          <ul>
-            <li>NCLEX prep with 1,678+ practice questions</li>
-            <li>Comprehensive medication reference</li>
-            <li>Clinical calculator learning tools</li>
-            <li>Spaced repetition flashcard system</li>
-          </ul>
-        </div>
-        <div class="role-card fade-in">
-          <div class="role-icon">
-            <!-- HeartPulse -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
-          </div>
-          <h3>New Graduates</h3>
-          <ul>
-            <li>First-shift confidence builders</li>
-            <li>Rapid drug interaction checking</li>
-            <li>Code Blue decision support</li>
-            <li>Dosing calculation tools</li>
-          </ul>
-        </div>
-        <div class="role-card fade-in">
-          <div class="role-icon">
-            <!-- Award -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </div>
-          <h3>Experienced Clinicians</h3>
-          <ul>
-            <li>Advanced clinical decision support</li>
-            <li>Complex interaction analysis</li>
-            <li>Specialty calculators and protocols</li>
-            <li>Latest evidence and guidelines</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Tool Map -->
+        <section id="toolmap">
+            <h2>27 tools. Zero fluff.</h2>
 
-  <!-- Evidence & Security -->
-  <section class="section evidence-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-label">Trust & Transparency</div>
-        <h2>Built on evidence, designed for safety</h2>
-        <p>Every recommendation is grounded in peer-reviewed guidelines and presented for your independent clinical evaluation.</p>
-      </div>
-      <div class="evidence-grid fade-in">
-        <div class="evidence-card">
-          <div class="evidence-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
-          </div>
-          <h4>Clinician-Reviewed</h4>
-          <p>All clinical content is reviewed and validated by licensed healthcare professionals against current evidence-based guidelines.</p>
-        </div>
-        <div class="evidence-card">
-          <div class="evidence-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <h4>Privacy-First</h4>
-          <p>Patient data is stored locally on your device. No protected health information is transmitted to external servers.</p>
-        </div>
-        <div class="evidence-card">
-          <div class="evidence-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
-          </div>
-          <h4>Source Transparency</h4>
-          <p>Underlying sources, algorithms, and clinical reasoning are accessible within the app for independent verification.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="tool-section">
+                <div class="tool-section-title">Learn</div>
+                <div class="tool-grid" id="learnTools"></div>
+            </div>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-card fade-in">
-        <h2>Ready to elevate your practice?</h2>
-        <p>Join healthcare professionals who trust Nexus for instant access to evidence-based clinical knowledge.</p>
-        <a href="https://app.nxsclinical.com/signup" class="btn btn-sienna">Start Your Free Trial</a>
-      </div>
-    </div>
-  </section>
+            <div class="tool-section">
+                <div class="tool-section-title">Tools</div>
+                <div class="tool-grid" id="toolsTools"></div>
+            </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-left">
-          <img src="https://app.nxsclinical.com/brand/nexus-n-mark-512-transparent.png" alt="Nexus">
-          <span>&copy; 2026 Nexus Clinical. All rights reserved.</span>
-        </div>
-        <div class="footer-links">
-          <a href="https://app.nxsclinical.com/privacy">Privacy</a>
-          <a href="https://app.nxsclinical.com/terms">Terms</a>
-          <a href="https://app.nxsclinical.com/disclaimer">Disclaimers</a>
-          <a href="/contact">Contact</a>
-        </div>
-      </div>
-      <div class="footer-disclaimer">
-        <strong>Clinical Decision Support Notice</strong>
-        Nexus Clinical is intended for licensed healthcare professionals only and is designed for informational and educational purposes. It is not a substitute for professional medical judgment, diagnosis, or treatment. All content supports — but does not replace — your independent clinical evaluation. Recommendations are based on peer-reviewed clinical guidelines; always verify with current evidence and apply your professional expertise before making patient-care decisions. Content is reviewed regularly but may not reflect every regional variation or the most recent updates. Data entered into patient-facing tools is stored locally on your device. Consult authoritative sources and institutional protocols for critical decisions.
-      </div>
-    </div>
-  </footer>
+            <div class="tool-section">
+                <div class="tool-section-title">Shift</div>
+                <div class="tool-grid" id="shiftTools"></div>
+            </div>
 
-  <script>
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+            <div class="tool-section">
+                <div class="tool-section-title">Me</div>
+                <div class="tool-grid" id="meTools"></div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing">
+            <h2>Built for your journey.</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="price">$9.99<span class="price-period">/mo</span></div>
+                    <p class="price-desc">Perfect for clinical rotations.</p>
+                    <a href="https://app.nxsclinical.com/signup" class="btn btn-primary" style="width: 100%; text-align: center;">Start 7-Day Free Trial</a>
+                </div>
+                <div class="pricing-card highlighted">
+                    <div class="badge">Best Value</div>
+                    <div class="price">$99.99<span class="price-period">/yr</span></div>
+                    <p class="price-desc">The professional's choice. Save 17%.</p>
+                    <a href="https://app.nxsclinical.com/signup" class="btn btn-primary" style="width: 100%; text-align: center;">Start 7-Day Free Trial</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#hero" class="logo">
+            <img class="logo-mark" src="data:image/png;base64,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" alt="NXS Clinical" />
+            <div class="logo-text">
+                <div class="logo-main">NXS</div>
+                <div class="logo-sub">CLINICAL</div>
+            </div>
+        </a>
+        <p class="footer-text">Built for healthcare professionals, students, and clinicians.</p>
+        <p class="footer-copyright">© 2026 NXS Clinical. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mode switcher data
+        const modes = {
+            student: [
+                { icon: 'BookOpen', label: 'Study' },
+                { icon: 'LayoutGrid', label: 'Flashcards' },
+                { icon: 'Headphones', label: 'Audio' },
+                { icon: 'BookMarked', label: 'Journals' },
+                { icon: 'CheckSquare', label: 'Exams' },
+                { icon: 'TrendingUp', label: 'Progress' }
+            ],
+            clinical: [
+                { icon: 'Brain', label: 'Patient Brain' },
+                { icon: 'FileText', label: 'SOAP Notes' },
+                { icon: 'ClipboardCheck', label: 'Care Plan' },
+                { icon: 'AlertTriangle', label: 'Code Blue' },
+                { icon: 'MessageCircle', label: 'Team Comms' }
+            ],
+            orientation: [
+                { icon: 'GraduationCap', label: 'Orientation' },
+                { icon: 'Users', label: 'Preceptor Tools' },
+                { icon: 'ClipboardList', label: 'Clinical Log' }
+            ],
+            aprn: [
+                { icon: 'BrainCircuit', label: 'Differential Diagnosis' },
+                { icon: 'Pill', label: 'Pharmacy Hub' },
+                { icon: 'Beaker', label: 'Lab Reference' },
+                { icon: 'ListChecks', label: 'Protocols' },
+                { icon: 'Database', label: 'ICD-10' }
+            ],
+            'clinical-student': [
+                { icon: 'BookOpen', label: 'Study' },
+                { icon: 'Brain', label: 'Patient Brain' },
+                { icon: 'FileText', label: 'SOAP Notes' },
+                { icon: 'CheckSquare', label: 'Exams' },
+                { icon: 'ClipboardCheck', label: 'Care Plan' }
+            ]
+        };
+
+        const toolSections = {
+            learn: [
+                { icon: 'BookOpen', label: 'Study' },
+                { icon: 'LayoutGrid', label: 'Flashcards' },
+                { icon: 'Headphones', label: 'Audio' },
+                { icon: 'BookMarked', label: 'Journals' },
+                { icon: 'CheckSquare', label: 'Exams' },
+                { icon: 'TrendingUp', label: 'Progress' }
+            ],
+            tools: [
+                { icon: 'Pill', label: 'Pharmacy Hub' },
+                { icon: 'Beaker', label: 'Lab Reference' },
+                { icon: 'AlertCircle', label: 'Disease Reference' },
+                { icon: 'ListChecks', label: 'Protocols' },
+                { icon: 'Scissors', label: 'Procedures' },
+                { icon: 'Activity', label: 'ECG' },
+                { icon: 'Calculator', label: 'Calculators' },
+                { icon: 'Database', label: 'ICD-10' },
+                { icon: 'BrainCircuit', label: 'DDx' },
+                { icon: 'Languages', label: 'Translator' },
+                // Doc Scanner removed per user request
+            ],
+            shift: [
+                { icon: 'Brain', label: 'Patient Brain' },
+                { icon: 'FileText', label: 'SOAP Notes' },
+                { icon: 'ClipboardCheck', label: 'Care Plan' },
+                { icon: 'AlertTriangle', label: 'Code Blue' },
+                { icon: 'MessageCircle', label: 'Team Comms' }
+            ],
+            me: [
+                { icon: 'ClipboardList', label: 'Clinical Log' },
+                { icon: 'FileArchive', label: 'Records' },
+                { icon: 'GraduationCap', label: 'Orientation' },
+                { icon: 'Users', label: 'Preceptor Tools' },
+                { icon: 'HelpCircle', label: 'App Guide' },
+                { icon: 'Settings', label: 'Settings' }
+            ]
+        };
+
+        function renderModeGrid(mode) {
+            const grid = document.getElementById('modeGrid');
+            grid.innerHTML = '';
+            modes[mode].forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'tool-card fade-in';
+                card.innerHTML = `
+                    <svg class="tool-icon" data-lucide="${tool.icon}"></svg>
+                    <div class="tool-label">${tool.label}</div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
         }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
-  </script>
 
+        function renderToolSection(sectionId, tools) {
+            const container = document.getElementById(sectionId);
+            container.innerHTML = '';
+            tools.forEach(tool => {
+                const item = document.createElement('div');
+                item.className = 'tool-item';
+                item.innerHTML = `
+                    <svg class="tool-item-icon" data-lucide="${tool.icon}"></svg>
+                    <div class="tool-item-label">${tool.label}</div>
+                `;
+                container.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+
+        // Initialize mode switcher
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                renderModeGrid(this.dataset.mode);
+            });
+        });
+
+        // Initialize voice tabs
+        document.querySelectorAll('.voice-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.voice-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const voiceMode = this.dataset.voice;
+                document.querySelectorAll('.voice-input, .voice-output').forEach(el => {
+                    el.classList.remove('active');
+                });
+                document.querySelectorAll(`[data-voice="${voiceMode}"]`).forEach(el => {
+                    el.classList.add('active');
+                });
+            });
+        });
+
+        // Initialize tool maps
+        renderToolSection('learnTools', toolSections.learn);
+        renderToolSection('toolsTools', toolSections.tools);
+        renderToolSection('shiftTools', toolSections.shift);
+        renderToolSection('meTools', toolSections.me);
+
+        // Initialize mode grid
+        renderModeGrid('student');
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
